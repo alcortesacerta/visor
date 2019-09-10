@@ -1,0 +1,74 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class BuscarEnrolamientoPorCriteriosDTO {
+
+	private String rfc;
+	private String curp;
+	private String nombre;
+	private String aPaterno;
+	private String aMaterno;
+	
+	public String getRfc() {
+		return rfc;
+	}
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+	public String getCurp() {
+		return curp;
+	}
+	public void setCurp(String curp) {
+		this.curp = curp;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getaPaterno() {
+		return aPaterno;
+	}
+	public void setaPaterno(String aPaterno) {
+		this.aPaterno = aPaterno;
+	}
+	public String getaMaterno() {
+		return aMaterno;
+	}
+	public void setaMaterno(String aMaterno) {
+		this.aMaterno = aMaterno;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BuscarEnrolamientoPorCriteriosDTO [");
+		if (rfc != null) {
+			builder.append("rfc=");
+			builder.append(rfc);
+			builder.append(", ");
+		}
+		if (curp != null) {
+			builder.append("curp=");
+			builder.append(curp);
+			builder.append(", ");
+		}
+		if (nombre != null) {
+			builder.append("nombre=");
+			builder.append(nombre);
+			builder.append(", ");
+		}
+		if (aPaterno != null) {
+			builder.append("aPaterno=");
+			builder.append(aPaterno);
+			builder.append(", ");
+		}
+		if (aMaterno != null) {
+			builder.append("aMaterno=");
+			builder.append(aMaterno);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+	
+}

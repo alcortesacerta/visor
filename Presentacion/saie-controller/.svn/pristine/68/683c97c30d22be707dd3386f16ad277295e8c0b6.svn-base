@@ -1,0 +1,20 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class BuscarDuplicidadPorCriteriosDTO {
+	public CatalogoDuplicidad opcionCatalogo;
+
+	public CatalogoDuplicidad getOpcionCatalogo() {
+		return opcionCatalogo;
+	}
+
+	public void setOpcionCatalogo(CatalogoDuplicidad opcionCatalogo) {
+		this.opcionCatalogo = opcionCatalogo;
+	}
+
+	@Override
+	public String toString() {
+		return "BuscarDuplicidadPorCriteriosDTO [opcionCatalogo="
+				+ opcionCatalogo + "]";
+	}
+	
+}

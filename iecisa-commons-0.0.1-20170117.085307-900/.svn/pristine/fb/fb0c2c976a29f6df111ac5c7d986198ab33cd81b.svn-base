@@ -1,0 +1,40 @@
+/*    */ package mx.com.iecisa.commons.utils;
+/*    */ 
+/*    */ import java.util.Collection;
+/*    */ import org.apache.commons.lang.StringUtils;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ public class StringFormatter
+/*    */ {
+/*    */   public static <T> String leftPad(T cad, char padding, int size)
+/*    */   {
+/* 16 */     return String.format("%" + size + "s", new Object[] { cad }).replace(' ', padding);
+/*    */   }
+/*    */   
+/*    */   public static <T> String join(Collection<T> list, String separator, String startEndDelimiter) {
+/* 20 */     String result = null;
+/*    */     
+/* 22 */     if ((list != null) && (!list.isEmpty())) {
+/* 23 */       result = "";
+/* 24 */       result = result + (startEndDelimiter != null ? startEndDelimiter : "");
+/*    */       
+/* 26 */       if (list.size() > 1) {
+/* 27 */         result = result + StringUtils.join(list, separator);
+/*    */       } else {
+/* 29 */         result = result + list.toArray()[0];
+/*    */       }
+/*    */       
+/* 32 */       result = result + (startEndDelimiter != null ? startEndDelimiter : "");
+/*    */     }
+/*    */     
+/*    */ 
+/* 36 */     return result;
+/*    */   }
+/*    */ }
+
+

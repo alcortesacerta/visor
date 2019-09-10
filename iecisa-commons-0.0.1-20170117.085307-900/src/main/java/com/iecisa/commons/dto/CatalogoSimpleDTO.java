@@ -1,0 +1,92 @@
+/*    */ package com.iecisa.commons.dto;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ public class CatalogoSimpleDTO<T>
+/*    */   extends Object
+/*    */ {
+/*    */   protected T id;
+/*    */   protected String desc;
+/*    */   
+/*    */   public CatalogoSimpleDTO() {}
+/*    */   
+/*    */   public CatalogoSimpleDTO(T id, String desc) {
+/* 21 */     this.id = id;
+/* 22 */     this.desc = desc;
+/*    */   }
+/*    */ 
+/*    */   
+/* 26 */   public T getId() { return (T)this.id; }
+/*    */ 
+/*    */   
+/* 29 */   public void setId(T id) { this.id = id; }
+/*    */ 
+/*    */   
+/* 32 */   public String getDesc() { return this.desc; }
+/*    */ 
+/*    */   
+/* 35 */   public void setDesc(String desc) { this.desc = desc; }
+/*    */ 
+/*    */ 
+/*    */   
+/*    */   public String toString() {
+/* 40 */     StringBuilder builder = new StringBuilder();
+/* 41 */     builder.append("CatalogoSimpleDTO [");
+/* 42 */     if (this.id != null) {
+/* 43 */       builder.append("id=");
+/* 44 */       builder.append(this.id);
+/* 45 */       builder.append(", ");
+/*    */     } 
+/* 47 */     if (this.desc != null) {
+/* 48 */       builder.append("desc=");
+/* 49 */       builder.append(this.desc);
+/*    */     } 
+/* 51 */     builder.append("]");
+/* 52 */     return builder.toString();
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public int hashCode() {
+/* 57 */     int prime = 31;
+/* 58 */     int result = 1;
+/* 59 */     result = 31 * result + ((this.desc == null) ? 0 : this.desc.hashCode());
+/* 60 */     return 31 * result + ((this.id == null) ? 0 : this.id.hashCode());
+/*    */   }
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */   
+/*    */   public boolean equals(Object obj) {
+/* 67 */     if (this == obj)
+/* 68 */       return true; 
+/* 69 */     if (obj == null)
+/* 70 */       return false; 
+/* 71 */     if (getClass() != obj.getClass())
+/* 72 */       return false; 
+/* 73 */     CatalogoSimpleDTO<T> other = (CatalogoSimpleDTO)obj;
+/* 74 */     if (this.desc == null) {
+/* 75 */       if (other.desc != null)
+/* 76 */         return false; 
+/* 77 */     } else if (!this.desc.equals(other.desc)) {
+/* 78 */       return false;
+/* 79 */     }  if (this.id == null) {
+/* 80 */       if (other.id != null)
+/* 81 */         return false; 
+/* 82 */     } else if (!this.id.equals(other.id)) {
+/* 83 */       return false;
+/* 84 */     }  return true;
+/*    */   }
+/*    */ }
+
+
+/* Location:              C:\Users\Alejandro Cortés\Desktop\VersionesVisor\saie-visor-2017ene17_1233.war!\WEB-INF\lib\iecisa-commons-0.0.1-20170117.085307-900.jar!\com\iecisa\commons\dto\CatalogoSimpleDTO.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.0.7
+ */

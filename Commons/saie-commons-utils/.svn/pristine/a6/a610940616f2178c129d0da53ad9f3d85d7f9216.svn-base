@@ -1,0 +1,58 @@
+package com.iecisa.sat.saie.audit.dto;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class DBSaieResult {
+	
+	private List<Map<String, Object>> resultSet = new ArrayList<Map<String,Object>>();
+
+	public DBSaieResult(List<Map<String, Object>> resultSet) {
+		super();
+		this.resultSet = resultSet;
+	}
+
+	public String getString(int indice, String nombre){
+		if(indice <= resultSet.size()){
+			Map<String, Object> temp = resultSet.get(indice);
+			if(temp != null){
+				return temp.get(nombre).toString();
+			}
+		}
+		return null;
+	}
+	
+	public int getInt(int indice, String nombre){
+		if(indice <= resultSet.size()){
+			Map<String, Object> temp = resultSet.get(indice);
+			if(temp != null){
+				try{
+					return Integer.parseInt(temp.get(nombre).toString());
+				}catch(Exception e){
+					return -1;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public Timestamp getTimestamp(int indice, String nombre){
+		if(indice <= resultSet.size()){
+			Map<String, Object> temp = resultSet.get(indice);
+			if(temp != null){
+				try{
+					return (Timestamp)temp.get(nombre);
+				}catch(Exception e){
+					return null;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public int size(){
+		return resultSet.size();
+	}
+}

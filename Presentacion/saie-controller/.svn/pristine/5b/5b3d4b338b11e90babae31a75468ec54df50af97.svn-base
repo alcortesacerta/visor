@@ -1,0 +1,21 @@
+package com.iecisa.sat.saie.vf.integration.service.rest;
+
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaLdapRequestDTO;
+
+@Path("/cxf/sldap/sldap/consultaGrupos/")
+public interface IServiceLdap {
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ServiceResponse<List<String>> getRolesLdap(ConsultaLdapRequestDTO request);
+}

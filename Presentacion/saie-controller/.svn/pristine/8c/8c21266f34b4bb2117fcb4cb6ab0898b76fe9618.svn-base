@@ -1,0 +1,139 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+import java.util.HashSet;
+
+public class UsuarioDTO {
+
+	private String rfc;
+	private String ip;
+	private String mac;
+	private String rol;
+	private String nombre;
+	private String localidad;
+	private String numeroSerieCertificado;
+	private HashSet<Permisos> permisos;
+	
+	private String[] tabla_rfc;
+	private String[] tabla_casos;
+	private String[] tabla_hitlist;
+	private String[] tabla_validar;
+	
+	public UsuarioDTO(String rfc, String ip, String mac, String rol, String nombre) {
+		super();
+		this.rfc = rfc;
+		this.ip = ip;
+		this.mac = mac;
+		this.rol = rol;
+		this.nombre = nombre;
+		
+		this.permisos = new HashSet<Permisos>();
+	}
+
+	public String getRfc() {
+		return rfc;
+	}
+
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getMac() {
+		return mac;
+	}
+
+	public void setMac(String mac) {
+		this.mac = mac;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public HashSet<Permisos> getPermisos() {
+		return permisos;
+	}
+
+	public void setPermisos(HashSet<Permisos> permisos) {
+		this.permisos = permisos;
+	}
+
+	public String[] getTabla_rfc() {
+		return tabla_rfc;
+	}
+
+	public void setTabla_rfc(String[] tabla_rfc) {
+		this.tabla_rfc = tabla_rfc;
+	}
+
+	public String[] getTabla_casos() {
+		return tabla_casos;
+	}
+
+	public void setTabla_casos(String[] tabla_casos) {
+		this.tabla_casos = tabla_casos;
+	}
+
+	public String[] getTabla_hitlist() {
+		return tabla_hitlist;
+	}
+
+	public void setTabla_hitlist(String[] tabla_hitlist) {
+		this.tabla_hitlist = tabla_hitlist;
+	}
+
+	public String[] getTabla_validar() {
+		return tabla_validar;
+	}
+
+	public void setTabla_validar(String[] tabla_validar) {
+		this.tabla_validar = tabla_validar;
+	}
+
+	@Override
+	public String toString() {
+		return "UsuarioDTO [" + (rfc != null ? "rfc=" + rfc + ", " : "")
+				+ (ip != null ? "ip=" + ip + ", " : "")
+				+ (mac != null ? "mac=" + mac + ", " : "")
+				+ (rol != null ? "rol=" + rol + ", " : "")
+				+ (nombre != null ? "nombre=" + nombre + ", " : "")
+				+ (permisos != null ? "permisos=" + permisos.size() : "") + "]"
+				+ (permisos != null ? "permisos=" + permisos : "") + "]";
+	}
+
+	public String getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(String localidad) {
+		this.localidad = localidad;
+	}
+
+	public String getNumeroSerieCertificado() {
+		return numeroSerieCertificado;
+	}
+
+	public void setNumeroSerieCertificado(String numeroSerieCertificado) {
+		this.numeroSerieCertificado = numeroSerieCertificado;
+	}	
+	
+}

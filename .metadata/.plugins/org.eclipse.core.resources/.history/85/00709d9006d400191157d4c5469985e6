@@ -1,0 +1,258 @@
+/*     */ package com.iecisa.sat.saie.vf.integration.service.dto;
+/*     */ 
+/*     */ import java.text.DecimalFormat;
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ public class DatosDuplicidadDTO
+/*     */ {
+/*     */   private String caso_numero_caso;
+/*     */   private String nombre_completo;
+/*     */   private String rfc;
+/*     */   private String fecha_enrolamiento;
+/*     */   private String localidad_enrolamiento;
+/*     */   private String nombre_completo2;
+/*     */   private String rfc2;
+/*     */   private String fecha_enrolamiento2;
+/*     */   private String localidad_enrolamiento2;
+/*     */   
+/*     */   public DatosDuplicidadDTO(String caso_numero_caso, String nombre_completo, String rfc, String fecha_enrolamiento, String localidad_enrolamiento, String nombre_completo2, String rfc2, String fecha_enrolamiento2, String localidad_enrolamiento2, String reporte_url, String observaciones, String resolucion, String score, String idReporte, String epid, Integer casoSat, String tipoCaso) {
+/*  24 */     this.scoreFormat = new DecimalFormat("##.###");
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */     
+/*  33 */     this.caso_numero_caso = caso_numero_caso;
+/*  34 */     this.nombre_completo = nombre_completo;
+/*  35 */     this.rfc = rfc;
+/*  36 */     this.fecha_enrolamiento = fecha_enrolamiento;
+/*  37 */     this.localidad_enrolamiento = localidad_enrolamiento;
+/*  38 */     this.nombre_completo2 = nombre_completo2;
+/*  39 */     this.rfc2 = rfc2;
+/*  40 */     this.fecha_enrolamiento2 = fecha_enrolamiento2;
+/*  41 */     this.localidad_enrolamiento2 = localidad_enrolamiento2;
+/*  42 */     this.reporte_url = reporte_url;
+/*  43 */     this.observaciones = observaciones;
+/*  44 */     this.resolucion = resolucion;
+/*  45 */     setScore(score);
+/*  46 */     this.idReporte = idReporte;
+/*  47 */     this.epid = epid;
+/*  48 */     this.casoSat = casoSat;
+/*  49 */     this.tipoCaso = tipoCaso;
+/*     */   }
+/*     */   private String reporte_url; private String observaciones; private String resolucion; private String score; private String idReporte;
+/*     */   private String epid;
+/*     */   private Integer casoSat;
+/*     */   private String tipoCaso;
+/*     */   private DecimalFormat scoreFormat;
+/*     */   
+/*     */   public DatosDuplicidadDTO(String caso_numero_caso, String nombre_completo, String rfc, String fecha_enrolamiento, String localidad_enrolamiento, String nombre_completo2, String rfc2, String fecha_enrolamiento2, String localidad_enrolamiento2, String reporte_url, String observaciones, String resolucion, String score, String idReporte, String epid, Integer casoSat) {
+/*     */     this.scoreFormat = new DecimalFormat("##.###");
+/*  59 */     this.caso_numero_caso = caso_numero_caso;
+/*  60 */     this.nombre_completo = nombre_completo;
+/*  61 */     this.rfc = rfc;
+/*  62 */     this.fecha_enrolamiento = fecha_enrolamiento;
+/*  63 */     this.localidad_enrolamiento = localidad_enrolamiento;
+/*  64 */     this.nombre_completo2 = nombre_completo2;
+/*  65 */     this.rfc2 = rfc2;
+/*  66 */     this.fecha_enrolamiento2 = fecha_enrolamiento2;
+/*  67 */     this.localidad_enrolamiento2 = localidad_enrolamiento2;
+/*  68 */     this.reporte_url = reporte_url;
+/*  69 */     this.observaciones = observaciones;
+/*  70 */     this.resolucion = resolucion;
+/*  71 */     setScore(score);
+/*  72 */     this.idReporte = idReporte;
+/*  73 */     this.epid = epid;
+/*  74 */     this.casoSat = casoSat;
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   public DatosDuplicidadDTO() { this.scoreFormat = new DecimalFormat("##.###"); }
+/*     */ 
+/*     */   
+/*  82 */   public String getCaso_numero_caso() { return this.caso_numero_caso; }
+/*     */ 
+/*     */ 
+/*     */   
+/*  86 */   public void setCaso_numero_caso(String caso_numero_caso) { this.caso_numero_caso = caso_numero_caso; }
+/*     */ 
+/*     */ 
+/*     */   
+/*  90 */   public String getNombre_completo() { return this.nombre_completo; }
+/*     */ 
+/*     */ 
+/*     */   
+/*  94 */   public void setNombre_completo(String nombre_completo) { this.nombre_completo = nombre_completo; }
+/*     */ 
+/*     */ 
+/*     */   
+/*  98 */   public String getRfc() { return this.rfc; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 102 */   public void setRfc(String rfc) { this.rfc = rfc; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 106 */   public String getFecha_enrolamiento() { return this.fecha_enrolamiento; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 110 */   public void setFecha_enrolamiento(String fecha_enrolamiento) { this.fecha_enrolamiento = fecha_enrolamiento; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 114 */   public String getLocalidad_enrolamiento() { return this.localidad_enrolamiento; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 118 */   public void setLocalidad_enrolamiento(String localidad_enrolamiento) { this.localidad_enrolamiento = localidad_enrolamiento; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 122 */   public String getNombre_completo2() { return this.nombre_completo2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 126 */   public void setNombre_completo2(String nombre_completo2) { this.nombre_completo2 = nombre_completo2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 130 */   public String getRfc2() { return this.rfc2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 134 */   public void setRfc2(String rfc2) { this.rfc2 = rfc2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 138 */   public String getFecha_enrolamiento2() { return this.fecha_enrolamiento2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 142 */   public void setFecha_enrolamiento2(String fecha_enrolamiento2) { this.fecha_enrolamiento2 = fecha_enrolamiento2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 146 */   public String getLocalidad_enrolamiento2() { return this.localidad_enrolamiento2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 150 */   public void setLocalidad_enrolamiento2(String localidad_enrolamiento2) { this.localidad_enrolamiento2 = localidad_enrolamiento2; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 154 */   public String getObservaciones() { return this.observaciones; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 158 */   public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 162 */   public String getReporte_url() { return this.reporte_url; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 166 */   public void setReporte_url(String reporte_url) { this.reporte_url = reporte_url; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 170 */   public String getResolucion() { return this.resolucion; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 174 */   public void setResolucion(String resolucion) { this.resolucion = resolucion; }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/* 179 */   public String toString() { return "DatosDuplicidadDTO [" + ((this.caso_numero_caso != null) ? ("caso_numero_caso=" + this.caso_numero_caso + ", ") : "") + ((this.nombre_completo != null) ? ("nombre_completo=" + this.nombre_completo + ", ") : "") + ((this.rfc != null) ? ("rfc=" + this.rfc + ", ") : "") + ((this.fecha_enrolamiento != null) ? ("fecha_enrolamiento=" + this.fecha_enrolamiento + ", ") : "") + ((this.localidad_enrolamiento != null) ? ("localidad_enrolamiento=" + this.localidad_enrolamiento + ", ") : "") + ((this.nombre_completo2 != null) ? ("nombre_completo2=" + this.nombre_completo2 + ", ") : "") + ((this.rfc2 != null) ? ("rfc2=" + this.rfc2 + ", ") : "") + ((this.fecha_enrolamiento2 != null) ? ("fecha_enrolamiento2=" + this.fecha_enrolamiento2 + ", ") : "") + ((this.localidad_enrolamiento2 != null) ? ("localidad_enrolamiento2=" + this.localidad_enrolamiento2 + ", ") : "") + ((this.reporte_url != null) ? ("reporte_url=" + this.reporte_url + ", ") : "") + ((this.observaciones != null) ? ("observaciones=" + this.observaciones + ", ") : "") + ((this.resolucion != null) ? ("resolucion=" + this.resolucion + ", ") : "") + ((this.score != null) ? ("score=" + this.score + ", ") : "") + ((this.idReporte != null) ? ("idReporte=" + this.idReporte + ", ") : "") + ((this.epid != null) ? ("epid=" + this.epid + ", ") : "") + ((this.scoreFormat != null) ? ("scoreFormat=" + this.scoreFormat) : "") + "]"; }
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */   
+/* 209 */   public String getScore() { return this.score; }
+/*     */ 
+/*     */   
+/*     */   public void setScore(String score) {
+/* 213 */     if (score != null && !score.equals("")) {
+/* 214 */       double ThFARLogRatio = 12.0D;
+/* 215 */       int scoreAux = (Integer.parseInt(score) < 0) ? 0 : Integer.parseInt(score);
+/* 216 */       this.score = this.scoreFormat.format(100.0D - Math.pow(10.0D, -scoreAux / ThFARLogRatio + 2.0D));
+/*     */     } else {
+/* 218 */       this.score = score;
+/*     */     } 
+/*     */   }
+/*     */ 
+/*     */   
+/* 223 */   public String getIdReporte() { return this.idReporte; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 227 */   public void setIdReporte(String idReporte) { this.idReporte = idReporte; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 231 */   public String getEpid() { return this.epid; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 235 */   public void setEpid(String epid) { this.epid = epid; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 239 */   public Integer getCasoSat() { return this.casoSat; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 243 */   public void setCasoSat(Integer casoSat) { this.casoSat = casoSat; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 247 */   public String getTipoCaso() { return this.tipoCaso; }
+/*     */ 
+/*     */ 
+/*     */   
+/* 251 */   public void setTipoCaso(String tipoCaso) { this.tipoCaso = tipoCaso; }
+/*     */ }
+
+
+/* Location:              C:\Users\Alejandro Cortés\Desktop\VersionesVisor\saie-visor-2017ene17_1233.war!\WEB-INF\lib\visor-documentos-presentacion-controller-0.0.1-SNAPSHOT.jar!\com\iecisa\sat\saie\vf\integration\service\dto\DatosDuplicidadDTO.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.0.7
+ */

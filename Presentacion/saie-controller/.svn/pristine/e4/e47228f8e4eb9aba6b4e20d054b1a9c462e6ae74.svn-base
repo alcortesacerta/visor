@@ -1,0 +1,116 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class ReporteBiometristaDTO {
+
+	private String caso;
+	private String rfc1;
+	private String rfc2;
+	private String url;
+	private String operador;
+	private String firma;
+	private String dictaminacion;
+	private String observaciones;
+	private String dictaminacionValue;
+	private String observacionesValue;
+	private String idReporte;
+	private String cadenaOriginal;
+	private int casoSat;
+	
+	public ReporteBiometristaDTO(String caso, String rfc1, String rfc2,	String url, String operador, String firma, String dictaminacion, String observaciones,
+			String dictaminacionValue, String observacionesValue, String idReporte, String cadenaOriginal, int casoSat) {
+		super();
+		this.caso = caso;
+		this.rfc1 = rfc1;
+		this.rfc2 = rfc2;
+		this.url = url;
+		this.operador = operador;
+		this.firma = firma;
+		this.dictaminacion = dictaminacion;
+		this.observaciones = observaciones;
+		this.dictaminacionValue = dictaminacionValue;
+		this.observacionesValue = observacionesValue;
+		this.idReporte = idReporte;
+		this.cadenaOriginal = cadenaOriginal;
+		this.casoSat = casoSat;
+	}
+	public String getCaso() {
+		return caso;
+	}
+	public void setCaso(String caso) {
+		this.caso = caso;
+	}
+	public String getRfc1() {
+		return rfc1;
+	}
+	public void setRfc1(String rfc1) {
+		this.rfc1 = rfc1;
+	}
+	public String getRfc2() {
+		return rfc2;
+	}
+	public void setRfc2(String rfc2) {
+		this.rfc2 = rfc2;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getOperador() {
+		return operador;
+	}
+	public void setOperador(String operador) {
+		this.operador = operador;
+	}
+	public String getFirma() {
+		return firma;
+	}
+	public void setFirma(String firma) {
+		this.firma = firma;
+	}
+	public String getDictaminacion() {
+		return dictaminacion;
+	}
+	public void setDictaminacion(String dictaminacion) {
+		this.dictaminacion = dictaminacion;
+	}
+	public String getObservaciones() {
+		return observaciones;
+	}
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+	public String getDictaminacionValue() {
+		return dictaminacionValue;
+	}
+	public void setDictaminacionValue(String dictaminacionValue) {
+		this.dictaminacionValue = dictaminacionValue;
+	}
+	public String getObservacionesValue() {
+		return observacionesValue;
+	}
+	public void setObservacionesValue(String observacionesValue) {
+		this.observacionesValue = observacionesValue;
+	}
+	public String getIdReporte() {
+		return idReporte;
+	}
+	public void setIdReporte(String idReporte) {
+		this.idReporte = idReporte;
+	}
+	public String getCadenaOriginal() {
+		return cadenaOriginal;
+	}
+	public void setCadenaOriginal(String cadenaOriginal) {
+		this.cadenaOriginal = cadenaOriginal;
+	}
+	public int getCasoSat() {
+		return casoSat;
+	}
+	public void setCasoSat(int casoSat) {
+		this.casoSat = casoSat;
+	}
+	
+	
+}

@@ -1,0 +1,47 @@
+/*    */ package mx.com.iecisa.commons.utils;
+/*    */ 
+/*    */ import java.io.File;
+/*    */ import java.io.PrintStream;
+/*    */ import java.net.MalformedURLException;
+/*    */ import java.net.URL;
+/*    */ import java.net.URLClassLoader;
+/*    */ import java.util.ResourceBundle;
+/*    */ 
+/*    */ public class ConfigResourceManager
+/*    */ {
+/* 12 */   private ResourceBundle pHandler = null;
+/*    */   
+/*    */   public ConfigResourceManager(String configPath, String locale, String resource)
+/*    */   {
+/* 16 */     if ((configPath != null) && (!configPath.trim().isEmpty())) {
+/* 17 */       File file = new File(configPath);
+/* 18 */       URL url = null;
+/*    */       try {
+/* 20 */         url = file.toURI().toURL();
+/* 21 */         URL[] urls = new URL[1];
+/* 22 */         urls[0] = url;
+/* 23 */         ClassLoader loader = new URLClassLoader(urls);
+/*    */         
+/* 25 */         this.pHandler = ResourceBundle.getBundle(resource, new java.util.Locale(locale), loader);
+/*    */       } catch (MalformedURLException e) {
+/* 27 */         e.printStackTrace();
+/*    */       }
+/*    */     } else {
+/* 30 */       System.out.println("CONFIG FILE NOT FOUND");
+/*    */     }
+/*    */   }
+/*    */   
+/*    */   public String getString(String propertyId)
+/*    */   {
+/* 36 */     String result = null;
+/*    */     try
+/*    */     {
+/* 39 */       result = this.pHandler.getString(propertyId);
+/*    */     } catch (Exception e) {
+/* 41 */       e.printStackTrace();
+/*    */     }
+/*    */     
+/* 44 */     return result;
+/*    */   }
+/*    */ }
+

@@ -1,0 +1,166 @@
+.holderTitulo img{
+	top: 0px;
+}
+
+#holder{
+	width: 100%;
+}
+
+#innerHolder{
+	width: 1000px;
+	margin: 0 auto 0 auto;
+	position: relative;
+}
+
+#huellasHolder{
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+}
+
+#selectorHolder{
+	width: 1000px;
+	height: 250px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+	margin-bottom: 10px;
+}
+
+.huellaHolder{
+	width: 480px;
+	margin: 10px;
+	float: left;
+}
+
+.datosHolder{
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.datosHolder p{
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.huellaGrande{
+	width: 480px;
+	height: 480px;
+	overflow: hidden;
+	position: relative;
+}
+
+.boton_mas{
+	position: absolute;
+	bottom: 5px;
+	right: 35px;
+	z-index: 11;
+	cursor: pointer;
+}
+
+.boton_menos{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	z-index: 10;
+	cursor: pointer;
+}
+
+.boton_fullscreen{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	z-index: 9;
+	cursor: pointer;
+}
+
+.huellasSelectorHolder{
+	width: 380px;
+	height: 76px;
+	margin: 30px 10px 0px 10px;
+	float: left;
+}
+
+.huellaSelector{
+	width: 200px;
+	height: 110px;
+	margin: 0 auto 0 auto;
+	background-image: url("../imgs/ojo.png");
+	background-size: initial;
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #007833;
+	border-width: 3px;
+}
+
+.huellasSelectorHolder p{
+	width: 380px;
+	text-align: center;
+	padding-top: 10px;
+	clear: both;
+}
+
+#circuloRojo{
+	position: absolute;
+	top: 65px;
+	left: 30px;
+}
+
+.hitArea{
+	height: 15px;
+	width: 15px;
+	position: absolute;
+	cursor: pointer;
+}
+
+#manosSelector{
+	position: relative;
+	width: 200px;
+	margin: 10px 0px 0px 0px;
+	float: left;
+}
+
+#comentariosHolder{
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	width: 980px;
+}
+
+#fComentario{
+	width: 665px;
+	float: left;
+	height: 30px;
+	margin-left: 10px;
+}
+
+#bGuardar{
+	float:right;
+}
+
+.etiqueta{
+	float: left;
+	font-size: 14px;		
+}
+
+#botonesHolder{
+	width: 50px;
+	position: absolute;
+	top: 30px;
+	left: -60px;
+}
+
+.botonBiometrico{
+	height: 60px;
+}
+
+.labelCandidato{
+	text-align: center;
+  	font-size: 14px;
+}

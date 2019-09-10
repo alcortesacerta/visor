@@ -1,0 +1,20 @@
+package com.iecisa.sat.saie.vf.integration.service.iface;
+
+import java.util.List;
+
+import com.iecisa.sat.saie.vf.integration.service.dto.BuscarEnrolamientoPorCriteriosDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoAdjuntosDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoDetalleDTO;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+
+public interface IServiceEnrolamiento {
+
+	public ServiceResponse<List<DatosEnrolamientoDTO>> getEnrolamientoPorCriterios(BuscarEnrolamientoPorCriteriosDTO request, boolean verExpuestos);
+	
+	public ServiceResponse<VersionEnrolamientoDetalleDTO> getVersionEnrolamientoByEPID(String request);
+	
+	public ServiceResponse<VersionEnrolamientoAdjuntosDTO> getVersionEnrolamientoAdjuntosByEPID(String request);
+	
+}

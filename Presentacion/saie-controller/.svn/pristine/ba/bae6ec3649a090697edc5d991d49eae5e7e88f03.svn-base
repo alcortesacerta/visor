@@ -1,0 +1,21 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class VersionEnrolamientoDetalleDTO extends VersionEnrolamientoGeneralDTO {
+	
+	private ArchivoDTO foto;
+	private ArchivoDTO firma;
+	
+	public ArchivoDTO getFoto() {
+		return foto;
+	}
+	public void setFoto(ArchivoDTO foto) {
+		this.foto = foto;
+	}
+	public ArchivoDTO getFirma() {
+		return firma;
+	}
+	public void setFirma(ArchivoDTO firma) {
+		this.firma = firma;
+	}
+	
+}

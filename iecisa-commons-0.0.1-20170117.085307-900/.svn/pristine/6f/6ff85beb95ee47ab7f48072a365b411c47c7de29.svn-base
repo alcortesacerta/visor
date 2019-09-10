@@ -1,0 +1,70 @@
+/*    */ package mx.com.iecisa.commons.utils;
+/*    */ 
+/*    */ import java.text.ParseException;
+/*    */ import java.text.SimpleDateFormat;
+/*    */ import java.util.Date;
+/*    */ import java.util.GregorianCalendar;
+/*    */ import javax.xml.datatype.DatatypeFactory;
+/*    */ import javax.xml.datatype.XMLGregorianCalendar;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ public class DateFormatter
+/*    */ {
+/*    */   public static String dateToString(Date date, String format)
+/*    */   {
+/* 20 */     String result = null;
+/* 21 */     SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
+/*    */     try {
+/* 23 */       if (date != null) {
+/* 24 */         result = dateFormatter.format(date);
+/*    */       }
+/*    */     }
+/*    */     catch (Exception localException) {}
+/*    */     
+/* 29 */     return result;
+/*    */   }
+/*    */   
+/*    */   public static Date stringToDate(String date, String format) {
+/* 33 */     Date result = null;
+/*    */     try {
+/* 35 */       SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
+/* 36 */       result = dateFormatter.parse(date);
+/*    */     }
+/*    */     catch (IllegalArgumentException localIllegalArgumentException) {}catch (ParseException localParseException) {}catch (Exception localException) {}
+/*    */     
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/* 44 */     return result;
+/*    */   }
+/*    */   
+/*    */   public static Date toDate(XMLGregorianCalendar calendar) {
+/* 48 */     if (calendar == null) {
+/* 49 */       return null;
+/*    */     }
+/* 51 */     return calendar.toGregorianCalendar().getTime();
+/*    */   }
+/*    */   
+/*    */   public static XMLGregorianCalendar toXMLGregorianCalendar(Date date) {
+/* 55 */     XMLGregorianCalendar xmlCalendar = null;
+/*    */     
+/* 57 */     if (date != null) {
+/* 58 */       GregorianCalendar gCalendar = new GregorianCalendar();
+/* 59 */       gCalendar.setTime(date);
+/*    */       try {
+/* 61 */         xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
+/*    */       }
+/*    */       catch (Exception localException) {}
+/*    */     }
+/*    */     
+/*    */ 
+/* 67 */     return xmlCalendar;
+/*    */   }
+/*    */ }
+

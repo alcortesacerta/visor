@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>
+				%date{ISO8601} %-5level %logger{0}.%method\(%L\) - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="SAIE_VISOR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<encoder>
+			<Pattern>
+				%date{ISO8601} %-5level %logger{0}.%method\(%L\) - %msg%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${jboss.server.log.dir}/saie-visor.log.%d{yyyy-MM-dd}</FileNamePattern>
+		</rollingPolicy>
+	</appender>
+	
+	<appender name="SAIE_VISOR_NAS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<prudent>true</prudent>
+		<encoder>
+			<Pattern>
+				%date{ISO8601} %-5level %logger{0}.%method\(%L\) - %msg%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${EXT_LOG_DIR}/saie-visor.log.%d{yyyy-MM-dd}</FileNamePattern>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.iecisa.sat.saie.audit" level="INFO">
+		<appender-ref ref="SAIE_VISOR" />
+		<appender-ref ref="SAIE_VISOR_NAS" />
+	</logger>
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+	
+</configuration>

@@ -1,0 +1,269 @@
+* { /*quita margenes a todo el documento*/
+	margin: 0px;
+	padding: 0px;
+}
+
+html {
+	/*fuente genérica del documento, en algunas partes se cambia a font-weight: normal y también se usa el tamaño 12px*/
+	font-family: sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+img {
+	text-decoration: none;
+	border: 0px;
+}
+
+a { /*apariencia de ligas*/
+	text-decoration: none;
+	border: 0px;
+	font-size: 14px;
+	color: graytext;
+	font-weight: normal;
+}
+
+a:visited { /*apariencia de ligas visitadas*/
+	text-decoration: none;
+	font-size: 14px;
+	color: graytext;
+	font-weight: normal;
+}
+
+body { /*fondo*/
+	background-color: white;
+}
+
+#head-sat { /*cabecera de los documentos*/
+	height: 50px;
+	width: 100%;
+	min-width: 1100px;
+	background-color: white;
+	position: relative;
+}
+
+#logo-sat { /*posicion del logo*/
+	position: absolute;
+	left: 20px;
+}
+
+#navegacion {
+	/*estilo de la navegacion (esquina superior derecha que tiene ligas a las secciones de las que venimos)*/
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	font-size: 12px;
+	font-weight: normal;
+	color: #C10C2D;
+}
+
+#navegacion span { /*estilo de la navegacion*/
+	font-weight: normal;
+	color: gray;
+	font-size: 12px;
+}
+
+#navegacion a { /*estilo de la navegacion*/
+	font-weight: normal;
+	color: gray;
+	font-size: 12px;
+}
+
+#navegacion a:VISITED { /*estilo de la navegacion*/
+	font-weight: normal;
+	color: gray;
+	font-size: 12px;
+}
+
+#barra-usuario {
+	/*barra verde clarito donde aparece el nombre de usuario en la cabecera*/
+	background-color: #a2ceab;
+	position: relative;
+	width: 100%;
+	height: 50px;
+	margin-bottom: 20px;
+	min-width: 1100px;
+}
+
+#holder { /*contenedor general del documento*/
+	min-width: 1100px;
+}
+
+#usuario { /*estilo del usuario dentro de la barra*/
+	position: absolute;
+	width: 350px;
+	height: 50px;
+	font-size: 14px;
+	color: white;
+	left: 5px;
+}
+
+#usuario-nombre { /*estilo del usuario dentro de la barra*/
+	position: absolute;
+	left: 60px;
+	top: 5px;
+}
+
+#usuario-fecha { /*estilo del usuario dentro de la barra*/
+	position: absolute;
+	left: 60px;
+	top: 25px;
+	font-weight: normal;
+	font-size: 12px;
+}
+
+#notificacion { /*estilo de notificacion dentro de la barra*/
+	position: absolute;
+	right: 5px;
+}
+
+#notificacion span {
+	color: white;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 50px;
+	position: relative;
+	bottom: 20px;
+}
+
+.holderTitulo {
+	/*contenedor de titulos (barra verde oscuro que se muestra en los titulos de las ventanas)*/
+	width: 100%;
+	height: 30px;
+	color: white;
+	background-color: #007833;
+	line-height: 30px;
+	border-radius: 10px 10px 0px 0px;
+	position: relative;
+}
+
+.holderTitulo img { /*icono de la barra de titulo*/
+	margin-left: 10px;
+	position: relative;
+	top: 5px;
+}
+
+input[type=text] { /*estilo de los campos de entrada*/
+	background-color: white;
+	width: 250px;
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	text-indent: 5px;
+}
+
+input[type=password] {
+	background-color: white;
+	width: 250px;
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	text-indent: 5px;
+}
+
+input[type=text]:disabled {
+	/*estilo de campos de entrada deshabilitados*/
+	background-color: #c2c2c2;
+}
+
+input[type=submit] { /*estilo de botones de forma*/
+	height: 25px;
+	width: 100px;
+	background-color: #C10C2D;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+input[type=submit]:disabled { /*estilo de boton de forma deshabilitado*/
+	background-color: #6e6e6e;
+}
+
+button[type=button] { /*estilo de boton*/
+	height: 25px;
+	min-width: 100px;
+	background-color: #C10C2D;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+button[type=button]:disabled { /*boton deshabilitado*/
+	background-color: #6e6e6e;
+}
+
+#imageViewer { /*contenedor general de imagen con zoom*/
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 100;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+#imageViewerImageHolder { /*contenedor de la imagen con zoom*/
+	position: absolute;
+	border: solid 1px #999;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+#bCerrar { /*estilo boton cerrar*/
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.seleccionado {
+	/*elemento seleccionado (usado en pantalla de huellas e iris)*/
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #C10C2D;
+	border-width: 3px;
+}
+
+.tooltip { /*tooltip de ayuda*/
+	display: inline;
+	position: relative;
+}
+
+.tooltip:hover:after { /*tooltip de ayuda*/
+	background: #a2ceab;
+	border-radius: 5px;
+	bottom: 26px;
+	color: #fff;
+	content: attr(title);
+	left: 20%;
+	padding: 5px 15px;
+	position: absolute;
+	z-index: 98;
+	width: 220px;
+}
+
+.tooltip:hover:before { /*tooltip de ayuda*/
+	border: solid;
+	border-color: #a2ceab transparent;
+	border-width: 6px 6px 0 6px;
+	bottom: 20px;
+	content: "";
+	left: 50%;
+	position: absolute;
+	z-index: 99;
+}
+
+.botonCerrar {
+	position: absolute !important;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}

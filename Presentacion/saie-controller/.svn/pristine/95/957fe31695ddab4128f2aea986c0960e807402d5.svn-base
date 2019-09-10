@@ -1,0 +1,42 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class AraResponseDTO {
+
+	private String certificado;
+	private String tipoCert;
+	private String estado;
+	private String vigenciaInicial;
+	private String vigenciaFinal;
+	public String getCertificado() {
+		return certificado;
+	}
+	public void setCertificado(String certificado) {
+		this.certificado = certificado;
+	}
+	public String getTipoCert() {
+		return tipoCert;
+	}
+	public void setTipoCert(String tipoCert) {
+		this.tipoCert = tipoCert;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public String getVigenciaInicial() {
+		return vigenciaInicial;
+	}
+	public void setVigenciaInicial(String vigenciaInicial) {
+		this.vigenciaInicial = vigenciaInicial;
+	}
+	public String getVigenciaFinal() {
+		return vigenciaFinal;
+	}
+	public void setVigenciaFinal(String vigenciaFinal) {
+		this.vigenciaFinal = vigenciaFinal;
+	}
+	
+	
+}

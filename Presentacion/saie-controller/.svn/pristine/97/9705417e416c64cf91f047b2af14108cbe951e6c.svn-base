@@ -1,0 +1,30 @@
+package com.iecisa.sat.saie.vf.integration.service.rest;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.AraResponseDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaAraRequestDTO;
+
+import feign.Feign;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
+import feign.jaxrs.JAXRSModule.JAXRSContract;
+
+public class ConsultarAraRestClient {
+	
+	private IServiceAra proxy;
+	
+	public ConsultarAraRestClient(){
+		super();
+		proxy = Feign
+				.builder()
+				.decoder(new GsonDecoder())
+				.encoder(new GsonEncoder())
+				.contract(new JAXRSContract())
+				.target(IServiceAra.class, System.getProperty("ARA_URL"));
+	}
+	
+	public ServiceResponse<AraResponseDTO> getCertificadoAra(ConsultaAraRequestDTO request){
+		return proxy.getCertificadoAra(request);
+	}
+
+}

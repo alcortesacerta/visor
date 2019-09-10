@@ -1,0 +1,1375 @@
+package com.iecisa.sat.saie.vf.integration.service.impl;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.math.BigInteger;
+import java.security.PrivateKey;
+import java.security.Signature;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+import javax.crypto.BadPaddingException;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.spi.IIORegistry;
+import javax.imageio.spi.ImageReaderSpi;
+import javax.imageio.stream.ImageInputStream;
+import javax.imageio.stream.MemoryCacheImageOutputStream;
+import javax.security.cert.CertificateExpiredException;
+import javax.security.cert.CertificateNotYetValidException;
+import javax.security.cert.X509Certificate;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.commons.ssl.PKCS8Key;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import com.github.jaiimageio.impl.plugins.raw.RawImageReaderSpi;
+import com.github.jaiimageio.impl.plugins.tiff.TIFFImageReaderSpi;
+import com.iecisa.sat.saie.audit.AuditManager;
+import com.iecisa.sat.saie.audit.dto.AuditEvent;
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dao.DBManager;
+import com.iecisa.sat.saie.vf.integration.service.dto.AraResponseDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ArchivoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.BuscarEnrolamientoPorCriteriosDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.CatalogoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaAraRequestDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaLdapRequestDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaSiseRequestDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.EstatusValidacionAutorizacionDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.Permisos;
+import com.iecisa.sat.saie.vf.integration.service.dto.ReporteBiometristaDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.UsuarioDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoAdjuntosDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoDetalleDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoGeneralDTO;
+import com.iecisa.sat.saie.vf.integration.service.iface.IServiceEnrolamiento;
+import com.iecisa.sat.saie.vf.integration.service.rest.ConsultarAraRestClient;
+import com.iecisa.sat.saie.vf.integration.service.rest.ConsultarLdapRestClient;
+import com.iecisa.sat.saie.vf.integration.service.rest.ConsultarRfcSiseRestClient;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.RandomAccessFileOrArray;
+import com.itextpdf.text.pdf.codec.TiffImage;
+
+public class ServiceEnrolamiento implements IServiceEnrolamiento {
+	
+	public static int VALIDACION_AUTORIZACION_INDICE = 0;
+
+	public ServiceEnrolamiento() {
+		super();
+		/*IIORegistry registro = IIORegistry.getDefaultInstance();
+		Iterator<ImageReaderSpi> itsp = registro.getServiceProviders(ImageReaderSpi.class, false);
+		
+		boolean breader = false;
+		int i = 1;
+		while(itsp.hasNext()){
+			ImageReaderSpi irs = itsp.next();
+			System.out.println(i + ": " + irs.getVendorName());
+			System.out.println(i + ": " + irs.getDescription(new Locale("")));
+			System.out.println(i + ": " + irs.getPluginClassName());
+			
+			if(irs.getVendorName().contains("github.com") && irs.getDescription(new Locale("")).contains("TIFF")){
+				breader = true;
+			}
+			i++;
+		}
+		if(!breader){
+			registro.registerServiceProvider(new TIFFImageReaderSpi());
+		}*/
+	}
+
+	public ServiceResponse<List<ControlVersionesDTO>> getActualizacionesPendientes() {
+
+		ServiceResponse<List<ControlVersionesDTO>> response = new ServiceResponse<List<ControlVersionesDTO>>();
+
+		try {
+			List<ControlVersionesDTO> result = null;
+			result = DBManager.getInstance().catalogoActualizacionesPendientes();
+
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}
+	
+	public ServiceResponse<String> validarFirmarFiel(InputStream certificado, InputStream llave, String pass, String textoPorFirmar, String rfcUsuario){
+		ServiceResponse<String> response = new ServiceResponse<String>();
+		String rfccer = "";
+		String mensaje = null;
+		String firmaB64 = null;
+		
+		try {            
+        	//validando certificado
+        	X509Certificate cer = X509Certificate.getInstance(certificado);
+        	cer.checkValidity();
+        	
+        	//obtiene rfc
+        	String cerdn = cer.getSubjectDN().toString();
+        	int ind = cerdn.indexOf(".45=")+4;
+        	rfccer = cerdn.substring(ind, ind+13);
+        	
+        	if(rfcUsuario != null && !rfccer.equals(rfcUsuario)){
+        		mensaje = "La firma electrónica no corresponde al usuario actual";
+        	}else{
+	        	//validando con ara
+	        	if(System.getProperty("SAIE_LOCAL") == null){	//esta variable solo existe en el entorno local
+		        	BigInteger cerbi = new BigInteger(cer.getSerialNumber().toString());
+		        	byte[] dif = cerbi.toByteArray();
+		        	ConsultarAraRestClient araClient = new ConsultarAraRestClient();
+		        	ServiceResponse<AraResponseDTO> araresponse = araClient.getCertificadoAra(new ConsultaAraRequestDTO(new String(dif)));
+		        	if(araresponse.getCode() == 0){
+		        		if(araresponse.getResult().getEstado().equals("R")){
+		        			mensaje = "El certificado está revocado";
+		        		}else if(araresponse.getResult().getEstado().equals("C")){
+			        		mensaje = "El certificado está cáduco";
+			        	}else if(!araresponse.getResult().getEstado().equals("A")){
+			        		mensaje = "El certificado no es válido";
+			        	}
+		        	}
+	        	}
+        	}
+        	
+        	if(mensaje == null){
+	        	//validando llave privada
+	        	byte[] encKey = new byte[llave.available()];
+	        	llave.read(encKey);
+	        	
+	        	PKCS8Key key = new PKCS8Key(encKey, pass.toCharArray());
+	        	PrivateKey pk = key.getPrivateKey();
+	        	
+	        	//Signature firma = Signature.getInstance("SHA1withRSA");
+	        	Signature firma = Signature.getInstance("SHA256withRSA");
+	        	firma.initSign(pk);
+	        	
+	        	firma.update(textoPorFirmar.getBytes("UTF-8"));
+	        	byte[] firmado = firma.sign();
+	        	firmaB64 = Base64.getEncoder().encodeToString(firmado);
+	        	
+	        	firma.initVerify(cer.getPublicKey());
+	        	firma.update(textoPorFirmar.getBytes("UTF-8"));
+	        	if(!firma.verify(firmado)){
+	        		mensaje = "La llave privada no concuerda con la información del certificado";
+	        	}
+        	}
+        }catch(CertificateExpiredException e){
+        	mensaje = "El certificado no es válido, por favor corrobora la fecha de expiración";
+        }catch(CertificateNotYetValidException e){
+        	mensaje = "El certificado aún no es válido, por favor corrobora la fecha de expiración";
+        }catch(BadPaddingException e){
+        	mensaje = "La clave de la llave privada es incorrecta";
+        }catch(Exception e){
+        	mensaje = "Ocurrió un error, por favor inténtalo más tarde";
+        	e.printStackTrace();
+        }
+		
+		response.setCode(mensaje == null ? 0 : -1);
+		response.setMessage(mensaje == null ? rfccer : mensaje);
+		response.setResult(firmaB64);
+		return response;
+	}
+
+	public ServiceResponse<Integer> setEstatusValidacionAutorizacion(EstatusValidacionAutorizacionDTO request, UsuarioDTO usuario) {
+		ServiceResponse<Integer> response = new ServiceResponse<Integer>();
+		
+		//AuditManager
+		AuditEvent aevent = new AuditEvent();
+		aevent.setUuid(UUID.randomUUID().toString());
+		aevent.setDateTime(new Date());
+		aevent.setUser(usuario.getRfc());
+		aevent.setIpAddress(usuario.getIp());
+		aevent.setMacAddress(usuario.getMac());
+		String amessage = request.getRfc()+", ";
+		if(request.getEstatus_validacion_actualizacion() == 5){
+			amessage += "ValidacionDeActualizacion,";
+		}else if(request.getEstatus_validacion_actualizacion() == 6){
+			amessage += "AutorizacionDeActualizacion,";
+		}else if(request.getEstatus_validacion_actualizacion() == 4){
+			amessage += "CancelaValidacionDeActualizacion,";
+		}else if(request.getEstatus_validacion_actualizacion() == 7){
+			amessage += "CancelaAutorizacionDeActualizacion,";
+		}
+		amessage += "version:"+request.getVersion() + ", " + request.getComentarios() + ", "+ request.getCadenaOriginal() + ", " + request.getFirma();
+		aevent.setMessage(amessage);
+		AuditManager.register(aevent);
+		//-AuditManager
+		try {
+			Integer result = null;
+			if (request != null) {
+				result = DBManager.getInstance().estatusValidacionAutorizacion(request.getRfc(), request.getVersion(), 
+						request.getEstatus_validacion_actualizacion(), request.getComentarios(), request.getMotivoCancelacion(), 
+						request.getFirma(), request.getCadenaOriginal());
+
+				response.setCode(0);
+				response.setMessage("OK");
+				response.setResult(result);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}
+	
+	public ServiceResponse<String> setReporteBiometristaDuplicados(ReporteBiometristaDTO request, UsuarioDTO usuario, String ePid){
+		ServiceResponse<String> response = new ServiceResponse<String>();
+		
+		//AuditManager
+		AuditEvent aevent = new AuditEvent();
+		aevent.setUuid(UUID.randomUUID().toString());
+		aevent.setDateTime(new Date());
+		aevent.setUser(usuario.getRfc());
+		aevent.setIpAddress(usuario.getIp());
+		aevent.setMacAddress(usuario.getMac());
+		String amessage = usuario.getRfc()+", "+request.getRfc1()+", "+request.getRfc2()+", "+request.getDictaminacionValue()+", "
+				+ request.getObservacionesValue() +", "+"ReporteBiometrista, epid="+ePid+request.getCaso();
+		aevent.setMessage(amessage);
+		AuditManager.register(aevent);
+		//-AuditManager
+		
+		try {
+			if (request != null) {
+				DBManager.getInstance().reporteBiometristaDuplicidad(request);
+
+				response.setCode(0);
+				response.setMessage("OK");
+				response.setResult("OK");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+		return response;
+	}
+
+	public ServiceResponse<List<DatosEnrolamientoDTO>> getEnrolamientoPorCriterios(BuscarEnrolamientoPorCriteriosDTO request,boolean verExpuestos) {
+
+		ServiceResponse<List<DatosEnrolamientoDTO>> response = new ServiceResponse<List<DatosEnrolamientoDTO>>();
+
+		try {
+			List<DatosEnrolamientoDTO> result = null;
+			if (request.getRfc() != null) {
+				result = DBManager.getInstance().buscarRFC(request.getRfc());
+			} else if (request.getCurp() != null) {
+				result = DBManager.getInstance().buscarCURP(request.getCurp());
+			} else {
+				result = DBManager.getInstance().buscarNombre(request.getNombre());
+			}
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}
+
+	public boolean getEnrolamientoSise(String rfc, String rfcusuario) {
+		ConsultarRfcSiseRestClient sise = new ConsultarRfcSiseRestClient();
+		ServiceResponse<String> response = sise.getConsultaSise(new ConsultaSiseRequestDTO(rfc, rfcusuario));
+		if(response.getCode() == 0){
+			System.out.println("SISE: "+rfc+" "+response.getResult());
+			return response.getResult().equals("1");
+		}else{
+			return false;
+		}
+	}
+
+	public ServiceResponse<List<VersionEnrolamientoGeneralDTO>> getVersionEnrolamientoByRFC(String rfc) {
+		ServiceResponse<List<VersionEnrolamientoGeneralDTO>> response = new ServiceResponse<List<VersionEnrolamientoGeneralDTO>>();
+		try {
+			List<VersionEnrolamientoGeneralDTO> result = DBManager.getInstance().listarVersiones(rfc);
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+		return response;
+	}
+	
+	public ServiceResponse<VersionEnrolamientoGeneralDTO> getVersionUnoByRFC(String rfc){
+		ServiceResponse<VersionEnrolamientoGeneralDTO> response = new ServiceResponse<VersionEnrolamientoGeneralDTO>();
+		try {
+			VersionEnrolamientoGeneralDTO result = DBManager.getInstance().getVersionUno(rfc);
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+		return response;
+	}
+	
+	public ServiceResponse<List<VersionEnrolamientoGeneralDTO>> getVersionEnrolamientoValidaByRFC(String rfc) {
+		ServiceResponse<List<VersionEnrolamientoGeneralDTO>> response = new ServiceResponse<List<VersionEnrolamientoGeneralDTO>>();
+		try {
+			List<VersionEnrolamientoGeneralDTO> resultTemp = DBManager.getInstance().listarVersiones(rfc);
+			List<VersionEnrolamientoGeneralDTO> result = new ArrayList<VersionEnrolamientoGeneralDTO>();
+			for(VersionEnrolamientoGeneralDTO version : resultTemp){
+				if(version.getEstatus() == 1 || version.getEstatus() == 2 || version.getEstatus() == 6){
+					result.add(version);
+				}
+			}
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+		return response;
+	}
+
+	public void getVersionFotoFirma(VersionEnrolamientoGeneralDTO version, String rfc) {
+		ArchivoDTO archivo = null;
+		if (version.getHistorico() == 1) {
+			archivo = getImageData("FOTO", version, rfc, "FOTO");
+		} else {
+			archivo = getImageActualData("foto.j", version, rfc, "foto.j");
+		}
+		if (archivo == null) {
+			archivo = new ArchivoDTO();
+			archivo.setName("noaplica");
+		}
+		version.setFoto(archivo);
+
+		archivo = null;
+		if (version.getHistorico() == 1) {
+			archivo = getImageTiffData("FIRMA", version, rfc, "FIRMA");
+		} else {
+			archivo = getImageActualData("firma.jpg", version, rfc, "firma.jpg");
+			if(archivo == null || archivo.getData() == null){
+				archivo = getImageTiffActualData("firma.tif", version, rfc, "firma.tif");
+			}
+		}
+		if (archivo == null) {
+			archivo = new ArchivoDTO();
+			archivo.setName("noaplica");
+		}
+		version.setFirma(archivo);
+	}
+
+	public ServiceResponse<VersionEnrolamientoDetalleDTO> getVersionEnrolamientoByEPID(String request) {
+		return null;
+	}
+
+	public ServiceResponse<List<ArchivoDTO>> getHuellas(VersionEnrolamientoGeneralDTO version, String rfc) {
+		ServiceResponse<List<ArchivoDTO>> response = new ServiceResponse<List<ArchivoDTO>>();
+		List<ArchivoDTO> huellas = new ArrayList<ArchivoDTO>();
+
+		String[] huellaFiles;
+		String[] huellaIds = { "H10", "H09", "H08", "H07", "H06", "H01", "H02",
+				"H03", "H04", "H05" };
+		String[] huellaIdsAux = { "h10", "h09", "h08", "h07", "h06", "h01",
+				"h02", "h03", "h04", "h05" };
+		if (version.getHistorico() == 1) {
+			huellaFiles = new String[] { "MEN_IZQ_RAW", "ANU_IZQ_RAW",
+					"MED_IZQ_RAW", "IND_IZQ_RAW", "PUL_IZQ_RAW", "PUL_DER_RAW",
+					"IND_DER_RAW", "MED_DER_RAW", "ANU_DER_RAW", "MEN_DER_RAW" };
+		} else {
+			huellaFiles = new String[] { "h10.p", "h09.p", "h08.p", "h07.p",
+					"h06.p", "h01.p", "h02.p", "h03.p", "h04.p", "h05.p" };
+		}
+		ArchivoDTO archivo = null;
+		for (int i = 0; i < huellaIds.length; i++) {
+			if (version.getHistorico() == 1) {
+				archivo = getImageData(huellaFiles[i], version, rfc,huellaIds[i]);
+			} else {
+				archivo = getImageActualData(huellaFiles[i], version, rfc, huellaIds[i]);
+				try {
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					Document dom = db.parse(new InputSource(new FileReader(version.getArchivos().get(0).substring(0, version.getArchivos().get(0).lastIndexOf("/")) + "/huellas.xml")));
+					NodeList nodeList = dom.getElementsByTagName("property");
+					for (int j = 0; j < nodeList.getLength(); j++) {
+						Element e = (Element) nodeList.item(j);
+						if (e.getAttribute("key").equals(
+								huellaIdsAux[i] + "_status")) {
+							String valor = e.getAttribute("value");
+							if (!valor.equals("OK")) {
+								if (archivo == null) {
+									archivo = new ArchivoDTO();
+								}
+								archivo.setId(huellaIds[i]);
+								archivo.setName(valor.equals("XX") ? "amputado"
+										: valor.equals("UP") ? "vendado"
+												: "noaplica");
+							}
+						}
+					}
+				}catch(FileNotFoundException|IndexOutOfBoundsException e){
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			if (archivo != null) {
+				huellas.add(archivo);
+			} else {
+				archivo = new ArchivoDTO();
+				archivo.setId(huellaIds[i]);
+				archivo.setName("noaplica");
+				huellas.add(archivo);
+			}
+
+		}
+		response.setCode(0);
+		response.setMessage("OK");
+		response.setResult(huellas);
+		return response;
+	}
+
+	public ServiceResponse<List<ArchivoDTO>> getIris(VersionEnrolamientoGeneralDTO version, String rfc) {
+		ServiceResponse<List<ArchivoDTO>> response = new ServiceResponse<List<ArchivoDTO>>();
+		List<ArchivoDTO> iris = new ArrayList<ArchivoDTO>();
+
+		String[] irisFiles;
+		String[] irisIds = { "IOZ", "IOD" };
+		String[] irisIdsAux = { "irisizq", "irisder" };
+		if (version.getHistorico() == 1) {
+			irisFiles = new String[] { "IRIS_OJO_IZQ", "IRIS_OJO_DER" };
+		} else {
+			irisFiles = new String[] { "irisizq.tif", "irisder.tif" };
+		}
+
+		ArchivoDTO archivo = null;
+		for (int i = 0; i < irisIds.length; i++) {
+			if (version.getHistorico() == 1) {
+				archivo = getImageTiffData(irisFiles[i], version, rfc, irisIds[i]);
+			} else {
+				archivo = getImageTiffActualData(irisFiles[i], version, rfc,
+						irisIds[i]);
+				try {
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					Document dom = db.parse(new InputSource(new FileReader(version.getArchivos().get(0).substring(0, version.getArchivos().get(0).lastIndexOf("/")) + "/iris.xml")));
+					NodeList nodeList = dom.getElementsByTagName("property");
+					for (int j = 0; j < nodeList.getLength(); j++) {
+						Element e = (Element) nodeList.item(j);
+						if (e.getAttribute("key").equals(irisIdsAux[i] + "_status")) {
+							String valor = e.getAttribute("value");
+							if (!valor.equals("OK")) {
+								if (archivo == null) {
+									archivo = new ArchivoDTO();
+								}
+								archivo.setId(irisIds[i]);
+								archivo.setName(valor.equals("XX") ? "amputado" : valor.equals("UP") ? "vendado" : "noaplica");
+							}
+						}
+					}
+				}catch(FileNotFoundException|IndexOutOfBoundsException e){
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			if (archivo != null) {
+				iris.add(archivo);
+			} else {
+				archivo = new ArchivoDTO();
+				archivo.setId(irisIds[i]);
+				archivo.setName("noaplica");
+				iris.add(archivo);
+			}
+		}
+
+		response.setCode(0);
+		response.setMessage("OK");
+		response.setResult(iris);
+		return response;
+	}
+
+	public ServiceResponse<List<ArchivoDTO>> getDocumentos(VersionEnrolamientoGeneralDTO version, String rfc) {
+		ServiceResponse<List<ArchivoDTO>> response = new ServiceResponse<List<ArchivoDTO>>();
+		List<ArchivoDTO> documentos = new ArrayList<ArchivoDTO>();
+
+		List<String> archivos = version.getArchivos();
+		List<String> nombreDocumentos = new ArrayList<String>();
+		if (version.getHistorico() == 1) {
+			for (int i = 0; i < archivos.size(); i++) {
+				if (archivos.get(i).substring(archivos.get(i).length() - 7,	archivos.get(i).length() - 4).equals("TIF")
+						&& !archivos.get(i).contains("FIRMA")
+						&& !archivos.get(i).contains("IRIS_OJO_IZQ")
+						&& !archivos.get(i).contains("IRIS_OJO_DER")) {
+					nombreDocumentos.add(archivos.get(i));
+				}
+			}
+		} else {
+			for (int i = 0; i < archivos.size(); i++) {
+				String archivoAux = archivos.get(i);
+				if (archivoAux.substring(archivoAux.length() - 3).equals("xml")
+						&& !archivoAux.contains("cierre")
+						&& !archivoAux.contains("datospersonales")
+						&& !archivoAux.contains("documentos")
+						&& !archivoAux.contains("firma")
+						&& !archivoAux.contains("foto")
+						&& !archivoAux.contains("huellas")
+						&& !archivoAux.contains("iris")) {
+					nombreDocumentos.add(archivos.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < nombreDocumentos.size(); i++) {
+			ArchivoDTO archivo = null;
+			if (version.getHistorico() == 1) {
+				archivo = getImageTiffData(nombreDocumentos.get(i), version, rfc, "");
+			} else {
+				try {
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					Document dom = db.parse(new InputSource(new FileReader(nombreDocumentos.get(i))));
+					NodeList nodeList = dom.getElementsByTagName("property");
+					for (int j = 0; j < nodeList.getLength(); j++) {
+						Element e = (Element) nodeList.item(j);
+						if (e.getAttribute("key").equals("legend")) {
+							archivo = new ArchivoDTO();
+							String nombre = nombreDocumentos.get(i).substring(nombreDocumentos.get(i).lastIndexOf("/")+1);
+							archivo.setId(nombre);
+							archivo.setName(e.getAttribute("value"));
+						}
+					}
+				}catch(FileNotFoundException|IndexOutOfBoundsException e){
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				if (archivo == null) {
+					String nombre = nombreDocumentos.get(i).substring(nombreDocumentos.get(i).lastIndexOf("/")+1);
+					archivo = getImageTiffActualData(nombre.replace(".xml", ".tif"), version, rfc,	nombre);
+				}
+			}
+			if (archivo != null) {
+				documentos.add(archivo);
+			}
+		}
+		response.setCode(0);
+		response.setMessage("OK");
+		response.setResult(documentos);
+		return response;
+	}
+
+	private ArchivoDTO getImageData(String nombre, VersionEnrolamientoGeneralDTO version, String rfc, String id) {
+		try {
+			List<String> archivos = version.getArchivos();
+			String nombreArchivo = null;
+			for (int i = 0; i < archivos.size(); i++) {
+				if(archivos.get(i).contains(nombre)) {
+					nombreArchivo = archivos.get(i);
+				}
+			}
+			if (nombreArchivo == null) {
+				return null;
+			}
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document dom = db.parse(new InputSource(new FileReader(nombreArchivo)));
+			byte[] imagen = Base64.getDecoder().decode(dom.getElementsByTagName("ARCHIVO_BINARIO").item(0).getTextContent());
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(imagen);
+			archivodto.setId(id);
+			archivodto.setName(nombre);
+			archivodto.setDescription(nombreArchivo);
+
+			return archivodto;
+		}catch(IOException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private ArchivoDTO getImageActualData(String nombre,VersionEnrolamientoGeneralDTO version, String rfc, String id) {
+		try {
+			FileInputStream inputStream;
+			ByteArrayOutputStream buffer;
+			int nRead;
+			byte[] data;
+			byte[] imagen;
+
+			List<String> archivos = version.getArchivos();
+			String nombreArchivo = null;
+			
+			for (int i = 0; i < archivos.size(); i++) {
+				if (archivos.get(i).contains(nombre)) {
+					nombreArchivo = archivos.get(i);
+					break;
+				}
+			}
+			
+			if (nombreArchivo == null) {
+				return null;
+			}
+
+			File file = new File(nombreArchivo);
+			inputStream = new FileInputStream(file);
+			buffer = new ByteArrayOutputStream();
+			data = new byte[16384];
+			while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+			buffer.flush();
+			imagen = buffer.toByteArray();
+			inputStream.close();
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(imagen);
+			archivodto.setId(id);
+			archivodto.setName(nombre);
+			archivodto.setDescription(nombreArchivo);
+
+			return archivodto;
+		}catch(IOException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public ArchivoDTO getReporteDuplicidadByte(String filename) {
+		try {
+			FileInputStream inputStream;
+			ByteArrayOutputStream buffer;
+			int nRead;
+			byte[] data;
+			byte[] imagen;
+			String directorio = System.getProperty("SAIE_BIOREPORTES_ROOT");
+
+			File file = new File(directorio + filename);
+			inputStream = new FileInputStream(file);
+			buffer = new ByteArrayOutputStream();
+			data = new byte[16384];
+			while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+			buffer.flush();
+			imagen = buffer.toByteArray();
+			inputStream.close();
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(imagen);
+			archivodto.setName(filename);
+
+			return archivodto;
+		}catch(FileNotFoundException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private ArchivoDTO getImageTiffData(String nombre, VersionEnrolamientoGeneralDTO version, String rfc, String id) {
+		try {
+			List<String> archivos = version.getArchivos();
+			String nombreArchivo = null;
+			for (int i = 0; i < archivos.size(); i++) {
+				if (archivos.get(i).contains(nombre)) {
+					nombreArchivo = archivos.get(i);
+				}
+			}
+			if (nombreArchivo == null) {
+				return null;
+			}
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document dom = db.parse(new InputSource(new FileReader(nombreArchivo)));
+			byte[] imagen = Base64.getDecoder().decode(dom.getElementsByTagName("ARCHIVO_BINARIO").item(0).getTextContent());
+			String convertirTiff = System.getProperty("SAIE_CONVERTIR_TIFF_JPG");
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			if (id.equals("")) {
+				String nombreImagen = dom.getElementsByTagName("T_TIPO_IMAGEN").item(0).getTextContent();
+				archivodto.setId(nombreImagen);
+				nombreImagen = nombreImagen.toLowerCase();
+				nombreImagen = nombreImagen.replace("_", " ");
+				archivodto.setName(nombreImagen);
+			} else {
+				archivodto.setId(id);
+				archivodto.setName(nombre);
+			}
+			archivodto.setDescription(nombreArchivo);
+
+			if (convertirTiff.equals("true")) {
+				ByteArrayInputStream baimagenTiff = new ByteArrayInputStream(imagen);
+				BufferedImage biimagenTiff = ImageIO.read(baimagenTiff);
+
+				ByteArrayOutputStream baosimagenJpg = new ByteArrayOutputStream();
+				ImageIO.write(biimagenTiff, "JPEG", baosimagenJpg);
+				baosimagenJpg.close();
+				archivodto.setDataContentType("image/jpeg");
+				archivodto.setData(baosimagenJpg.toByteArray());
+			} else {
+				archivodto.setDataContentType("image/tiff");
+				archivodto.setData(imagen);
+			}
+			return archivodto;
+		}catch(FileNotFoundException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private ArchivoDTO getImageTiffActualData(String nombre,VersionEnrolamientoGeneralDTO version, String rfc, String id) {
+		try {
+			List<String> archivos = version.getArchivos();
+			String nombreArchivo = null;
+			
+			for (int i = 0; i < archivos.size(); i++) {
+				if (archivos.get(i).contains(nombre)) {
+					nombreArchivo = archivos.get(i);
+				}
+			}
+			if (nombreArchivo == null) {
+				return null;
+			}
+
+			FileInputStream inputStream;
+			ByteArrayOutputStream buffer;
+			int nRead;
+			byte[] data;
+			byte[] imagen;
+			File file = new File(nombreArchivo);
+			inputStream = new FileInputStream(file);
+			buffer = new ByteArrayOutputStream();
+			data = new byte[16384];
+			while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+			buffer.flush();
+			imagen = buffer.toByteArray();
+			inputStream.close();
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setId(id);
+			archivodto.setName(nombre);
+			archivodto.setDescription(nombreArchivo);
+
+			String convertirTiff = System.getProperty("SAIE_CONVERTIR_TIFF_JPG");
+			if (convertirTiff.equals("true")) {
+
+				ByteArrayInputStream baimagenTiff = new ByteArrayInputStream(imagen);
+				BufferedImage biimagenTiff = ImageIO.read(baimagenTiff);
+
+				ByteArrayOutputStream baosimagenJpg = new ByteArrayOutputStream();
+				ImageIO.write(biimagenTiff, "JPEG", baosimagenJpg);
+				baosimagenJpg.close();
+				archivodto.setDataContentType("image/jpeg");
+				archivodto.setData(baosimagenJpg.toByteArray());
+			} else {
+				archivodto.setDataContentType("image/tiff");
+				archivodto.setData(imagen);
+			}
+			return archivodto;
+		}catch(FileNotFoundException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private ArchivoDTO getImageTiffOnlyData(String nombreArchivo) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document dom = db.parse(new InputSource(new FileReader(nombreArchivo)));
+			byte[] imagen = Base64.getDecoder().decode(dom.getElementsByTagName("ARCHIVO_BINARIO").item(0).getTextContent());
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(imagen);
+			return archivodto;
+		}catch(FileNotFoundException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private ArchivoDTO getImageTiffActualOnlyData(String nombreArchivo) {
+		try {
+			FileInputStream inputStream;
+			ByteArrayOutputStream buffer;
+			int nRead;
+			byte[] data;
+			byte[] imagen;
+			File file = new File(nombreArchivo);
+			inputStream = new FileInputStream(file);
+			buffer = new ByteArrayOutputStream();
+			data = new byte[16384];
+			while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+				buffer.write(data, 0, nRead);
+			}
+			buffer.flush();
+			imagen = buffer.toByteArray();
+			inputStream.close();
+
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(imagen);
+			return archivodto;
+		}catch(FileNotFoundException e){
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ServiceResponse<VersionEnrolamientoAdjuntosDTO> getVersionEnrolamientoAdjuntosByEPID(String request) {
+		return null;
+	}
+
+	public ServiceResponse<ArchivoDTO> getCertificacionDocumentos(DatosEnrolamientoDTO datosdto,
+			VersionEnrolamientoGeneralDTO versiondto, VersionEnrolamientoAdjuntosDTO adjuntosdto, String[] iddocumentos,
+			String nombrealsc, String fraccionalsc, String administrador,String ciudad, UsuarioDTO usuario) {
+		ServiceResponse<ArchivoDTO> response = new ServiceResponse<ArchivoDTO>();
+		
+		AuditEvent aevent = new AuditEvent();
+		aevent.setDateTime(new Date());
+		aevent.setUser(usuario.getRfc());
+		aevent.setIpAddress(usuario.getIp());
+		aevent.setMacAddress(usuario.getMac());
+		String amessage = datosdto.getRfc()+", ";
+		amessage += "CertificacionDocumental,";
+		amessage += Arrays.toString(iddocumentos);
+		aevent.setMessage(amessage);
+		aevent.setUuid(UUID.randomUUID().toString());
+		AuditManager.register(aevent);
+		
+		try {
+			ArchivoDTO certificacion = new ArchivoDTO();
+			
+			try{
+				com.itextpdf.text.Document pdf = new com.itextpdf.text.Document();
+				ByteArrayOutputStream pdfos = new ByteArrayOutputStream();
+				PdfWriter writer = PdfWriter.getInstance(pdf, pdfos);
+				pdf.open();
+				float ancho = pdf.getPageSize().getWidth() - pdf.leftMargin() - pdf.rightMargin();
+				float alto = pdf.getPageSize().getHeight() - pdf.topMargin() - pdf.bottomMargin()-12;
+				int np = 1;
+				for (int j = 0; j < iddocumentos.length; j++, np++) {
+					String nombreArchivo = null;
+					List<ArchivoDTO> adjuntos = adjuntosdto.getDocumentos();
+					for (int i = 0; i < adjuntos.size(); i++) {
+						if (adjuntos.get(i).getId().equals(iddocumentos[j])) {
+							nombreArchivo = adjuntos.get(i).getDescription();
+							break;
+						}
+					}
+					byte[] imagen;
+					if(versiondto.getHistorico() == 1){
+						imagen = getImageTiffOnlyData(nombreArchivo).getData();
+					}else{
+						imagen = getImageTiffActualOnlyData(nombreArchivo).getData();
+					}
+					RandomAccessFileOrArray tifFile = new RandomAccessFileOrArray(imagen);
+					
+					Image img = null;
+					try{
+						img = TiffImage.getTiffImage(tifFile, 1);
+					}catch(Exception e){
+						img = null;
+					}
+					
+					if(img != null){
+						for(int i = 1; i <= TiffImage.getNumberOfPages(tifFile); i++, np++){
+							PdfContentByte canvas = writer.getDirectContent();
+							canvas.beginText();
+							canvas.setFontAndSize(BaseFont.createFont(), 12);
+							canvas.showTextAligned(com.itextpdf.text.Element.ALIGN_LEFT, iddocumentos[j] +i, pdf.leftMargin(), pdf.getPageSize().getHeight()-pdf.topMargin(), 0);
+							canvas.showTextAligned(com.itextpdf.text.Element.ALIGN_RIGHT, ""+np, pdf.getPageSize().getWidth()-pdf.rightMargin(), pdf.bottomMargin(), 0);
+							canvas.endText();
+							
+							img = TiffImage.getTiffImage(tifFile, i);
+							float escala = alto / img.getHeight() * 100;
+							img.scalePercent(escala);
+							if(img.getScaledWidth() > ancho){
+								escala = ancho / img.getWidth() * 100;
+								img.scalePercent(escala);
+							}
+							img.setAbsolutePosition((pdf.getPageSize().getWidth() - img.getScaledWidth())/2, pdf.getPageSize().getHeight() - img.getScaledHeight() - pdf.topMargin() -12);
+							pdf.add(img);
+							pdf.newPage();
+						}
+					}else{
+						List<byte[]> paginas = getJpgFromTiff(imagen);
+						for(int i = 0; i < paginas.size(); i++, np++){
+							PdfContentByte canvas = writer.getDirectContent();
+							canvas.beginText();
+							canvas.setFontAndSize(BaseFont.createFont(), 12);
+							canvas.showTextAligned(com.itextpdf.text.Element.ALIGN_LEFT, iddocumentos[j] +(i+1), pdf.leftMargin(), pdf.getPageSize().getHeight()-pdf.topMargin(), 0);
+							canvas.showTextAligned(com.itextpdf.text.Element.ALIGN_RIGHT, ""+np, pdf.getPageSize().getWidth()-pdf.rightMargin(), pdf.bottomMargin(), 0);
+							canvas.endText();
+							
+							img = Image.getInstance(paginas.get(i));
+							float escala = alto / img.getHeight() * 100;
+							img.scalePercent(escala);
+							if(img.getScaledWidth() > ancho){
+								escala = ancho / img.getWidth() * 100;
+								img.scalePercent(escala);
+							}
+							img.setAbsolutePosition((pdf.getPageSize().getWidth() - img.getScaledWidth())/2, pdf.getPageSize().getHeight() - img.getScaledHeight() - pdf.topMargin() -12);
+							pdf.add(img);
+							pdf.newPage();
+						}
+					}
+					np--;
+				}
+				int fuenteSize = 11;
+				Font fuente = FontFactory.getFont("Noto-Sans", fuenteSize);
+				Font fuenteBold = FontFactory.getFont("Noto-Sans", fuenteSize, Font.BOLD);
+				String texto = "El que suscribe, en su carácter de ";
+				Paragraph par = new Paragraph(texto, fuente);
+				par.setAlignment(com.itextpdf.text.Element.ALIGN_JUSTIFIED);
+				Chunk chunk = new Chunk(nombrealsc, fuenteBold);
+				par.add(chunk);
+				texto = ", dependiente de la Administración General de Servicios al Contribuyente, "
+						+ "del Servicio de Administración Tributaria (SAT); con fundamento en lo dispuesto por el artículo 10, fracción I en relación con el 9, "
+						+ "fracción V y por el artículo 16 en relación con el 14 fracción VIII, y Artículo 37, apartado A, fracción ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(fraccionalsc, fuenteBold);
+				par.add(chunk);
+				texto = " del Reglamento Interior del Servicio de Administración Tributaria, publicado en el Diario Oficial de la Federación el 22 de octubre de 2007, "
+						+ "cuya vigencia inició el 23 de diciembre de 2007, modificado mediante Decreto por el que se reforman, adicionan y derogan "
+						+ "diversas disposiciones del Reglamento Interior del Servicio de Administración Tributaria, publicado en el Diario Oficial "
+						+ "de la Federación el 29 de abril de 2010, 13 de julio de 2012 y 30 de diciembre de- 2013; así como el Artículo Primero, "
+						+ "párrafo primero y fracción ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(fraccionalsc, fuenteBold);
+				par.add(chunk);
+				texto = ", del Acuerdo por el que se establece la Circunscripción Territorial de las Unidades Administrativas "
+						+ "Regionales del Servicio de Administración Tributaria, publicado en el Diario Oficial de la Federación el 15 de enero de 2013, "
+						+ "en vigor a partir del 16 de enero de 2013; CERTIFICA: Que la impresión del presente documento, misma que consta de "+(Math.round(np/2))+" fojas, "
+						+ "y que comprende de la página 1 a " + np + ", es copia fiel y exacta de las imágenes contenidas en el expediente electrónico de Firma "
+						+ "Electrónica Avanzada (Fiel) en poder del SAT, resultantes de la digitalización realizada por dicho órgano desconcentrado "
+						+ "de la documentación que le fue presentada en original o mediante copia certificada por el contribuyente ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(versiondto.getNombre(), fuenteBold);
+				par.add(chunk);
+				texto = ", con Clave de Registro Federal del Contribuyente ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(datosdto.getRfc(), fuenteBold);
+				par.add(chunk);
+				texto = ", en la Administración Local de Servicios al Contribuyente de ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(versiondto.getLocalidadEnrolamiento(), fuenteBold);
+				par.add(chunk);
+				texto = ", el ";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(versiondto.getFechaEnrolamiento(), fuenteBold);
+				par.add(chunk);
+				texto =  ", para la realización del trámite de obtención del certificado de Fiel que emite el Servicio de Administración Tributaria.";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				texto = "\n\nLa información y documentación que se le proporciona sólo podrá ser utilizada para los efectos por los cuales fue solicitada, "
+						+ "sin que por ello pierda su confidencialidad, señalando a su vez, que la información fiscal se encuentra clasificada como RESERVADA, "
+						+ "en términos de lo previsto por el artículo 14, fracciones I Y II, de la Ley Federal de Transparencia y Acceso a la Información Pública "
+						+ "Gubernamental, en relación con los artículos 8, incisos a), b) y e) de las Recomendaciones para la identificación de información "
+						+ "reservada o confidencial por parte de las dependencias y entidades de la Administración Pública Federal, publicadas en el Diario "
+						+ "Oficial de la Federación el 1 de abril de 2003,previniendo de las penas administrativas o penales que se contemplan en los artículos 8, "
+						+ "fracción V, de la Ley Federal de Responsabilidades Administrativas de los Servidores Públicos, 210 y 211 del Código Penal Federal, "
+						+ "para los casos de violentar la reserva legal.\n\n";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				SimpleDateFormat sdf = new SimpleDateFormat("dd' de 'MMMM' de 'YYYY", new Locale("es", "MX"));
+				texto = ciudad+", a "+sdf.format(new Date());
+				chunk = new Chunk(texto, fuenteBold);
+				par.add(chunk);
+				texto = "\n\n";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				chunk = new Chunk(administrador, fuenteBold);
+				par.add(chunk);
+				texto = "\n\n";
+				chunk = new Chunk(texto);
+				par.add(chunk);
+				texto = ""+nombrealsc;
+				chunk = new Chunk(texto, fuenteBold);
+				par.add(chunk);
+				
+				pdf.add(par);
+				
+				PdfContentByte canvas = writer.getDirectContent();
+				canvas.beginText();
+				canvas.setFontAndSize(BaseFont.createFont(), 12);
+				canvas.showTextAligned(com.itextpdf.text.Element.ALIGN_RIGHT, ""+np, pdf.getPageSize().getWidth()-pdf.rightMargin(), pdf.bottomMargin(), 0);
+				canvas.endText();
+				
+				pdf.close();
+				certificacion.setData(pdfos.toByteArray());
+			
+			}catch(DocumentException e){
+				e.printStackTrace();
+			}
+			
+			DBManager.getInstance().insertarBitacoraFolio(Arrays.toString(iddocumentos), administrador);
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(certificacion);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+		}
+		return response;
+	}
+	
+	private List<byte[]> getJpgFromTiff(byte[] imagen) {
+		try {
+			List<byte[]> resultado = new ArrayList<byte[]>();
+			
+			ByteArrayInputStream baisTiff = new ByteArrayInputStream(imagen);
+			ImageInputStream iis = ImageIO.createImageInputStream(baisTiff);
+			Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
+			ImageReader ir = readers.next();
+			ir.setInput(iis);
+			int frameCount = ir.getNumImages(true);
+			
+			for (int i = 0; i < frameCount; i++) {
+				ByteArrayOutputStream baosTiff = new ByteArrayOutputStream();
+				
+				Iterator<ImageWriter> iteriw = ImageIO.getImageWritersByFormatName("jpeg");
+				ImageWriter iw = iteriw.next();
+				ImageWriteParam iwp = iw.getDefaultWriteParam();
+				iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
+				iwp.setCompressionQuality(.5f);
+				iw.setOutput(new MemoryCacheImageOutputStream(baosTiff));
+				iw.write(null, new IIOImage(ir.read(i), null, null), iwp);
+				iw.dispose();
+				baosTiff.flush();
+				baosTiff.close();
+				
+				resultado.add(baosTiff.toByteArray());
+			}
+			return resultado;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ServiceResponse<ArchivoDTO> getZipAdjuntos(DatosEnrolamientoDTO datosdto, VersionEnrolamientoGeneralDTO versiondto,
+			VersionEnrolamientoAdjuntosDTO adjuntosdto, String[] idadjuntos, String tipo, UsuarioDTO usuario) {
+		ServiceResponse<ArchivoDTO> response = new ServiceResponse<ArchivoDTO>();
+		
+		try {
+			ByteArrayOutputStream byoszip = new ByteArrayOutputStream();
+			List<ArchivoDTO> adjuntos = tipo.equals("huellas") ? adjuntosdto
+					.getHuellas() : tipo.equals("iris") ? adjuntosdto.getIris()
+					: adjuntosdto.getDocumentos();
+			List<ArchivoDTO> adjuntosFiles = new ArrayList<ArchivoDTO>();
+			ZipOutputStream zos = new ZipOutputStream(byoszip);
+			for (int i = 0; i < idadjuntos.length; i++) {
+				for (int j = 0; j < adjuntos.size(); j++) {
+					if (idadjuntos[i].equals(adjuntos.get(j).getId())) {
+						if (tipo.equals("huellas")) {
+							adjuntosFiles.add(adjuntos.get(j));
+						} else {
+							ArchivoDTO temp = null;
+							if (versiondto.getHistorico() == 1) {
+								temp = getImageTiffOnlyData(adjuntos.get(j)
+										.getDescription());
+							} else {
+								temp = getImageTiffActualOnlyData(adjuntos.get(
+										j).getDescription());
+							}
+							temp.setId(idadjuntos[i]);
+							adjuntosFiles.add(temp);
+						}
+						break;
+					}
+				}
+			}
+			String[] nombresHuellas = { "pulgar_derecho", "indice_derecho",
+					"medio_derecho", "anular_derecho", "menique_derecho",
+					"pulgar_izquierdo", "indice_izquierdo", "medio_izquierdo",
+					"anular_izquierdo", "menique_izquierdo" };
+			String idsarchivos = "";
+			for (int i = 0; i < adjuntosFiles.size(); i++) {
+				String nombreArchivo = null;
+				if (tipo.equals("huellas")) {
+					int indice = Integer.parseInt(adjuntosFiles.get(i).getId().substring(1)) - 1;
+					nombreArchivo = nombresHuellas[indice];
+				} else if (tipo.equals("iris")) {
+					nombreArchivo = adjuntosFiles.get(i).getId().equals("IOD") ? "iris_derecho"	: "iris_izquierdo";
+				} else {
+					nombreArchivo = adjuntosFiles.get(i).getId().replace(".xml", "");
+				}
+				ZipEntry zipEntry = new ZipEntry(nombreArchivo + (tipo.equals("huellas") ? ".png" : ".tif"));
+				idsarchivos += (i != 0 ? ", " : "") + zipEntry;
+				zos.putNextEntry(zipEntry);
+				zos.write(adjuntosFiles.get(i).getData());
+				zos.closeEntry();
+			}
+			
+			AuditEvent aevent = new AuditEvent();
+			aevent.setDateTime(new Date());
+			aevent.setUser(usuario.getRfc());
+			aevent.setIpAddress(usuario.getIp());
+			aevent.setMacAddress(usuario.getMac());
+			String amessage = datosdto.getRfc()+", ";
+			if(tipo.equals("huellas") || tipo.equals("iris")){
+				amessage += "DescargaBiometricos,";
+			}else{
+				amessage += "DescargaDocumentos,";
+			}
+			amessage += "["+idsarchivos+"]";
+			aevent.setMessage(amessage);
+			aevent.setUuid(UUID.randomUUID().toString());
+			AuditManager.register(aevent);
+
+			zos.close();
+			byoszip.close();
+			response.setCode(0);
+			response.setMessage("OK");
+			ArchivoDTO archivodto = new ArchivoDTO();
+			archivodto.setData(byoszip.toByteArray());
+			response.setResult(archivodto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+		}
+
+		return response;
+	}
+	
+	public ServiceResponse<UsuarioDTO> autorizaUsuario(UsuarioDTO usuario){
+		ServiceResponse<UsuarioDTO> response = new ServiceResponse<UsuarioDTO>(); 
+		
+		if(usuario.getNumeroSerieCertificado() != null && usuario.getNumeroSerieCertificado().substring(6,12).equals("999999")){
+			usuario.setPermisos(new HashSet<Permisos>());
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(usuario);
+			return response;
+		}
+		
+		List<String> roles = null;
+		ServiceResponse<List<String>> ldapRoles = null;
+		if(System.getProperty("SAIE_LOCAL") == null){
+			ConsultarLdapRestClient ldapClient = new ConsultarLdapRestClient();//#ldap#
+			ldapRoles = ldapClient.getRolesLdap(new ConsultaLdapRequestDTO(usuario.getRfc(),usuario.getRfc().length()<12?null:"largo"));//#ldap#
+		}
+		try{
+			if(System.getProperty("SAIE_LOCAL") == null){
+				roles = DBManager.getInstance().obtenerRoles(ldapRoles.getResult());//#ldap#
+			}else{
+				roles = new ArrayList<String>();//#local#
+				roles.add("administradorCentral");//#local#
+				roles.add("validador");//#local#
+				roles.add("autorizador");//#local#
+				roles.add("biometrista");
+				roles.add("analista");
+				roles.add("superValidador");
+			}
+			
+			HashSet<Permisos> permisos = new HashSet<Permisos>();
+			for(int i = 0; i < roles.size(); i++){
+				String rol = roles.get(i);
+				if(rol.equals("administradorLocal") || rol.equals("operadorCentral")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_DOCUMENTOS);
+					permisos.add(Permisos.CERTIFICAR);
+					permisos.add(Permisos.DUPLICIDAD);
+				}else if(rol.equals("operadorLocal")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DUPLICIDAD);
+				}else if(rol.equals("administradorCentral")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_BIOMETRICOS);
+					permisos.add(Permisos.DES_DOCUMENTOS);
+					permisos.add(Permisos.CERTIFICAR);
+					permisos.add(Permisos.DUPLICIDAD);
+					permisos.add(Permisos.EXPUESTOS);
+				}else if(rol.equals("biometrista")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_BIOMETRICOS);
+					permisos.add(Permisos.DUPLICIDAD);
+					permisos.add(Permisos.REPORTE_BIO);
+				}else if(rol.equals("validador")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DUPLICIDAD);
+					permisos.add(Permisos.VALIDAR);
+				}else if(rol.equals("autorizador")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DUPLICIDAD);
+					permisos.add(Permisos.AUTORIZAR);
+				}else if(rol.equals("analista")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_DOCUMENTOS);
+				}else if(rol.equals("superValidador")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_DOCUMENTOS);
+					permisos.add(Permisos.VALIDAR);
+					permisos.add(Permisos.AUTORIZAR);
+					permisos.add(Permisos.VALIDA_NACIONAL);
+				}else if(rol.equals("operadorSat")){
+					permisos.add(Permisos.VISOR);
+					permisos.add(Permisos.DES_BIOMETRICOS);
+					permisos.add(Permisos.DUPLICIDAD);
+				}
+			}
+			usuario.setPermisos(permisos);
+				
+			String directorio = System.getProperty("USER_PROPERTIES");
+			File f = new File(directorio+"/"+usuario.getNombre()+"_orden_tabla.ser");
+			
+			if(f.isFile() && f.canRead()){
+				FileInputStream file = new FileInputStream(f);
+				ObjectInputStream inStream = new ObjectInputStream(file);
+				String[] tabla_rfc = (String[])inStream.readObject();
+				String[] tabla_casos = (String[])inStream.readObject();
+				String[] tabla_hitlist = (String[])inStream.readObject();
+				String[] tabla_validar = (String[])inStream.readObject();
+				inStream.close();
+				file.close();
+				
+				usuario.setTabla_rfc(tabla_rfc);
+				usuario.setTabla_casos(tabla_casos);
+				usuario.setTabla_hitlist(tabla_hitlist);
+				usuario.setTabla_validar(tabla_validar);
+			}
+			
+			//AuditManager
+			AuditEvent aevent = new AuditEvent();
+			aevent.setUuid(UUID.randomUUID().toString());
+			aevent.setDateTime(new Date());
+			aevent.setUser(usuario.getRfc());
+			aevent.setIpAddress(usuario.getIp());
+			aevent.setMacAddress(usuario.getMac());
+			String amessage = usuario.getLocalidad() + ", "+ usuario.getNumeroSerieCertificado() + ", " + "loginUsuario";
+			aevent.setMessage(amessage);
+			AuditManager.register(aevent);
+			//-AuditManager
+			
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+		}
+		
+		return response;
+	}
+	
+	public ServiceResponse<List<CatalogoDTO>> cargarCatalogoTipoObservacionDTO(){
+		ServiceResponse<List<CatalogoDTO>> response = new ServiceResponse<List<CatalogoDTO>>();
+		
+		try {
+			List<CatalogoDTO> result = null;
+			result = DBManager.getInstance().cargaCatalogoTipoObservacion();
+
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}
+	public ServiceResponse<List<CatalogoDTO>> cargarCatalogoTipoResolucionDTO(){
+		ServiceResponse<List<CatalogoDTO>> response = new ServiceResponse<List<CatalogoDTO>>();
+		
+		try {
+			List<CatalogoDTO> result = null;
+			result = DBManager.getInstance().cargaCatalogoTipoResolucion();
+
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}
+
+	public ServiceResponse<List<String>> getUnidadesLocalidad(String localidad) {
+		ServiceResponse<List<String>> response = new ServiceResponse<List<String>>();
+		
+		try {
+			List<String> result = null;
+			result = DBManager.getInstance().getUnidadesLocalidad(localidad);
+
+			response.setCode(0);
+			response.setMessage("OK");
+			response.setResult(result);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setCode(-1);
+			response.setMessage("Error Desconocido: " + e.getMessage());
+		}
+
+		return response;
+	}	
+}

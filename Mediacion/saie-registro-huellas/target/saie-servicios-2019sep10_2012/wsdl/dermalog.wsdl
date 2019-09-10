@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://dermalog.afis/DermalogAFIS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DermalogAFIS" targetNamespace="http://dermalog.afis/DermalogAFIS/">
+	
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://dermalog.afis/DermalogAFIS/">
+			<xsd:element name="Delete">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" minOccurs="0" maxOccurs="1">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" minOccurs="1" maxOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" minOccurs="1" maxOccurs="1"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="resultType">
+				<xsd:annotation>
+					<xsd:documentation>
+            0: OK
+            1: AFIS component error
+            2: Transaction canceled after timeout
+            3: No or invalid biodata (image/template) provided
+            4: Invalid finger position given
+            5: AFIS workflowengine error
+            6: Requested command is not available or implemented
+            7: Operation system error
+            8: Invalid image type specification
+            10: No identifier found
+            13: Unknown Error
+            16: Identifier already exists
+            17: Matching failed
+            18: Search result sent to adjudication and should be get later
+            19: The provided template is not a valid Dermalog template
+            20: The template does not contain shape data, but the shape data are mandatory
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="description" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="biodataType">
+                <xsd:annotation>
+                	<xsd:documentation></xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+					<xsd:element name="base64" type="xsd:base64Binary" minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                        	<xsd:documentation>base64 encoded data of the image/template</xsd:documentation>
+                        </xsd:annotation>
+					</xsd:element>
+					<xsd:element name="position" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Literal or numeric position according to NIST
+								standard:
+								
+								1: 'RT'
+								2: 'RI'
+								3: 'RM'
+								4: 'RR'
+								5: 'RL'
+								6: 'LT'
+								7: 'LI'
+								8: 'LM'
+								9: 'LR'
+								10: 'LL'
+
+								For unknown position (not applicable for all functions!):
+								0:'UF'
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="imagetype" type="xsd:string" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Empty if data is a Dermalog template, otherwise number or string as follows. Note that not all functions accept templates!
+								1 | BMP: Windows uncompressed bitmap
+								3 | WSQ: Wavelet Scalar Quantization
+								4 | TIF: Tagged Image File
+								6 | PNG: Protable Network Graphic
+								8 | JP2: Jpeg2000
+
+								100|ISO_2005: 			ISO/IEC 19794-2:2005:0001
+								101|ISO_2005_01:		ISO/IEC 19794-2:2005:0001
+								102|ISO_2005_02:		ISO/IEC 19794-2:2005:0002
+								103|ISO_2005_03:		ISO/IEC 19794-2:2005:0003
+								104|ISO_2005_04:		ISO/IEC 19794-2:2005:0004
+								105|ISO_2005_05:		ISO/IEC 19794-2:2005:0005
+								106|ISO_2005_06:		ISO/IEC 19794-2:2005:0006
+								125|ISO_2005_19:		ISO/IEC 19794-2:2005:0019
+								126|ISO_2005_1A:		ISO/IEC 19794-2:2005:001A
+								127|ISO_2005_1B:		ISO/IEC 19794-2:2005:001B
+								128|ISO_2005_1C:		ISO/IEC 19794-2:2005:001C</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="ClearResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Clear">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Ping">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PingResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Insert">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation>
+                            </xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InsertResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Verify">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation></xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifyResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="score" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Search">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SearchResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="candidates" type="tns:candidateType" maxOccurs="unbounded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>If hit is true, returns list of candidates by
+									their id and matching score between 0 and 100.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+			<xsd:element name="SearchID">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+						</xsd:element>						
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SearchIDResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="candidates" type="tns:candidateType" maxOccurs="unbounded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>If hit is true, returns list of candidates by
+									their id and matching score between 0 and 100.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+
+			<xsd:element name="SearchAndInsert">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation></xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SearchAndInsertResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="candidates" type="tns:candidateType" maxOccurs="unbounded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>If hit is true, returns list of candidates by
+									their id and matching score between 0 and 100.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:complexType name="candidateType">
+				<xsd:sequence>
+					<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+					</xsd:element>
+					<xsd:element name="score" type="xsd:int" maxOccurs="1" minOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="VerifyAndUpdate">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation></xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifyAndUpdateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="score" type="xsd:int" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+
+
+      <xsd:element name="VerifyAndInsert">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+            <xsd:element name="identifier" type="xsd:string" maxOccurs="1" minOccurs="1">
+            </xsd:element>
+            <xsd:element name="biodata" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">              
+            </xsd:element>
+            <xsd:element name="biodata2Verify" type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+            </xsd:element>
+
+            <xsd:element name="NIST_impression_type" type="xsd:int" maxOccurs="1" minOccurs="0">
+              <xsd:annotation>
+                <xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="VerifyAndInsertResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1">
+            </xsd:element>
+            <xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+            <xsd:element name="score" type="xsd:int" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <xsd:element name="Update">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int"
+							maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string"
+							maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata"
+							type="tns:biodataType" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type"
+							type="xsd:int" maxOccurs="1" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>
+									Impression type according to the
+									NIST Standard (see NIST/ANSI ITL
+									1-2007 standard)
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType"
+							maxOccurs="1" minOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>			
+			
+			<xsd:element name="VerifyWithUnknownPositions">
+				<xsd:complexType>
+					<xsd:sequence>
+
+						<xsd:element name="timeout_ms" type="xsd:int"
+							maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string"
+							maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type"
+							type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation></xsd:annotation>
+						</xsd:element>
+
+						<xsd:element name="biodata"
+							type="tns:bioDataWithUniqueID" maxOccurs="unbounded" minOccurs="1">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifyWithUnknownPositionsResponse">
+				<xsd:complexType>
+                    <xsd:annotation>
+                    	<xsd:documentation></xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:sequence>
+                        <xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1">
+                    	</xsd:element>
+                        <xsd:element name="ResponseList"
+                    		type="tns:VerifyWithUnknownPositionResponseType"
+                    		maxOccurs="unbounded" minOccurs="0">
+                    	</xsd:element>
+                        <xsd:element name="fingerPositionSearched"
+                    		type="xsd:string" maxOccurs="1"
+                    		minOccurs="0">
+                    		<xsd:annotation>
+                    			<xsd:documentation>list of available fingers in biometrical data that is matched against
+                    			</xsd:documentation>
+                    		</xsd:annotation>
+                        </xsd:element>
+                    </xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="bioDataWithUniqueID">
+				<xsd:complexContent>
+					<xsd:extension base="tns:biodataType">
+						<xsd:sequence>
+							<xsd:element name="bioDataUniqueID"
+								type="xsd:int" maxOccurs="1" minOccurs="1">
+                                <xsd:annotation>
+                                	<xsd:documentation>Unique identifier of the finger that is used as a reference in the response</xsd:documentation>
+                                </xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="VerifyWithUnknownPositionResponseType">
+                <xsd:annotation>
+                	<xsd:documentation>Result of matching the finger with the bioDataUniqueID against all fingers of the reference ID</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+					<xsd:element name="bioDataUniqueID"
+						type="xsd:int" maxOccurs="1" minOccurs="1">
+                        <xsd:annotation>
+                        	<xsd:documentation>Same as input reference</xsd:documentation></xsd:annotation>
+					</xsd:element>
+					<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>True in case the highest score was above threshold</xsd:documentation>
+						</xsd:annotation></xsd:element>
+					<xsd:element name="score" type="xsd:int" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Highest score of matches against all fingers</xsd:documentation></xsd:annotation></xsd:element>
+					<xsd:element name="bestMatchingFingerPosition" type="xsd:string" maxOccurs="1" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Finger position of match with highest score</xsd:documentation>
+						</xsd:annotation></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="Query">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int"
+							maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="identifier" type="xsd:string"
+							maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="imagetype"
+							type="xsd:string" maxOccurs="1" minOccurs="0">
+                <xsd:annotation>
+                  <xsd:documentation>Empty or 0 in case of Dermalog template, otherwise images will be returned as stored by prevois insertion/update/etc:
+								  </xsd:documentation>
+                </xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="QueryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType"
+							maxOccurs="1" minOccurs="1">
+						</xsd:element>
+						<xsd:element name="biodata"
+							type="tns:biodataType" maxOccurs="unbounded" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="NIST_impression_type"
+							type="xsd:int" maxOccurs="1" minOccurs="0">
+                            <xsd:annotation>
+                            	<xsd:documentation>Impression type according to the NIST Standard (see NIST/ANSI ITL 1-2007 standard)</xsd:documentation></xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetSearchResult">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="timeout_ms" type="xsd:int"
+							maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="transaction_id" type="xsd:string" maxOccurs="1" minOccurs="1">
+              <xsd:annotation>
+                <xsd:documentation>
+                  Only a valid Ticket ID can be proceeded by the GetSearchResult function. 
+                  A valid Ticket ID is that one, which is given by the response of the SearchID/SearchAndInsert function.
+                  After the request was proceeded in the adjudication, 
+                  the ticketID is valid only for the first call of GetSearchResult.
+                </xsd:documentation>
+              </xsd:annotation>
+						</xsd:element>            
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetSearchResultResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="result" type="tns:resultType">
+						</xsd:element>
+						<xsd:element name="hit" type="xsd:boolean" maxOccurs="1" minOccurs="0">
+						</xsd:element>
+						<xsd:element name="candidates" type="tns:candidateType" maxOccurs="unbounded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>If hit is true, returns list of candidates by
+									their id and matching score between 0 and 100.
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+      <xsd:element name="HealthCheck">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="level" type="xsd:int" maxOccurs="1" minOccurs="1"></xsd:element>
+            <xsd:element name="timeout_ms" type="xsd:int" maxOccurs="1" minOccurs="0">
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="HealthCheckResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="result" type="tns:resultType" maxOccurs="1" minOccurs="1"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="DeleteRequest">
+		<wsdl:part name="parameters" element="tns:Delete"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteResponse">
+		<wsdl:part name="parameters" element="tns:DeleteResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ClearRequest">
+		<wsdl:part name="parameters" element="tns:Clear"/>
+	</wsdl:message>
+	<wsdl:message name="ClearResponse">
+		<wsdl:part name="parameters" element="tns:ClearResponse"/>
+	</wsdl:message>
+	<wsdl:message name="PingRequest">
+		<wsdl:part name="parameters" element="tns:Ping"/>
+	</wsdl:message>
+	<wsdl:message name="PingResponse">
+		<wsdl:part name="parameters" element="tns:PingResponse"/>
+	</wsdl:message>
+	<wsdl:message name="InsertRequest">
+		<wsdl:part name="parameters" element="tns:Insert"/>
+	</wsdl:message>
+	<wsdl:message name="InsertResponse">
+		<wsdl:part name="parameters" element="tns:InsertResponse"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyRequest">
+		<wsdl:part name="parameters" element="tns:Verify"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyResponse">
+		<wsdl:part name="parameters" element="tns:VerifyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SearchRequest">
+		<wsdl:part name="parameters" element="tns:Search"/>
+	</wsdl:message>
+	<wsdl:message name="SearchResponse">
+		<wsdl:part name="parameters" element="tns:SearchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SearchIDRequest">
+		<wsdl:part name="parameters" element="tns:SearchID"/>
+	</wsdl:message>
+	<wsdl:message name="SearchIDResponse">
+		<wsdl:part name="parameters" element="tns:SearchIDResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="SearchAndInsertRequest">
+		<wsdl:part name="parameters" element="tns:SearchAndInsert"/>
+	</wsdl:message>
+	<wsdl:message name="SearchAndInsertResponse">
+		<wsdl:part name="parameters" element="tns:SearchAndInsertResponse"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyAndUpdateRequest">
+		<wsdl:part name="parameters" element="tns:VerifyAndUpdate"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyAndUpdateResponse">
+		<wsdl:part name="parameters" element="tns:VerifyAndUpdateResponse"/>
+	</wsdl:message>
+
+  <wsdl:message name="VerifyAndInsertRequest">
+    <wsdl:part name="parameters" element="tns:VerifyAndInsert"/>
+  </wsdl:message>
+  <wsdl:message name="VerifyAndInsertResponse">
+    <wsdl:part name="parameters" element="tns:VerifyAndInsertResponse"/>
+  </wsdl:message>
+  
+  
+	<wsdl:message name="UpdateRequest">
+		<wsdl:part name="parameters" element="tns:Update"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateResponse">
+		<wsdl:part name="parameters" element="tns:UpdateResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="VerifyWithUnknownPositionsRequest">
+		<wsdl:part name="parameters" element="tns:VerifyWithUnknownPositions"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="VerifyWithUnknownPositionsResponse">
+		<wsdl:part name="parameters" element="tns:VerifyWithUnknownPositionsResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="QueryRequest">
+		<wsdl:part name="parameters" element="tns:Query"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="QueryResponse">
+		<wsdl:part name="parameters" element="tns:QueryResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSearchResultRequest">
+		<wsdl:part name="parameters" element="tns:GetSearchResult"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSearchResultResponse">
+		<wsdl:part name="parameters" element="tns:GetSearchResultResponse"></wsdl:part>
+	</wsdl:message>
+
+  <wsdl:message name="HealthCheckRequest">
+    <wsdl:part name="parameters" element="tns:HealthCheck"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HealthCheckResponse">
+    <wsdl:part name="parameters" element="tns:HealthCheckResponse"></wsdl:part>
+  </wsdl:message>
+  
+	<wsdl:portType name="DermalogAFIS">
+		<wsdl:operation name="Delete">
+			<wsdl:documentation>Deletes the specified record</wsdl:documentation>
+			<wsdl:input message="tns:DeleteRequest"/>
+			<wsdl:output message="tns:DeleteResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="Clear">
+			<wsdl:documentation>Clears the biometric database. This function is only implemented in test environments!
+			</wsdl:documentation>
+			<wsdl:input message="tns:ClearRequest"/>
+			<wsdl:output message="tns:ClearResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="Ping">
+			<wsdl:documentation>Returns the health status of the system
+			</wsdl:documentation>
+			<wsdl:input message="tns:PingRequest"/>
+			<wsdl:output message="tns:PingResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="Insert">
+			<wsdl:documentation>Inserts biometrical data (images or Dermalog
+				templates) into the database. </wsdl:documentation>
+			<wsdl:input message="tns:InsertRequest"/>
+			<wsdl:output message="tns:InsertResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="Search">
+			<wsdl:documentation>Searches for the biometrical data (images or
+				Dermalog templates) in the database</wsdl:documentation>
+			<wsdl:input message="tns:SearchRequest"/>
+			<wsdl:output message="tns:SearchResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="SearchID">
+			<wsdl:documentation>Searches for the biometrical data (images or
+				Dermalog templates) in the database. Additionally to Search, an identifier is given for reference in AFIS.</wsdl:documentation>
+			<wsdl:input message="tns:SearchIDRequest"/>
+			<wsdl:output message="tns:SearchIDResponse"/>
+		</wsdl:operation>		
+		<wsdl:operation name="Verify">
+			<wsdl:documentation>Verifies biometrical data against given entry in
+				the database</wsdl:documentation>
+			<wsdl:input message="tns:VerifyRequest"/>
+			<wsdl:output message="tns:VerifyResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="SearchAndInsert">
+			<wsdl:documentation>Searches for the biometrical data (images or
+				Dermalog templates) in the database and inserts if no candidate was
+				found</wsdl:documentation>
+			<wsdl:input message="tns:SearchAndInsertRequest"/>
+			<wsdl:output message="tns:SearchAndInsertResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="VerifyAndUpdate">
+			<wsdl:documentation>Verifies biometrical data against given entry in the database. Only images are accepted, no templates are allowed. Only on successful verification, the biometric data is updated.</wsdl:documentation>
+			<wsdl:input message="tns:VerifyAndUpdateRequest"/>
+			<wsdl:output message="tns:VerifyAndUpdateResponse"/>
+		</wsdl:operation>
+    <wsdl:operation name="VerifyAndInsert">
+      <wsdl:documentation>Verifies given biometrical data(=biodata) against old set of images(biodata2Verify). Only images are accepted, no templates are allowed. Only on successful verification, the biometric data is inserted.</wsdl:documentation>
+      <wsdl:input message="tns:VerifyAndInsertRequest"/>
+      <wsdl:output message="tns:VerifyAndInsertResponse"/>
+    </wsdl:operation>
+		<wsdl:operation name="Update">
+			<wsdl:documentation>Updates the reference record.</wsdl:documentation>
+			<wsdl:input message="tns:UpdateRequest"/>
+			<wsdl:output message="tns:UpdateResponse"/>
+		</wsdl:operation>		
+		<wsdl:operation name="VerifyWithUnknownPositions">
+			<wsdl:documentation>Verifies biometrical data against given entry in the database. Position for every finger must be &quot;UF&quot;. bioDataUniqueID must be unique for every finger within the request, as it is used as a reference in the response</wsdl:documentation>
+			<wsdl:input message="tns:VerifyWithUnknownPositionsRequest"></wsdl:input>
+			<wsdl:output message="tns:VerifyWithUnknownPositionsResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Query">
+			<wsdl:documentation>Returns fingerprint images/templates for the given ID</wsdl:documentation>
+			<wsdl:input message="tns:QueryRequest"></wsdl:input>
+			<wsdl:output message="tns:QueryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSearchResult">
+			<wsdl:documentation>Returns postponed Search results that have been processed manually in Search (Search returned code 18)</wsdl:documentation>
+			<wsdl:input message="tns:GetSearchResultRequest"></wsdl:input>
+			<wsdl:output message="tns:GetSearchResultResponse"></wsdl:output>
+		</wsdl:operation>
+
+    <wsdl:operation name="HealthCheck">
+      <wsdl:documentation>
+        Performs a health check of the system. The numerical parameter 'level' determines the scope of the check.
+        the higher this parameter, the more extensive is the check. In case the parameter is&gt;=0, all checks from 0...level are performed.
+        In case the parameter is&lt;0, only the distinct, absolute level check is performed.
+        Currently two levels are available:
+        0: Same as Ping. Checks if the central component of the system is up. Returns 9 (WFE_ERROR) on failure
+        1: Checks availability of all AFIS components. Returns 1 (AFIS_COMPONENT_ERROR) on failure, including a comma separated list of failed components.
+      </wsdl:documentation>
+      <wsdl:input message="tns:HealthCheckRequest"></wsdl:input>
+      <wsdl:output message="tns:HealthCheckResponse"></wsdl:output>
+    </wsdl:operation>
+    
+	</wsdl:portType>
+	<wsdl:binding name="DermalogAFISSOAP" type="tns:DermalogAFIS">
+
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="Delete">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Delete" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Clear">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Clear" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Ping">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Ping" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Insert">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Insert" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Verify">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Verify" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Search">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Search" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SearchID">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/SearchID" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>		
+		<wsdl:operation name="SearchAndInsert">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/SearchAndInsert" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VerifyAndUpdate">
+
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/VerifyAndUpdate" />
+			<wsdl:input>
+
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+
+    <wsdl:operation name="VerifyAndInsert">
+      <soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/VerifyAndInsert" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    
+ 	<wsdl:operation name="Update">
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Update" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="VerifyWithUnknownPositions">
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/VerifyWithUnknownPositions" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="Query">
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/Query" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSearchResult">
+			<soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/GetSearchResult" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+    <wsdl:operation name="HealthCheck">
+      <soap:operation
+				soapAction="http://dermalog.afis/DermalogAFIS/HealthCheck" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DermalogAFIS">
+		<wsdl:documentation>DERMALOG AFIS 4.5.1509.0</wsdl:documentation>
+		<wsdl:port binding="tns:DermalogAFISSOAP" name="DermalogAFISSOAPPort">
+			<soap:address location="http://afis.saie3.sat.gob.mx"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

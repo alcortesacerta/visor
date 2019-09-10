@@ -1,0 +1,491 @@
+2019-09-10 11:14:09,925 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2019-09-10 11:14:41,816 [Worker-4: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-visor:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\pom.xml.
+2019-09-10 11:14:45,326 [Worker-4: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-visor/src/main/java
+2019-09-10 11:14:45,327 [Worker-4: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-visor/src/test/java
+2019-09-10 11:14:46,154 [Worker-12: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.iecisa.sat.saie:visor-documentos-presentacion-controller:jar:sources:0.0.1-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:801) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:112) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:769) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:746) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:328) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:302) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:267) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:231) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.400.v20190506-1457.jar:na]
+2019-09-10 11:14:46,178 [Worker-12: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.iecisa.sat.saie:saie-commons-utils:jar:sources:0.0.1-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:801) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:112) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:769) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:746) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:328) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:302) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:267) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:231) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.400.v20190506-1457.jar:na]
+2019-09-10 11:14:48,154 [Worker-4: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 10 sec
+2019-09-10 11:14:48,874 [Worker-2: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.iecisa.sat.saie:visor-documentos-presentacion-controller:jar:javadoc:0.0.1-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:801) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:112) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:769) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:746) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:328) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:314) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:267) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:231) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.400.v20190506-1457.jar:na]
+2019-09-10 11:14:48,883 [Worker-2: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.iecisa.sat.saie:saie-commons-utils:jar:javadoc:0.0.1-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$4(MavenImpl.java:801) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:112) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:769) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:746) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:328) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:314) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:267) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:231) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:177) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:1374) ~[org.eclipse.m2e.core_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:159) [org.eclipse.m2e.jdt_1.12.0.20190529-1916.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.400.v20190506-1457.jar:na]
+2019-09-10 11:14:48,995 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 11:14:48,995 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\main\resources
+2019-09-10 11:14:48,997 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 11:14:48,997 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\test\resources
+2019-09-10 11:15:03,332 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2019-09-10 11:15:10,975 [Worker-2: Launching saie-visor] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor
+2019-09-10 11:15:10,978 [Worker-2: Launching saie-visor] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 12:11:43,701 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-09-10 12:14:01,673 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Presentacion\saie-controller\pom.xml.
+2019-09-10 12:14:02,115 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:02,141 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:02,157 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.iecisa.sat.saie:visor-parent:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent\pom.xml.
+2019-09-10 12:14:03,994 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-servicios:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Mediacion\saie-registro-huellas\pom.xml.
+2019-09-10 12:14:04,595 [Worker-17: Importing Maven projects] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:14:04,598 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:04,600 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:04,711 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2019-09-10 12:14:05,819 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.jar
+2019-09-10 12:14:05,979 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.jar
+2019-09-10 12:14:06,397 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.pom
+2019-09-10 12:14:06,455 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.1/maven-compiler-plugin-3.1.pom
+2019-09-10 12:14:06,515 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/24/maven-plugins-24.pom
+2019-09-10 12:14:06,576 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/24/maven-plugins-24.pom
+2019-09-10 12:14:06,651 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.2/plexus-compiler-api-2.2.pom
+2019-09-10 12:14:06,718 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.2/plexus-compiler-api-2.2.pom
+2019-09-10 12:14:06,778 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler/2.2/plexus-compiler-2.2.pom
+2019-09-10 12:14:06,841 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler/2.2/plexus-compiler-2.2.pom
+2019-09-10 12:14:06,962 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.2/plexus-compiler-manager-2.2.pom
+2019-09-10 12:14:07,019 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.2/plexus-compiler-manager-2.2.pom
+2019-09-10 12:14:07,081 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.2/plexus-compiler-javac-2.2.pom
+2019-09-10 12:14:07,140 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.2/plexus-compiler-javac-2.2.pom
+2019-09-10 12:14:07,200 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compilers/2.2/plexus-compilers-2.2.pom
+2019-09-10 12:14:07,259 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compilers/2.2/plexus-compilers-2.2.pom
+2019-09-10 12:14:07,369 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.2/plexus-compiler-api-2.2.jar
+2019-09-10 12:14:07,429 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.2/plexus-compiler-api-2.2.jar
+2019-09-10 12:14:07,483 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.2/plexus-compiler-manager-2.2.jar
+2019-09-10 12:14:07,541 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.2/plexus-compiler-manager-2.2.jar
+2019-09-10 12:14:07,594 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloading https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.2/plexus-compiler-javac-2.2.jar
+2019-09-10 12:14:07,693 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.2/plexus-compiler-javac-2.2.jar
+2019-09-10 12:14:08,305 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\pom.xml.
+2019-09-10 12:14:08,361 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Commons\saie-commons-utils\pom.xml.
+2019-09-10 12:14:08,422 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-visor:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\pom.xml.
+2019-09-10 12:14:08,694 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:14:08,694 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:08,722 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:08,774 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Presentacion\saie-controller\pom.xml.
+2019-09-10 12:14:08,791 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:08,796 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:08,893 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-servicios:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Mediacion\saie-registro-huellas\pom.xml.
+2019-09-10 12:14:08,896 [Worker-17: Importing Maven projects] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:14:08,899 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:08,900 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:08,997 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-visor:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\pom.xml.
+2019-09-10 12:14:09,003 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:14:09,003 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:09,012 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:10,838 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-commons-utils/src/main/java
+2019-09-10 12:14:10,839 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-commons-utils/src/main/resources
+2019-09-10 12:14:10,848 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-commons-utils/src/test/java
+2019-09-10 12:14:10,849 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-commons-utils/src/test/resources
+2019-09-10 12:14:10,945 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /iecisa-commons-0.0.1-20170117.085307-900/src/main/java
+2019-09-10 12:14:10,945 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /iecisa-commons-0.0.1-20170117.085307-900/src/test/java
+2019-09-10 12:14:11,113 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-servicios/src/main/java
+2019-09-10 12:14:11,114 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-servicios/src/main/resources
+2019-09-10 12:14:11,115 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-servicios/src/test/java
+2019-09-10 12:14:11,115 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-servicios/src/test/resources
+2019-09-10 12:14:11,304 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /visor-documentos-presentacion-controller/src/main/java
+2019-09-10 12:14:11,304 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /visor-documentos-presentacion-controller/src/main/resources
+2019-09-10 12:14:11,315 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /visor-documentos-presentacion-controller/src/test/java
+2019-09-10 12:14:11,316 [Worker-17: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /visor-documentos-presentacion-controller/src/test/resources
+2019-09-10 12:14:11,437 [Worker-17: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 5 project(s) in 14 sec
+2019-09-10 12:14:13,822 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:13,822 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:14:13,824 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:13,824 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:14:14,198 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:14,212 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:14,214 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:14,219 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:16,340 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:14:16,346 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:16,351 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:16,390 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:16,391 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-09-10 12:14:16,400 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:16,400 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:17,180 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:17,184 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:17,196 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:17,198 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:17,199 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:17,201 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:17,576 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:14:17,576 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:17,584 [Worker-4: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:17,598 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:17,598 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\main\resources
+2019-09-10 12:14:17,599 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:17,599 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\test\resources
+2019-09-10 12:14:17,736 [Worker-2: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 12:14:17,736 [Worker-2: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 12:14:36,274 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:36,274 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:14:36,275 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:36,275 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:14:36,326 [Worker-3: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:36,331 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:36,335 [Worker-3: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:36,337 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:37,761 [Worker-3: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:14:37,765 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:37,767 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:37,798 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:37,799 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:37,803 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:37,804 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:38,089 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:38,092 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:38,107 [Worker-3: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:38,109 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:38,111 [Worker-3: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:14:38,114 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:14:38,567 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:14:38,568 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:14:38,576 [Worker-3: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:14:38,591 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:38,591 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\main\resources
+2019-09-10 12:14:38,593 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:14:38,593 [Worker-3: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\test\resources
+2019-09-10 12:17:49,170 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2019-09-10 12:17:50,071 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Presentacion\saie-controller\pom.xml.
+2019-09-10 12:17:50,191 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:50,195 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:50,207 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.iecisa.sat.saie:visor-parent:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent\pom.xml.
+2019-09-10 12:17:50,243 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-visor:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\pom.xml.
+2019-09-10 12:17:50,312 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:17:50,312 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:50,321 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:51,076 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-servicios:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Mediacion\saie-registro-huellas\pom.xml.
+2019-09-10 12:17:51,153 [Worker-11: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:17:51,155 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:51,156 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:51,358 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\pom.xml.
+2019-09-10 12:17:51,391 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT @ C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\Commons\saie-commons-utils\pom.xml.
+2019-09-10 12:17:51,978 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /iecisa-commons-0.0.1-20170117.085307-900/src/main/java
+2019-09-10 12:17:51,979 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /iecisa-commons-0.0.1-20170117.085307-900/src/test/java
+2019-09-10 12:17:52,057 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-commons-utils/src/main/java
+2019-09-10 12:17:52,057 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-commons-utils/src/main/resources
+2019-09-10 12:17:52,058 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-commons-utils/src/test/java
+2019-09-10 12:17:52,058 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-commons-utils/src/test/resources
+2019-09-10 12:17:52,139 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-servicios/src/main/java
+2019-09-10 12:17:52,139 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-servicios/src/main/resources
+2019-09-10 12:17:52,140 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-servicios/src/test/java
+2019-09-10 12:17:52,140 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /saie-servicios/src/test/resources
+2019-09-10 12:17:52,276 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-visor/src/main/java
+2019-09-10 12:17:52,276 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /saie-visor/src/test/java
+2019-09-10 12:17:52,399 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /visor-documentos-presentacion-controller/src/main/java
+2019-09-10 12:17:52,400 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /visor-documentos-presentacion-controller/src/main/resources
+2019-09-10 12:17:52,400 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /visor-documentos-presentacion-controller/src/test/java
+2019-09-10 12:17:52,401 [Worker-11: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /visor-documentos-presentacion-controller/src/test/resources
+2019-09-10 12:17:52,868 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 3 sec
+2019-09-10 12:17:53,234 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:53,234 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:17:53,236 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:53,236 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:17:53,378 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:17:53,380 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:17:53,381 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:17:53,384 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:17:53,817 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 12:17:53,819 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:53,821 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:53,839 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:53,841 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-09-10 12:17:53,851 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:53,852 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:17:54,314 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:54,318 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:54,330 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:17:54,334 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:17:54,335 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:17:54,338 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:17:54,452 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/visor-documentos-presentacion-controller: com.iecisa.sat.saie:visor-documentos-presentacion-controller:0.0.1-SNAPSHOT with classifier  to /visor-documentos-presentacion-controller/target/classes
+2019-09-10 12:17:54,452 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 12:17:54,460 [Worker-6: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 12:17:54,473 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:54,474 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\main\resources
+2019-09-10 12:17:54,476 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:17:54,476 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017\META-INF\maven\com.iecisa.sat.saie\saie-visor\src\test\resources
+2019-09-10 12:21:20,209 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:21:20,217 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:21:20,220 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:21:20,221 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:21:50,277 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:21:50,279 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:21:50,280 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:21:50,282 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:22:29,509 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:22:29,513 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:22:29,515 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:22:29,520 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:24:27,602 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:24:27,602 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:24:27,603 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:24:27,604 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:24:39,791 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:24:39,791 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:24:39,792 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:24:39,793 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:26:05,243 [Worker-11: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:05,245 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:26:05,246 [Worker-11: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:05,247 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:26:15,329 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:15,330 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:26:15,331 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:15,333 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:26:36,564 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:36,566 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:26:36,567 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:26:36,569 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:32:33,343 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:32:33,345 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:32:33,346 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:32:33,348 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:32:58,447 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:32:58,450 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:32:58,451 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:32:58,454 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:33:15,476 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:33:15,478 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:33:15,482 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:33:15,483 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:33:36,173 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:33:36,175 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:33:36,176 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:33:36,177 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:34:33,455 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:34:33,462 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:34:33,463 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:34:33,465 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:35:40,187 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:35:40,189 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:35:40,191 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:35:40,192 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:36:52,405 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:36:52,405 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 12:36:52,406 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 12:36:52,406 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 12:39:12,130 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:12,132 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:39:12,133 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:12,134 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:39:16,843 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:16,845 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:39:16,847 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:16,848 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:39:29,628 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:29,630 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:39:29,631 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:39:29,633 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:40:21,567 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:40:21,569 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:40:21,571 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:40:21,572 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:43:15,194 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:43:15,196 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:43:15,198 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:43:15,199 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:44:39,076 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:44:39,078 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:44:39,079 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:44:39,081 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:45:31,803 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:45:31,806 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:45:31,807 [Worker-15: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:45:31,808 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:11,373 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:11,375 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:11,376 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:11,378 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:27,893 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:27,897 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:27,899 [Worker-10: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:27,900 [Worker-10: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:49,052 [Worker-11: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:49,054 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:49:49,056 [Worker-11: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:49:49,059 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:51:38,308 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:51:38,310 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:51:38,311 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:51:38,313 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:54:09,623 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:54:09,630 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:54:09,631 [Worker-4: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:54:09,633 [Worker-4: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:23,751 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:23,755 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:23,756 [Worker-18: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:23,757 [Worker-18: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:30,760 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:30,763 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:30,764 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:30,765 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:57,089 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:57,091 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:55:57,092 [Worker-12: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 12:55:57,093 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 12:56:10,099 [main] INFO  o.e.m2e.actions.ExecutePomAction - Using existing launch configuration
+2019-09-10 12:56:10,144 [Worker-4: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 12:56:10,144 [Worker-4: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:00:05,222 [Worker-4: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:00:05,223 [Worker-4: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 13:00:18,378 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2019-09-10 13:00:27,041 [Worker-4: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:00:27,042 [Worker-4: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:02:45,604 [Worker-15: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:02:45,605 [Worker-15: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:12:54,485 [Worker-15: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:12:54,485 [Worker-15: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:15:11,708 [Worker-12: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:15:11,708 [Worker-12: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 13:15:20,147 [Worker-12: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:15:20,147 [Worker-12: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:17:28,554 [Worker-12: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:17:28,555 [Worker-12: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 13:17:40,159 [Worker-23: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:17:40,159 [Worker-23: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 13:21:58,035 [Worker-25: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:21:58,035 [Worker-25: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 13:22:07,312 [Worker-25: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 13:22:07,313 [Worker-25: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 14:05:33,964 [Worker-28: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 14:05:33,966 [Worker-28: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 14:05:47,620 [Worker-31: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 14:05:47,621 [Worker-31: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 14:36:37,351 [Worker-40: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:36:37,355 [Worker-40: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:36:37,357 [Worker-40: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:36:37,360 [Worker-40: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:36:37,391 [Worker-40: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:36:37,393 [Worker-40: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:36:37,395 [Worker-40: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:36:37,397 [Worker-40: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:37:40,934 [Worker-39: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:37:40,936 [Worker-39: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:37:40,937 [Worker-39: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:37:40,938 [Worker-39: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:38:05,982 [Worker-37: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:38:05,989 [Worker-37: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:38:05,990 [Worker-37: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 14:38:05,993 [Worker-37: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 14:38:14,492 [Worker-39: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 14:38:14,492 [Worker-39: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 14:38:21,587 [Worker-35: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 14:38:21,588 [Worker-35: Launching visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 15:07:08,356 [Worker-45: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:08,359 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:08,360 [Worker-45: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:08,363 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:08,390 [Worker-45: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:08,392 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:08,393 [Worker-45: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:08,395 [Worker-45: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:31,253 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 15:07:31,253 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\main\resources
+2019-09-10 15:07:31,254 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 15:07:31,254 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\iecisa-commons-0.0.1-20170117.085307-900\src\test\resources
+2019-09-10 15:07:31,265 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:31,268 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:31,269 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:31,271 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:32,087 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - The artifact org.apache.commons:commons-io:jar:1.3.2 has been relocated to commons-io:commons-io:jar:1.3.2
+2019-09-10 15:07:32,090 [Worker-47: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/saie-commons-utils: com.iecisa.sat.saie:saie-commons-utils:0.0.1-SNAPSHOT with classifier  to /saie-commons-utils/target/classes
+2019-09-10 15:07:32,092 [Worker-47: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/iecisa-commons-0.0.1-20170117.085307-900: com.iecisa.commons:iecisa-commons:0.0.1-SNAPSHOT with classifier  to /iecisa-commons-0.0.1-20170117.085307-900/target/classes
+2019-09-10 15:07:32,115 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 15:07:32,117 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2019-09-10 15:07:32,118 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2019-09-10 15:07:32,120 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:32,134 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:32,135 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:07:32,137 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:07:32,139 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:09:16,412 [Worker-52: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:09:16,414 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:09:16,415 [Worker-52: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:09:16,416 [Worker-52: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:10:22,446 [Worker-50: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:10:22,449 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:10:22,450 [Worker-50: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:10:22,453 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:10:44,629 [Worker-50: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:10:44,631 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:10:44,632 [Worker-50: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:10:44,635 [Worker-50: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:12:35,745 [Worker-53: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 15:12:35,745 [Worker-53: Launching Executing clean in C__Users_Alejandro Cortés_Desktop_VersionesVisor_2017-mod-1.1_visor-parent] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B clean
+2019-09-10 15:12:46,766 [Worker-52: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Alejandro Cortés\Desktop\VersionesVisor\2017-mod-1.1\visor-parent
+2019-09-10 15:12:46,767 [Worker-52: Launching visor-parent (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dmaven.test.skip=true -DskipTests install
+2019-09-10 15:35:11,050 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:35:11,052 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:35:11,053 [Worker-47: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:35:11,055 [Worker-47: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:35:12,085 [Worker-54: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:35:12,087 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:35:12,088 [Worker-54: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:35:12,089 [Worker-54: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-09-10 15:35:20,521 [Worker-55: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-09-10 15:35:20,523 [Worker-55: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource

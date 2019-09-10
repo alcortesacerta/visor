@@ -1,0 +1,160 @@
+#holder{
+	width: 100%;
+}
+
+#innerHolder{
+	width: 1000px;
+	margin: 0 auto 0 auto;
+	position: relative;
+}
+
+#contribuyenteHolder{
+	width: 1000px;
+	position: relative;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+	margin-bottom: 10px;
+}
+
+#ligas_vez{
+	margin: 20px 0px 20px 30px;
+	font-size: 14px;
+	font-weight: normal;
+	width: 970px;
+}
+
+#ligas_vez span{
+	color: #007833;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#holderFoto{
+	width: 230px;
+    margin: 0px 0px 0px 30px;
+    float: left;
+}
+
+.botonBiometrico{
+	height: 50px;
+	width: 60px;
+	float: left;
+}
+
+#holderFirma{
+	float: left;
+	margin-right: 40px;
+}
+
+#bDetalles{
+	width: 170px;
+	bottom: 0px;
+	margin-left: 50px;
+}
+
+.holderDatos{
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 18px;
+	float: left;
+}
+
+#botonesHolder{
+	margin: 20px 0px 0px 0px;
+}
+
+#bDuplicidad{
+	width: 200px;
+	background-color: #333333;
+}
+
+.imagenVisor{
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.imagenVisorNo{
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.holder{
+	top: 40px;
+	padding-left: 15px;	
+}
+
+.label{
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 40px;
+}
+
+.dialogoHolder{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.8);
+	z-index: 100;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+#dialogo{
+	width: 300px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+	margin: 0 auto 0 auto;
+	position: relative;
+	top: 25%;
+}
+
+.boton{
+	text-align: right;
+    margin: 10px 35px 10px 0px;
+    padding-bottom: 10px;
+}
+
+.botonCerrar{
+	position: absolute !important;
+	top: 5px;
+	right: 5px;
+	cursor: pointer;
+}
+
+#holderBotonesValidar{
+	position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+#botonValidar{
+	margin-right: 10px;
+}
+
+#holderBotonMoral{
+	margin: 0px 60px 0px 30px;
+	float: left;
+}
+
+#errorLabel{
+	margin: 10px 10px;
+  	height: 75px;
+}
+
+.labelError{
+	color: red;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: right;
+	margin-right: 30px;
+	margin-top: 5px;
+}

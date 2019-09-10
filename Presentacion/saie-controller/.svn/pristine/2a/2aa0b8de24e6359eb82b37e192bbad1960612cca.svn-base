@@ -1,0 +1,29 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class CatalogoDTO {
+	
+	private String valor;
+	private int id;
+	
+	public CatalogoDTO() {
+		super();
+	}
+	public CatalogoDTO(String valor, int id) {
+		super();
+		this.valor = valor;
+		this.id = id;
+	}
+	public String getValor() {
+		return valor;
+	}
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+}

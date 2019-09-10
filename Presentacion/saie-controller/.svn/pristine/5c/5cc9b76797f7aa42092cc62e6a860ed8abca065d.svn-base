@@ -1,0 +1,219 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+import java.text.DecimalFormat;
+
+public class DatosDuplicidadDTO {
+	private String caso_numero_caso;
+	private String nombre_completo;
+	private String rfc;
+	private String fecha_enrolamiento;
+	private String localidad_enrolamiento;
+	private String nombre_completo2;
+	private String rfc2;
+	private String fecha_enrolamiento2;
+	private String localidad_enrolamiento2;
+	private String reporte_url;
+	private String observaciones;
+	private String resolucion;
+	private String score;
+	private String idReporte;
+	private String epid;
+	private Integer casoSat;
+	
+	private DecimalFormat scoreFormat = new DecimalFormat("##.###");
+	
+	public DatosDuplicidadDTO(String caso_numero_caso, String nombre_completo,
+			String rfc, String fecha_enrolamiento,
+			String localidad_enrolamiento, String nombre_completo2,
+			String rfc2, String fecha_enrolamiento2,
+			String localidad_enrolamiento2, String reporte_url,
+			String observaciones, String resolucion, String score, String idReporte, String epid, Integer casoSat) {
+		super();
+		this.caso_numero_caso = caso_numero_caso;
+		this.nombre_completo = nombre_completo;
+		this.rfc = rfc;
+		this.fecha_enrolamiento = fecha_enrolamiento;
+		this.localidad_enrolamiento = localidad_enrolamiento;
+		this.nombre_completo2 = nombre_completo2;
+		this.rfc2 = rfc2;
+		this.fecha_enrolamiento2 = fecha_enrolamiento2;
+		this.localidad_enrolamiento2 = localidad_enrolamiento2;
+		this.reporte_url = reporte_url;
+		this.observaciones = observaciones;
+		this.resolucion = resolucion;
+		this.setScore(score);
+		this.idReporte = idReporte;
+		this.epid = epid;
+		this.casoSat = casoSat;
+	}
+
+	public DatosDuplicidadDTO() {
+		super();
+	}
+
+	public String getCaso_numero_caso() {
+		return caso_numero_caso;
+	}
+
+	public void setCaso_numero_caso(String caso_numero_caso) {
+		this.caso_numero_caso = caso_numero_caso;
+	}
+
+	public String getNombre_completo() {
+		return nombre_completo;
+	}
+
+	public void setNombre_completo(String nombre_completo) {
+		this.nombre_completo = nombre_completo;
+	}
+
+	public String getRfc() {
+		return rfc;
+	}
+
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+
+	public String getFecha_enrolamiento() {
+		return fecha_enrolamiento;
+	}
+
+	public void setFecha_enrolamiento(String fecha_enrolamiento) {
+		this.fecha_enrolamiento = fecha_enrolamiento;
+	}
+
+	public String getLocalidad_enrolamiento() {
+		return localidad_enrolamiento;
+	}
+
+	public void setLocalidad_enrolamiento(String localidad_enrolamiento) {
+		this.localidad_enrolamiento = localidad_enrolamiento;
+	}
+
+	public String getNombre_completo2() {
+		return nombre_completo2;
+	}
+
+	public void setNombre_completo2(String nombre_completo2) {
+		this.nombre_completo2 = nombre_completo2;
+	}
+
+	public String getRfc2() {
+		return rfc2;
+	}
+
+	public void setRfc2(String rfc2) {
+		this.rfc2 = rfc2;
+	}
+
+	public String getFecha_enrolamiento2() {
+		return fecha_enrolamiento2;
+	}
+
+	public void setFecha_enrolamiento2(String fecha_enrolamiento2) {
+		this.fecha_enrolamiento2 = fecha_enrolamiento2;
+	}
+
+	public String getLocalidad_enrolamiento2() {
+		return localidad_enrolamiento2;
+	}
+
+	public void setLocalidad_enrolamiento2(String localidad_enrolamiento2) {
+		this.localidad_enrolamiento2 = localidad_enrolamiento2;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public String getReporte_url() {
+		return reporte_url;
+	}
+
+	public void setReporte_url(String reporte_url) {
+		this.reporte_url = reporte_url;
+	}
+
+	public String getResolucion() {
+		return resolucion;
+	}
+
+	public void setResolucion(String resolucion) {
+		this.resolucion = resolucion;
+	}
+
+	@Override
+	public String toString() {
+		return "DatosDuplicidadDTO ["
+				+ (caso_numero_caso != null ? "caso_numero_caso="
+						+ caso_numero_caso + ", " : "")
+				+ (nombre_completo != null ? "nombre_completo="
+						+ nombre_completo + ", " : "")
+				+ (rfc != null ? "rfc=" + rfc + ", " : "")
+				+ (fecha_enrolamiento != null ? "fecha_enrolamiento="
+						+ fecha_enrolamiento + ", " : "")
+				+ (localidad_enrolamiento != null ? "localidad_enrolamiento="
+						+ localidad_enrolamiento + ", " : "")
+				+ (nombre_completo2 != null ? "nombre_completo2="
+						+ nombre_completo2 + ", " : "")
+				+ (rfc2 != null ? "rfc2=" + rfc2 + ", " : "")
+				+ (fecha_enrolamiento2 != null ? "fecha_enrolamiento2="
+						+ fecha_enrolamiento2 + ", " : "")
+				+ (localidad_enrolamiento2 != null ? "localidad_enrolamiento2="
+						+ localidad_enrolamiento2 + ", " : "")
+				+ (reporte_url != null ? "reporte_url=" + reporte_url + ", "
+						: "")
+				+ (observaciones != null ? "observaciones=" + observaciones
+						+ ", " : "")
+				+ (resolucion != null ? "resolucion=" + resolucion + ", " : "")
+				+ (score != null ? "score=" + score + ", " : "")
+				+ (idReporte != null ? "idReporte=" + idReporte + ", " : "")
+				+ (epid != null ? "epid=" + epid + ", " : "")
+				+ (scoreFormat != null ? "scoreFormat=" + scoreFormat : "")
+				+ "]";
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		if(score != null && !score.equals("")){
+			double ThFARLogRatio = 12;
+			int scoreAux = Integer.parseInt(score) < 0 ? 0 : Integer.parseInt(score);
+			this.score = scoreFormat.format(100 - Math.pow(10, -scoreAux/ThFARLogRatio + 2));
+		}else{
+			this.score = score;
+		}
+	}
+
+	public String getIdReporte() {
+		return idReporte;
+	}
+
+	public void setIdReporte(String idReporte) {
+		this.idReporte = idReporte;
+	}
+
+	public String getEpid() {
+		return epid;
+	}
+
+	public void setEpid(String epid) {
+		this.epid = epid;
+	}
+
+	public Integer getCasoSat() {
+		return casoSat;
+	}
+
+	public void setCasoSat(Integer casoSat) {
+		this.casoSat = casoSat;
+	}
+	
+}

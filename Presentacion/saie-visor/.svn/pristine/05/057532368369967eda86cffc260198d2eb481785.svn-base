@@ -1,0 +1,129 @@
+#holder{
+	width: 100%;
+}
+
+#innerHolder{
+	width: 1000px;
+	margin: 0 auto 0 auto;
+	position: relative;
+}
+
+#huellasHolder{
+	width: 1000px;
+	position: absolute;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+}
+
+.datosContribuyente{
+	margin: 10px 0px 10px 10px;
+}
+
+.datosContribuyente span{
+	font-weight: normal;
+}
+
+table td{
+	text-align: center;
+	width: 330px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#tablaIris{
+	margin-bottom: 50px
+}
+
+.tdTexto{
+	height: 30px;
+}
+
+#marcadorHolder{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 279px;
+	margin: 0 auto 0 auto;
+}
+
+#circuloRojo{
+	position: absolute;
+	top: 65px;
+	left: 30px;
+}
+
+.hitArea{
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	cursor: pointer;
+}
+
+#botonesHolder{
+	width: 50px;
+	position: absolute;
+	top: 30px;
+	left: -60px;
+}
+
+.botonBiometrico{
+	height: 60px;
+}
+
+.iris{
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	border-style: solid;
+	border-color: #C10C2D;
+	border-width: 3px;
+}
+
+.imagenVisor{
+	width:200px;
+	height:200px;
+	margin: 0 auto 0 auto;
+	background-size: contain;
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+	background-color: white;
+}
+
+.imagenVisorNo{
+	width:200px;
+	height:200px;
+	margin: 0 auto 0 auto;
+	background-size: contain;
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	border-radius: 10px;
+	background-repeat: no-repeat;
+	background-color: white;
+}
+
+#bdescargar{
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+.downloadLink{
+	width: 20px;
+	height: 20px;
+	position: relative;
+	left: 170px;
+	top: 170px;
+	background-image: url("../imgs/check.png");
+	background-size: contain;
+	background-color: white;
+	border-radius: 10px;
+	cursor: pointer;
+}

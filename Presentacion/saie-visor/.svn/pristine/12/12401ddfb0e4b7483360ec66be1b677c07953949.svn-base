@@ -1,0 +1,53 @@
+package com.saie.servlets;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+
+public class ActualizaValidacionesServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException{
+		System.out.println("borrando de contexto");
+		try{
+			String rfcBorrar = req.getParameter("rfc");
+			int version = Integer.parseInt(req.getParameter("version"));
+			List<ControlVersionesDTO> validaciones = (List<ControlVersionesDTO>)getServletContext().getAttribute("validacionesDTO");
+			List<ControlVersionesDTO> autorizaciones = (List<ControlVersionesDTO>)getServletContext().getAttribute("autorizacionesDTO");
+			ControlVersionesDTO versionTemporal = null;
+			for(ControlVersionesDTO versionBorrar : validaciones){
+				if(versionBorrar.getRfc().equals(rfcBorrar) && versionBorrar.getVersion() == version){
+					versionTemporal = versionBorrar;
+					break;
+				}
+			}
+			if(versionTemporal != null)
+				validaciones.remove(versionTemporal);
+			
+			for(ControlVersionesDTO versionBorrar : autorizaciones){
+				if(versionBorrar.getRfc().equals("") && versionBorrar.getVersion() == 0){
+					versionTemporal = versionBorrar;
+					break;
+				}
+			}
+			if(versionTemporal != null)
+				validaciones.remove(versionTemporal);
+		}catch(Exception e){
+			System.out.println("Validacion/Autorizacion contexto");
+		}
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
+		doPost(req, resp);
+	}
+}

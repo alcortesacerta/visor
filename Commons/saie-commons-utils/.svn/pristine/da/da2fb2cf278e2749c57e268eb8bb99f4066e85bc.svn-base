@@ -1,0 +1,28 @@
+package com.iecisa.sat.saie.audit;
+
+import java.text.SimpleDateFormat;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.iecisa.sat.saie.audit.dto.AuditEvent;
+
+public class AuditManager {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AuditManager.class);
+	private static final SimpleDateFormat sdt = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+	
+	public static void register(AuditEvent event){
+		if (event != null){
+			logger.info(String.format("%s, %s, %s, %s, %s, %s", 
+					event.getUuid(),
+					event.getUser(),
+					sdt.format(event.getDateTime()),
+					event.getIpAddress(),
+					event.getMacAddress(),
+					event.getMessage()));
+		}
+		
+	}
+	
+}

@@ -1,0 +1,15 @@
+<jboss-deployment-structure>
+	<deployment>
+		<dependencies>
+			<module name="org.postgresql" />
+			<module name="org.codehaus.jackson.jackson-mapper-asl" />
+		</dependencies>
+		<exclusions>
+			<module name="org.slf4j" />
+			<module name="org.apache.commons.logging" />
+			<module name="org.slf4j.ext" />
+			<module name="org.slf4j.impl" />
+			<module name="org.apache.log4j" />
+		</exclusions>
+	</deployment>
+</jboss-deployment-structure>

@@ -1,0 +1,10 @@
+mx\com\iecisa\commons\utils\XmlFormatter.class
+com\iecisa\commons\dto\CustomCriteriaDTO.class
+mx\com\iecisa\commons\utils\ConfigResourceManager.class
+com\iecisa\commons\dto\CatalogoInfoLocaleDTO.class
+mx\com\iecisa\commons\utils\StringFormatter.class
+mx\com\iecisa\commons\utils\DateFormatter.class
+mx\com\iecisa\commons\utils\FileManager.class
+com\iecisa\commons\dto\CatalogoGenericoDTO.class
+mx\com\iecisa\commons\exceptions\BusinessException.class
+com\iecisa\commons\dto\CatalogoSimpleDTO.class

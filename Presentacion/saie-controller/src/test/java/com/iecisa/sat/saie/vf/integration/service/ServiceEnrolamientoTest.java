@@ -1,0 +1,31 @@
+package com.iecisa.sat.saie.vf.integration.service;
+
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoDetalleDTO;
+import com.iecisa.sat.saie.vf.integration.service.iface.IServiceEnrolamiento;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceEnrolamiento;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+
+public class ServiceEnrolamientoTest {
+
+	@Test
+	public void getEnrolamientoPorCriteriosTest() {
+		IServiceEnrolamiento instance = new ServiceEnrolamiento();
+		ServiceResponse<List<DatosEnrolamientoDTO>> response = instance.getEnrolamientoPorCriterios(null, false);
+		Assert.assertNotNull(response);
+	}
+
+	@Test
+	public void getVersionEnrolamientoByEPIDTest() {
+		IServiceEnrolamiento instance = new ServiceEnrolamiento();
+		ServiceResponse<VersionEnrolamientoDetalleDTO> response = instance.getVersionEnrolamientoByEPID("");
+		Assert.assertNotNull(response.getResult().getFoto());
+	}
+
+}

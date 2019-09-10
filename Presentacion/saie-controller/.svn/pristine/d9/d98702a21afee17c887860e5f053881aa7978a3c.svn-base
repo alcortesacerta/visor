@@ -1,0 +1,100 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+import java.util.Arrays;
+
+public class ArchivoDTO {
+
+	private String id;
+	private String name;
+	private String description;
+	private byte[] data;
+	private String dataContentType = "image/jpeg";
+	private byte[] thumbnail;
+	private String thumbnailContentType;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public byte[] getData() {
+		return data;
+	}
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+	public String getDataContentType() {
+		return dataContentType;
+	}
+	public void setDataContentType(String dataContentType) {
+		this.dataContentType = dataContentType;
+	}
+	public byte[] getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(byte[] thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public String getThumbnailContentType() {
+		return thumbnailContentType;
+	}
+	public void setThumbnailContentType(String thumbnailContentType) {
+		this.thumbnailContentType = thumbnailContentType;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ArchivoDTO [");
+		if (id != null) {
+			builder.append("id=");
+			builder.append(id);
+			builder.append(", ");
+		}
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (description != null) {
+			builder.append("description=");
+			builder.append(description);
+			builder.append(", ");
+		}
+		if (data != null) {
+			builder.append("data=");
+			builder.append(Arrays.toString(data));
+			builder.append(", ");
+		}
+		if (dataContentType != null) {
+			builder.append("dataContentType=");
+			builder.append(dataContentType);
+			builder.append(", ");
+		}
+		if (thumbnail != null) {
+			builder.append("thumbnail=");
+			builder.append(Arrays.toString(thumbnail));
+			builder.append(", ");
+		}
+		if (thumbnailContentType != null) {
+			builder.append("thumbnailContentType=");
+			builder.append(thumbnailContentType);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+	
+}

@@ -1,0 +1,39 @@
+/*    */ package com.iecisa.sat.saie.vf.integration.service.dto;
+
+/*    */
+/*    */ public class VersionEnrolamientoDetalleDTO/*    */ extends VersionEnrolamientoGeneralDTO
+/*    */ {
+	/*    */ private ArchivoDTO foto;
+	/*    */ private ArchivoDTO firma;
+
+	/*    */
+	/* 9 */ public ArchivoDTO getFoto() {
+		return this.foto;
+	}
+
+	/*    */
+	/*    */
+	/* 12 */ public void setFoto(ArchivoDTO foto) {
+		this.foto = foto;
+	}
+
+	/*    */
+	/*    */
+	/* 15 */ public ArchivoDTO getFirma() {
+		return this.firma;
+	}
+
+	/*    */
+	/*    */
+	/* 18 */ public void setFirma(ArchivoDTO firma) {
+		this.firma = firma;
+	}
+	/*    */ }
+
+/*
+ * Location: C:\Users\Alejandro
+ * Cortés\Desktop\VersionesVisor\saie-visor-2017ene17_1233.war!\WEB-INF\lib\
+ * visor-documentos-presentacion-controller-0.0.1-SNAPSHOT.jar!\com\iecisa\sat\
+ * saie\vf\integration\service\dto\VersionEnrolamientoDetalleDTO.class Java
+ * compiler version: 8 (52.0) JD-Core Version: 1.0.7
+ */

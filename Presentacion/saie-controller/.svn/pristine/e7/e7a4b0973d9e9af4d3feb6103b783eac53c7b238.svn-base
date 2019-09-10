@@ -1,0 +1,164 @@
+package com.iecisa.sat.saie.vf.integration.service.impl;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoGeneralDTO;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+
+public class LeyendaCentral implements ILeyenda {
+
+	@Override
+	public void leyenda(Document pdf, Map<String, Object> vars) throws DocumentException {
+
+		String nombrealsc = (String) vars.getOrDefault("nombrealsc", "");
+		String fraccionalsc = (String) vars.getOrDefault("fraccionalsc", "");
+		Integer np = (Integer) vars.getOrDefault("np", 0);
+		VersionEnrolamientoGeneralDTO versiondto = (VersionEnrolamientoGeneralDTO) vars.get("versiondto");
+		DatosEnrolamientoDTO datosdto = (DatosEnrolamientoDTO) vars.get("datosdto");
+		String ciudad = (String) vars.getOrDefault("ciudad", "");
+		String funcionario = (String) vars.getOrDefault("funcionario", "");
+//		String  = (String) vars.getOrDefault("", "");
+		
+		
+		SimpleDateFormat sdf  = new SimpleDateFormat("dd' de 'MMMM' de 'YYYY", new Locale("es", "MX"));
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd' del mes de 'MMMM' del año 'YYYY", new Locale("es", "MX"));
+		
+		int fuenteSize = 11;
+		Font fuente = FontFactory.getFont("Noto-Sans", fuenteSize);
+		Font fuenteBold = FontFactory.getFont("Noto-Sans", fuenteSize, Font.BOLD);
+		
+		String texto;
+		Chunk chunk ;
+		Paragraph par = new Paragraph("", fuente);
+		par.setAlignment(com.itextpdf.text.Element.ALIGN_JUSTIFIED);
+		
+		chunk = new Chunk(funcionario, fuenteBold);
+		par.add(chunk);
+		
+		texto = ", Administrador ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		
+		chunk = new Chunk(nombrealsc, fuenteBold);
+		par.add(chunk);
+		
+		texto = 
+				"con fundamento en los articulos 63, cuarto párrafo del Código Fiscal de "+
+				"la Federación; 13, fracción II en relación con el 12, fracción XXIV, y 32 ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+
+		chunk = new Chunk(fraccionalsc, fuenteBold);
+		par.add(chunk);
+		
+		texto = 
+		" del reglamento interior "+
+		"del Servicio de Administración Tributaria vigente, CERTIFICO: que la presente representación impresa, que consta de "+
+		(Math.round(np/2))+" fojas, del expediente de firma electrónica, correspondiente al documento digital que obra en los "+
+		" sistemas electrónicos de esta unidad administrativa, mismo que se tuvo a la vista. La presente certificación se expide "+
+		"en ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		
+		chunk = new Chunk(ciudad, fuenteBold);
+		par.add(chunk);
+		
+		texto = " a los días ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		
+		String fecha = sdf2.format(new Date());
+		chunk = new Chunk(fecha, fuenteBold);
+		par.add(chunk);
+		
+		
+		texto = ".";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+
+/*		
+		texto = ", dependiente de la Administración General de Servicios al Contribuyente, "
+				+ "del Servicio de Administración Tributaria (SAT); con fundamento en lo dispuesto por el artículo 10, fracción I en relación con el 9, "
+				+ "fracción V y por el artículo 16 en relación con el 14 fracción VIII, y Artículo 37, apartado A, fracción ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		
+		texto = " del Reglamento Interior del Servicio de Administración Tributaria, publicado en el Diario Oficial de la Federación el 22 de octubre de 2007, "
+				+ "cuya vigencia inició el 23 de diciembre de 2007, modificado mediante Decreto por el que se reforman, adicionan y derogan "
+				+ "diversas disposiciones del Reglamento Interior del Servicio de Administración Tributaria, publicado en el Diario Oficial "
+				+ "de la Federación el 29 de abril de 2010, 13 de julio de 2012 y 30 de diciembre de- 2013; así como el Artículo Primero, "
+				+ "párrafo primero y fracción ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(fraccionalsc, fuenteBold);
+		par.add(chunk);
+		texto = ", del Acuerdo por el que se establece la Circunscripción Territorial de las Unidades Administrativas "
+				+ "Regionales del Servicio de Administración Tributaria, publicado en el Diario Oficial de la Federación el 15 de enero de 2013, "
+				+ "en vigor a partir del 16 de enero de 2013; CERTIFICA: Que la impresión del presente documento, misma que consta de "+(Math.round(np/2))+" fojas, "
+				+ "y que comprende de la página 1 a " + np + ", es copia fiel y exacta de las imágenes contenidas en el expediente electrónico de Firma "
+				+ "Electrónica Avanzada (Fiel) en poder del SAT, resultantes de la digitalización realizada por dicho órgano desconcentrado "
+				+ "de la documentación que le fue presentada en original o mediante copia certificada por el contribuyente ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(versiondto.getNombre(), fuenteBold);
+		par.add(chunk);
+		texto = ", con Clave de Registro Federal del Contribuyente ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(datosdto.getRfc(), fuenteBold);
+		par.add(chunk);
+		texto = ", en la Administración Local de Servicios al Contribuyente de ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(versiondto.getLocalidadEnrolamiento(), fuenteBold);
+		par.add(chunk);
+		texto = ", el ";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(versiondto.getFechaEnrolamiento(), fuenteBold);
+		par.add(chunk);
+		texto =  ", para la realización del trámite de obtención del certificado de Fiel que emite el Servicio de Administración Tributaria.";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		texto = "\n\nLa información y documentación que se le proporciona sólo podrá ser utilizada para los efectos por los cuales fue solicitada, "
+				+ "sin que por ello pierda su confidencialidad, señalando a su vez, que la información fiscal se encuentra clasificada como RESERVADA, "
+				+ "en términos de lo previsto por el artículo 14, fracciones I Y II, de la Ley Federal de Transparencia y Acceso a la Información Pública "
+				+ "Gubernamental, en relación con los artículos 8, incisos a), b) y e) de las Recomendaciones para la identificación de información "
+				+ "reservada o confidencial por parte de las dependencias y entidades de la Administración Pública Federal, publicadas en el Diario "
+				+ "Oficial de la Federación el 1 de abril de 2003,previniendo de las penas administrativas o penales que se contemplan en los artículos 8, "
+				+ "fracción V, de la Ley Federal de Responsabilidades Administrativas de los Servidores Públicos, 210 y 211 del Código Penal Federal, "
+				+ "para los casos de violentar la reserva legal.\n\n";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		texto = ciudad+", a "+sdf.format(new Date());
+		chunk = new Chunk(texto, fuenteBold);
+		par.add(chunk);*/
+		
+		//FIRMA
+		texto = "\n\n";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		chunk = new Chunk(funcionario, fuenteBold);
+		par.add(chunk);
+		texto = "\n\n";
+		chunk = new Chunk(texto);
+		par.add(chunk);
+		texto = ""+nombrealsc;
+		chunk = new Chunk(texto, fuenteBold);
+		par.add(chunk);
+		
+		pdf.add(par);
+		
+
+	}
+
+}

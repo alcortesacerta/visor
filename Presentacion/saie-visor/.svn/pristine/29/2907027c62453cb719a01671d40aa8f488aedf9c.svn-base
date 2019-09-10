@@ -1,0 +1,108 @@
+package com.saie.listeners;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.imageio.spi.IIORegistry;
+import javax.imageio.spi.ImageReaderSpi;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+import com.github.jaiimageio.impl.plugins.raw.RawImageReaderSpi;
+import com.github.jaiimageio.impl.plugins.tiff.TIFFImageReaderSpi;
+import com.iecisa.sat.saie.dao.DBManagerSaie;
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.CatalogoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosDuplicidadDTO;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceDuplicidad;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceEnrolamiento;
+
+public class ContextListener implements ServletContextListener {
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		 ServiceResponse<List<CatalogoDTO>> response = new ServiceEnrolamiento().cargarCatalogoTipoObservacionDTO();
+		 if(response.getCode() == 0){
+			 List<CatalogoDTO> catalogo = response.getResult();
+			 sce.getServletContext().setAttribute("catalogoTipoObservacion", catalogo);
+		 }else{
+			 System.out.println("Error al cargar el catalogo tipo observacion, por favor reinicie el .war");
+		 }
+		 
+		 ServiceResponse<List<CatalogoDTO>> resp = new ServiceEnrolamiento().cargarCatalogoTipoResolucionDTO();
+		if (resp.getCode() == 0) {
+			List<CatalogoDTO> catalogo = resp.getResult();
+			sce.getServletContext().setAttribute("catalogoTipoResolucion", catalogo);
+			
+		}else{
+			System.out.println("Error al cargar el catalogo tipo resolucion, por favor reinicie el .war");
+		}
+		ServiceResponse<List<DatosDuplicidadDTO>> responseDuplicados = new ServiceDuplicidad().getListadoDuplicidadPorCriterios();
+		List<DatosDuplicidadDTO> duplicados = null;
+		if(responseDuplicados.getCode() == 0){
+			duplicados = responseDuplicados.getResult();
+		}else{
+			duplicados = new ArrayList<DatosDuplicidadDTO>();
+		}
+		sce.getServletContext().setAttribute("duplicadosDTO", duplicados);
+		
+		ServiceResponse<List<ControlVersionesDTO>> responseAutorizaciones = new ServiceEnrolamiento().getActualizacionesPendientes();
+		List<ControlVersionesDTO> autval = null;
+		if(responseAutorizaciones.getCode() == 0){
+			autval = responseAutorizaciones.getResult();
+		}else{
+			autval = new ArrayList<ControlVersionesDTO>();
+		}
+		List<ControlVersionesDTO> autorizaciones = new ArrayList<ControlVersionesDTO>();
+		List<ControlVersionesDTO> validaciones = new ArrayList<ControlVersionesDTO>();
+		for(ControlVersionesDTO control : autval){
+			if(control.getEstatus() == 3){
+				validaciones.add(control);
+			}else if(control.getEstatus() == 5){
+				autorizaciones.add(control);
+			}
+		}
+		sce.getServletContext().setAttribute("validacionesDTO", validaciones);
+		sce.getServletContext().setAttribute("autorizacionesDTO", autorizaciones);
+		
+		try{
+			Properties properties = new Properties();
+			properties.load(this.getClass().getResourceAsStream("/version.properties"));
+			sce.getServletContext().setAttribute("version", properties.getProperty("fecha.version"));
+		}catch(Exception e){
+			System.out.println("Error al cargar la version, por favor reinicie el .war");
+		}
+		
+		//Servicios de imagenes
+		IIORegistry registro = IIORegistry.getDefaultInstance();
+		Iterator<ImageReaderSpi> itsp = registro.getServiceProviders(ImageReaderSpi.class, false);
+		
+		boolean breader = false;
+		int i = 1;
+		while(itsp.hasNext()){
+			ImageReaderSpi irs = itsp.next();
+			if(irs.getVendorName().contains("github.com")){
+				breader = true;
+			}
+		}
+		if(!breader){
+			registro.registerServiceProvider(new TIFFImageReaderSpi());
+			registro.registerServiceProvider(new RawImageReaderSpi());
+		}
+		itsp = registro.getServiceProviders(ImageReaderSpi.class, false);
+		while(itsp.hasNext()){
+			ImageReaderSpi irs = itsp.next();
+			System.out.println(i + ": " + irs.getPluginClassName());
+			i++;
+		}
+	}
+	
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		DBManagerSaie.closePool();
+	}
+	
+}

@@ -1,0 +1,103 @@
+package com.saie.beans;
+
+public class Contribuyente {
+	
+	String nombre = "Pedro";
+    String apellidos = "Alvarez Andante";
+    String foto = "foto01.jpg";
+    String fecha = "12/05/75";
+    String lugar = "Puebla, Pue.";
+    String sexo = "M";
+    String curp = "AACP640301IP2HJRT";
+    String fechaEnrolamiento = "02/04/15";
+    String estadoTramite = "aprobado";
+    String fechaCarga = "02/04/15 15:30";
+    String fechaAbis = "02/10/15 14:45";
+    String rfc = "AACP640301IP2";
+    
+    public Contribuyente(){
+    	
+    }
+    
+	public Contribuyente(String nombre, String apellidos, String lugar,
+			String fechaEnrolamiento, String rfc) {
+		super();
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.lugar = lugar;
+		this.fechaEnrolamiento = fechaEnrolamiento;
+		this.rfc = rfc;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	public String getLugar() {
+		return lugar;
+	}
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	public String getCurp() {
+		return curp;
+	}
+	public void setCurp(String curp) {
+		this.curp = curp;
+	}
+	public String getFechaEnrolamiento() {
+		return fechaEnrolamiento;
+	}
+	public void setFechaEnrolamiento(String fechaEnrolamiento) {
+		this.fechaEnrolamiento = fechaEnrolamiento;
+	}
+	public String getEstadoTramite() {
+		return estadoTramite;
+	}
+	public void setEstadoTramite(String estadoTramite) {
+		this.estadoTramite = estadoTramite;
+	}
+	public String getFechaCarga() {
+		return fechaCarga;
+	}
+	public void setFechaCarga(String fechaCarga) {
+		this.fechaCarga = fechaCarga;
+	}
+	public String getFechaAbis() {
+		return fechaAbis;
+	}
+	public void setFechaAbis(String fechaAbis) {
+		this.fechaAbis = fechaAbis;
+	}
+	public String getRfc() {
+		return rfc;
+	}
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+}

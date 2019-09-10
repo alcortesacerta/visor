@@ -1,0 +1,144 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+import java.util.List;
+
+public class DatosEnrolamientoDTO {
+	
+	private String rfc;
+	private String curp;
+	private String nombre;
+	private String fechaEnrolamiento;
+	private String localidadEnrolamiento;
+	private String unidadEnrolamiento;
+	private TipoPersona tipoPersona;
+	private boolean duplicidad;
+	private boolean expuesto;
+	private List<VersionEnrolamientoGeneralDTO> versiones;
+	
+	public DatosEnrolamientoDTO(String rfc, String curp,
+			TipoPersona tipoPersona, boolean duplicidad) {
+		super();
+		this.rfc = rfc;
+		this.curp = curp;
+		this.tipoPersona = tipoPersona;
+		this.duplicidad = duplicidad;
+	}
+	
+	public DatosEnrolamientoDTO(String rfc, String curp, String nombre,
+			String fechaEnrolamiento, String localidadEnrolamiento,
+			String unidadEnrolamiento, TipoPersona tipoPersona) {
+		super();
+		this.rfc = rfc;
+		this.curp = curp;
+		this.nombre = nombre;
+		this.fechaEnrolamiento = fechaEnrolamiento;
+		this.localidadEnrolamiento = localidadEnrolamiento;
+		this.unidadEnrolamiento = unidadEnrolamiento;
+		this.tipoPersona = tipoPersona;
+	}
+
+	public DatosEnrolamientoDTO() {
+		super();
+	}
+	
+	public String getRfc() {
+		return rfc;
+	}
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+	public String getCurp() {
+		return curp;
+	}
+	public void setCurp(String curp) {
+		this.curp = curp;
+	}
+	public TipoPersona getTipoPersona() {
+		return tipoPersona;
+	}
+	public void setTipoPersona(TipoPersona tipoPersona) {
+		this.tipoPersona = tipoPersona;
+	}
+	public boolean isDuplicidad() {
+		return duplicidad;
+	}
+	public void setDuplicidad(boolean duplicidad) {
+		this.duplicidad = duplicidad;
+	}
+	public List<VersionEnrolamientoGeneralDTO> getVersiones() {
+		return versiones;
+	}
+	public void setVersiones(List<VersionEnrolamientoGeneralDTO> versiones) {
+		this.versiones = versiones;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getFechaEnrolamiento() {
+		return fechaEnrolamiento;
+	}
+
+	public void setFechaEnrolamiento(String fechaEnrolamiento) {
+		this.fechaEnrolamiento = fechaEnrolamiento;
+	}
+
+	public String getLocalidadEnrolamiento() {
+		return localidadEnrolamiento;
+	}
+
+	public void setLocalidadEnrolamiento(String localidadEnrolamiento) {
+		this.localidadEnrolamiento = localidadEnrolamiento;
+	}
+
+	public String getUnidadEnrolamiento() {
+		return unidadEnrolamiento;
+	}
+
+	public void setUnidadEnrolamiento(String unidadEnrolamiento) {
+		this.unidadEnrolamiento = unidadEnrolamiento;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DatosEnrolamientoDTO [");
+		if (rfc != null) {
+			builder.append("rfc=");
+			builder.append(rfc);
+			builder.append(", ");
+		}
+		if (curp != null) {
+			builder.append("curp=");
+			builder.append(curp);
+			builder.append(", ");
+		}
+		if (tipoPersona != null) {
+			builder.append("tipoPersona=");
+			builder.append(tipoPersona);
+			builder.append(", ");
+		}
+		builder.append("duplicidad=");
+		builder.append(duplicidad);
+		builder.append(", ");
+		if (versiones != null) {
+			builder.append("versiones=");
+			builder.append(versiones);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+	public boolean isExpuesto() {
+		return expuesto;
+	}
+
+	public void setExpuesto(boolean expuesto) {
+		this.expuesto = expuesto;
+	}
+}

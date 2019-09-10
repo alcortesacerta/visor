@@ -1,0 +1,283 @@
+#holder{
+	width: 100%;
+}
+
+#innerHolder{
+	width: 1000px;
+	margin: 0 auto 0 auto;
+	position: relative;
+}
+
+#searchHolder{
+	width: 1000px;
+	height: 80px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+}
+
+#busRFC{
+	position: absolute;
+	top: 43px;
+	left: 15px;
+}
+
+#campoRFC{
+	position: absolute;
+	top: 40px;
+	left: 75px;
+}
+
+#busNombre{
+	position: absolute;
+	top: 43px;
+	left: 345px;
+}
+
+#campoNombre{
+	position: absolute;
+	top: 40px;
+	left: 415px;
+}
+
+#busCatalogo{
+	position: absolute;
+	top: 43px;
+	left: 705px;
+}
+
+#catalogo{
+	position: absolute;
+	top: 40px;
+	left: 780px;
+	height: 25px;
+}
+
+#resultadosHolder{
+	width: 1000px;
+	height: 400px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+}
+
+#resultadosHolder2{
+	width: 1000px;
+	height: 400px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+}
+
+#tableHolder{
+	position: relative;
+	overflow: scroll;
+	overflow-y: auto;
+	width: 1000px;
+	height: 370px;
+}
+
+#tableHolder2{
+	position: relative;
+	overflow: scroll;
+	overflow-y: auto;
+	width: 1000px;
+	height: 370px;
+}
+
+.tablaResultados1{
+	width: 1100px;
+	table-layout: fixed;
+}
+
+table th {;
+  font-size: 10px;
+}
+
+table td{
+	height: 40px;
+}
+
+.th0{
+	width: 70px;
+}
+.th1{
+	width: 150px;
+}
+.th2{
+	width: 230px;
+}
+.th3{
+	width: 130px;
+}
+.th4{
+	width: 200px;
+}
+.th5{
+	width: 120px;
+}
+.th6{
+	width: 100px;
+}
+.th7{
+	width: 80px;
+}
+
+.tablaResultados2{
+	width: 1650px;
+	table-layout: fixed;
+}
+.th20{
+	width: 70px;
+}
+.th21{
+	width: 150px;
+}
+.th22{
+	width: 230px;
+}
+.th23{
+	width: 130px;
+}
+.th24{
+	width: 200px;
+}
+.th25{
+	width: 120px;
+}
+.th26{
+	width: 200px;
+}
+.th27{
+	width: 300px;
+}
+.th28{
+	width: 100px;
+}
+.th29{
+	width: 80px;
+}
+.th210{
+	width: 70px;
+}
+
+
+.boton{
+	margin-top: 10px;
+	float: right;
+}
+
+.botonBio{
+	float:left;
+	width: 30px;
+	margin-left: 10px;
+}
+
+#bCerrar2{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+#catalogoHolder{
+	width: 1000px;
+	height: 30px;
+	text-align: right;
+	line-height: 30px;
+}
+
+.dialogoHolder{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.8);
+	z-index: 100;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow: hidden;
+}
+
+#dialogo{
+	width: 600px;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #DBDBDB;
+	margin: 0 auto 0 auto;
+	position: relative;
+	top: 25%;
+}
+
+.label{
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 40px;
+}
+
+.holder{
+	padding-left: 15px;	
+}
+
+button{
+	margin: 10px 15px;
+}
+
+#botonSubirDiv{
+	text-align: right;
+	margin-right: 15px;
+	margin-top: 10px;
+	padding-bottom: 10px;
+}
+
+#bCerrarDialogoFile{
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+}
+
+#errorLabel{
+	margin: 10px 10px;
+  	height: 75px;
+}
+
+.labelError{
+	color: red;
+	font-size: 12px;
+	line-height: 12px;
+	text-align: right;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+
+.holderFileColumna{
+	float: left;
+	padding: 0px 15px;
+	width: 270px;
+}
+
+.holderFileColumna input[type=file]{
+	width: 270px;
+	height: 25px;
+}
+
+.holderFileColumna input[type=text]{
+	width: 270px;
+}
+
+.holderFileColumna input[type=password]{
+	width: 270px;
+}
+
+.holderFileColumna select{
+	height: 25px;
+  	width: 270px;
+}
+
+textarea{
+	width: 270px;
+	height: 90px;
+	resize: none;
+}
+
+.campoFile{
+	height: 25px;
+}
+
+.tablaHeadHolder{
+	position: absolute;
+}

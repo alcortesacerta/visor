@@ -1,0 +1,91 @@
+package com.iecisa.sat.saie.vf.integration.service.dto;
+
+public class EstatusValidacionAutorizacionDTO {
+	private String rfc; 
+	private String version; 
+	private Integer estatus_validacion_actualizacion; 
+	private String comentarios;
+	private String motivoCancelacion;
+	private String firma;
+	private String cadenaOriginal;
+	
+	public EstatusValidacionAutorizacionDTO(String rfc, String version, Integer estatus_validacion_actualizacion, String comentarios, String motivoCancelacion) {
+		super();
+		this.rfc = rfc;
+		this.version = version;
+		this.estatus_validacion_actualizacion = estatus_validacion_actualizacion;
+		this.comentarios = comentarios;
+		this.motivoCancelacion = motivoCancelacion;
+	}
+	
+	public EstatusValidacionAutorizacionDTO() {
+		super();
+	}
+
+	public String getRfc() {
+		return rfc;
+	}
+
+	public void setRfc(String rfc) {
+		this.rfc = rfc;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public Integer getEstatus_validacion_actualizacion() {
+		return estatus_validacion_actualizacion;
+	}
+
+	public void setEstatus_validacion_actualizacion(
+			Integer estatus_validacion_actualizacion) {
+		this.estatus_validacion_actualizacion = estatus_validacion_actualizacion;
+	}
+
+	public String getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(String comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public String getMotivoCancelacion() {
+		return motivoCancelacion;
+	}
+
+	public void setMotivoCancelacion(String motivoCancelacion) {
+		this.motivoCancelacion = motivoCancelacion;
+	}
+
+	@Override
+	public String toString() {
+		return "EstatusValidacionAutorizacionDTO [rfc=" + rfc + ", version="
+				+ version + ", estatus_validacion_actualizacion="
+				+ estatus_validacion_actualizacion + ", comentarios="
+				+ comentarios + ", motivoCancelacion=" + motivoCancelacion
+				+ "]";
+	}
+
+	public String getFirma() {
+		return firma;
+	}
+
+	public void setFirma(String firmaValidacion) {
+		this.firma = firmaValidacion;
+	}
+
+	public String getCadenaOriginal() {
+		return cadenaOriginal;
+	}
+
+	public void setCadenaOriginal(String cadenaOriginal) {
+		this.cadenaOriginal = cadenaOriginal;
+	}
+	
+}

@@ -1,0 +1,30 @@
+package com.iecisa.sat.saie.dao;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+public class DBManager {
+	
+	private static DBManager instance = null;
+	
+	public HikariDataSource ds = null;
+	
+	public static DBManager getInstance(){
+		if(instance == null){
+			HikariConfig config = new HikariConfig();
+			config.setJdbcUrl(System.getProperty("SAIE_JDBC"));
+			config.setUsername(System.getProperty("SAIE_DB_USER"));
+			config.setPassword(System.getProperty("SAIE_DB_PASS"));
+			config.setMaximumPoolSize(1);
+			config.addDataSourceProperty("cachePrepStmts", "true");
+			config.addDataSourceProperty("prepStmtCacheSize", "1");
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", "5");
+			
+			instance = new DBManager();
+			instance.ds = new HikariDataSource(config);
+		}
+		
+		return instance;
+	}
+
+}

@@ -1,0 +1,9 @@
+com\iecisa\sat\saie\audit\dto\DBSaieResult.class
+com\iecisa\sat\saie\audit\dto\AuditEvent.class
+com\iecisa\sat\saie\audit\AuditManager.class
+com\iecisa\sat\saie\dao\DBManager.class
+com\iecisa\sat\saie\dao\DBManagerDuplicados.class
+com\iecisa\sat\saie\audit\dto\DBSaie.class
+com\iecisa\sat\saie\audit\dto\EventType.class
+com\iecisa\sat\saie\dao\DBManagerSaie.class
+com\iecisa\sat\saie\response\ServiceResponse.class

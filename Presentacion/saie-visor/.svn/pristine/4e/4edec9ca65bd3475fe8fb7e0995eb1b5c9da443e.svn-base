@@ -1,0 +1,159 @@
+package com.saie.servlets;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iecisa.sat.saie.audit.AuditManager;
+import com.iecisa.sat.saie.audit.dto.AuditEvent;
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.BuscarEnrolamientoPorCriteriosDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.Permisos;
+import com.iecisa.sat.saie.vf.integration.service.dto.UsuarioDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoGeneralDTO;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceEnrolamiento;
+
+public class VersionContribuyenteServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private ServiceEnrolamiento servicio = new ServiceEnrolamiento();
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String rfc = req.getParameter("rfc");
+	
+		if(rfc != null && rfc != ""){
+			rfc = rfc.replaceAll("_", "Ñ");
+			req.getSession().setAttribute("rfc", rfc);
+		}else{
+			rfc = (String)req.getSession().getAttribute("rfc");
+		}
+		String version = req.getParameter("version");
+		if(version != null && version != ""){
+			req.getSession().setAttribute("version", version);
+		}else{
+			version = (String)req.getSession().getAttribute("version");
+		}
+		int ver = 0;
+		try{
+			ver = Integer.parseInt(version);
+		}catch(Exception e){
+			ver = 0;
+		}
+		DatosEnrolamientoDTO enrolamientoDto = (DatosEnrolamientoDTO)req.getSession().getAttribute("enrolamientoDto");
+		if(enrolamientoDto != null && enrolamientoDto.getVersiones().size() > 0 && enrolamientoDto.getRfc().equals(rfc)){
+			if(!enrolamientoDto.getVersiones().get(ver).equals(req.getSession().getAttribute("versionEnrolamiento"))){
+				req.getSession().setAttribute("versionEnrolamiento", enrolamientoDto.getVersiones().get(ver));
+				servicio.getVersionFotoFirma(enrolamientoDto.getVersiones().get(ver),enrolamientoDto.getRfc());
+				req.getSession().removeAttribute("adjuntosDto");
+			}
+			return;
+		}else{
+			enrolamientoDto = null;
+		}
+		
+		List<DatosEnrolamientoDTO> enrolamientoDtos = (List<DatosEnrolamientoDTO>)req.getSession().getAttribute("enrolamientoDtoList");
+		List<ControlVersionesDTO> controlDtos = null;
+		UsuarioDTO usuario = (UsuarioDTO)req.getSession().getAttribute("usuario");
+		boolean validando = false;
+		req.getSession().setAttribute("referer", "buscar");
+		if(usuario != null && usuario.getPermisos().contains(Permisos.VALIDAR) || usuario.getPermisos().contains(Permisos.AUTORIZAR)){
+			controlDtos = (List<ControlVersionesDTO>)req.getSession().getAttribute("controlDtoList");
+			System.out.println("VersionContribuyente controlDTO "+(controlDtos != null));
+			if(controlDtos != null){
+				validando = true;
+				req.getSession().setAttribute("referer", "validar");
+				for(int i = 0; i < controlDtos.size(); i++){
+					if(controlDtos.get(i).getRfc().equals(rfc)){
+						BuscarEnrolamientoPorCriteriosDTO busquedadto = new BuscarEnrolamientoPorCriteriosDTO();
+						busquedadto.setRfc(rfc);
+						ServiceResponse<List<DatosEnrolamientoDTO>> serviceResponse = servicio.getEnrolamientoPorCriterios(busquedadto, true);
+						enrolamientoDtos = serviceResponse.getResult();
+						if(enrolamientoDtos.size() == 0){
+							enrolamientoDto = new DatosEnrolamientoDTO();
+							enrolamientoDto.setRfc(rfc);
+							enrolamientoDtos.add(enrolamientoDto);
+						}
+						break;
+					}
+				}
+			}
+		}
+		
+		System.out.println("VersionContribuyente enrolamientoDTOs "+(enrolamientoDtos != null));
+		if(enrolamientoDtos != null){
+			for(int i = 0; i < enrolamientoDtos.size(); i++){
+				if(enrolamientoDtos.get(i).getRfc().equals(rfc)){
+					enrolamientoDto = enrolamientoDtos.get(i);
+					break;
+				}
+			}
+			System.out.println("VersionContribuyente enrolamientoDTO "+(enrolamientoDto != null));
+			if(enrolamientoDto != null){
+				if(System.getProperty("SAIE_CONSULTAR_SISE").equals("true")){
+					boolean bsise = servicio.getEnrolamientoSise(enrolamientoDto.getRfc(), usuario.getRfc());
+					AuditEvent aevent = new AuditEvent();
+					aevent.setDateTime(new Date());
+					aevent.setUser(usuario.getRfc());
+					aevent.setIpAddress(usuario.getIp());
+					aevent.setMacAddress(usuario.getMac());
+					String amessage = "ConsultaSISE, "+enrolamientoDto.getRfc()+ ", "+bsise;
+					aevent.setMessage(amessage);
+					aevent.setUuid(UUID.randomUUID().toString());
+					AuditManager.register(aevent);
+					if(!bsise){
+						System.out.println("sise error");
+						req.setAttribute("sise", "error");
+						return;
+					}
+				}else{
+					req.setAttribute("sise", "bien");
+				}
+				ServiceResponse<List<VersionEnrolamientoGeneralDTO>> result = servicio.getVersionEnrolamientoByRFC(rfc);
+				
+				System.out.println("VersionContribuyente versionDTO "+result.getCode() + " " + (result.getResult() != null ? result.getResult().size() : -1) +" " + rfc);
+				if(result.getCode() == 0){
+					List<VersionEnrolamientoGeneralDTO> temp = result.getResult();
+					List<VersionEnrolamientoGeneralDTO> versiones = new ArrayList<VersionEnrolamientoGeneralDTO>();
+					for(int i = 0; i < temp.size(); i++){
+						if(usuario.getPermisos().contains(Permisos.VALIDAR) && temp.get(i).getEstatus() == 3 && validando){
+							versiones.add(temp.get(i));
+						}else if(usuario.getPermisos().contains(Permisos.AUTORIZAR) && temp.get(i).getEstatus() == 5 && validando){
+							versiones.add(temp.get(i));
+						}else if(!validando && (temp.get(i).getEstatus() == 1 || temp.get(i).getEstatus() == 2 || temp.get(i).getEstatus() == 6)){
+							versiones.add(temp.get(i));
+						}
+					}
+					System.out.println("VersionContribuyente versionDTO "+versiones.size());
+					enrolamientoDto.setVersiones(versiones);
+					req.getSession().setAttribute("enrolamientoDto", enrolamientoDto);
+					
+					if(versiones.size() <= 0 || ver < 0){
+						req.getSession().removeAttribute("enrolamientoDto");
+						req.getSession().removeAttribute("versionEnrolamiento");
+						req.getSession().removeAttribute("adjuntosDto");
+					}else{
+						VersionEnrolamientoGeneralDTO versiondto = versiones.get(ver);
+						req.getSession().setAttribute("versionEnrolamiento", versiondto);
+						servicio.getVersionFotoFirma(versiondto,enrolamientoDto.getRfc());
+						req.getSession().removeAttribute("adjuntosDto");
+					}
+				}else{
+					req.getSession().removeAttribute("enrolamientoDto");
+					req.getSession().removeAttribute("versionEnrolamiento");
+					req.getSession().removeAttribute("adjuntosDto");
+				}
+			}
+		}
+	}
+}

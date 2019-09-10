@@ -1,0 +1,344 @@
+package com.iecisa.sat.saie.vf.integration.service.dao;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.iecisa.sat.saie.audit.dto.DBSaie;
+import com.iecisa.sat.saie.audit.dto.DBSaieResult;
+import com.iecisa.sat.saie.dao.DBManagerSaie;
+import com.iecisa.sat.saie.vf.integration.service.dto.CatalogoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosDuplicidadDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.ReporteBiometristaDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoGeneralDTO;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceDuplicidad;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceEnrolamiento;
+
+public class DBManager {
+
+	private static DBManager instance = null;
+	public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	public static DBManager getInstance(){
+		if(instance == null){
+			instance = new DBManager();
+		}
+		return instance;
+	}
+	
+	public List<CatalogoDTO> cargaCatalogoTipoObservacion() throws SQLException{
+		List<CatalogoDTO> resultado = new ArrayList<CatalogoDTO>();
+		
+		String sql = "SELECT * FROM cat_tipo_observacion;";
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.DUPLICIDAD, null);
+		for(int i = 0; i < rs.size(); i++){
+			CatalogoDTO catalogodto = new CatalogoDTO(rs.getString(i, "tipo_observacion_desc"), rs.getInt(i, "id_tipo_observacion"));
+			resultado.add(catalogodto);
+		}
+		
+		return resultado;
+	}
+	
+	public List<CatalogoDTO> cargaCatalogoTipoResolucion() throws SQLException{
+		List<CatalogoDTO> result = new ArrayList<CatalogoDTO>();
+		
+		String sql = "SELECT * FROM cat_tipo_resolucion ORDER BY id = '1' ASC, id = '2'desc;";
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.DUPLICIDAD, null);
+		for (int i = 0; i < rs.size(); i++) {
+			CatalogoDTO catalogoDTO = new CatalogoDTO(rs.getString(i, "tipo_resolucion"),rs.getInt(i, "id"));
+			result.add(catalogoDTO);
+			
+		}
+		return result;
+	}
+	
+	public List<String> getUnidadesLocalidad(String idLocalidad)throws SQLException{
+		List<String> result = new ArrayList<String>();
+		
+		String sql = "SELECT workstation_id FROM workstation_localidad WHERE lcrm = ?";
+		List<Object> args = new ArrayList<Object>();
+		args.add(idLocalidad);
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.EXTERNA, args);
+		for (int i = 0; i < rs.size(); i++) {
+			String unidad = rs.getString(i, "workstation_id");
+			result.add(unidad);
+		}		
+		
+		return result;
+	}
+	
+	
+	public List<ControlVersionesDTO> catalogoActualizacionesPendientes() throws SQLException{
+		List<ControlVersionesDTO> resultado = new ArrayList<ControlVersionesDTO>();
+		String sql = "SELECT * FROM control_versiones WHERE (estatus_validacion_actualizacion = 3 OR estatus_validacion_actualizacion = 5) AND id > ?;";//###
+		List<Object> args = new ArrayList<Object>();
+		args.add(new Integer(ServiceEnrolamiento.VALIDACION_AUTORIZACION_INDICE));
+		
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+		
+		for(int i = 0 ; i < rs.size(); i++){
+			ControlVersionesDTO datosdto = new ControlVersionesDTO(rs.getInt(i, "id"),rs.getString(i,"operador"), rs.getString(i,"rfc_contribuyente"), rs.getString(i,"lista_documentos"), 
+					rs.getTimestamp(i, "fecha_actualizacion") != null ? dateFormat.format(rs.getTimestamp(i, "fecha_actualizacion")) : "", rs.getString(i,"unidad_actualizacion"), rs.getString(i, "localidad_actualizacion"),
+					rs.getString(i,"justificacion_actualizacion"), rs.getInt(i, "estatus_validacion_actualizacion"),rs.getInt(i, "num_version"));
+			resultado.add(datosdto);
+			if(datosdto.getId() > ServiceEnrolamiento.VALIDACION_AUTORIZACION_INDICE){
+				ServiceEnrolamiento.VALIDACION_AUTORIZACION_INDICE = datosdto.getId();
+			}
+		}
+
+		return resultado;
+	}
+	
+	public Integer estatusValidacionAutorizacion(String rfc, String version, Integer estatus_validacion_actualizacion, String comentarios, String movitoCancelacion, String firma, String cadenaOriginal) throws SQLException{
+		String sql = "";
+		String sql2 = "";
+		Integer resultado = 0;
+		List<Object> args = new ArrayList<Object>();
+		List<Object> args2 = new ArrayList<Object>();
+		
+		if(estatus_validacion_actualizacion == 5 || estatus_validacion_actualizacion == 4){
+			sql = "UPDATE control_versiones SET estatus_validacion_actualizacion = ?, firma_validacion = ?, cadena_original_validacion = ?, comentarios = ?, motivo_cancelacion = ? WHERE rfc_contribuyente = ? AND num_version = ?;";
+		}else{
+			sql = "UPDATE control_versiones SET estatus_validacion_actualizacion = ?, firma_autorizacion = ?, cadena_original_autorizacion = ?, comentarios = ?, motivo_cancelacion = ? WHERE rfc_contribuyente = ? AND num_version = ?;";
+		}
+		args.add(estatus_validacion_actualizacion);
+		args.add(firma);
+		args.add(cadenaOriginal);
+		args.add(comentarios);
+		args.add(movitoCancelacion);
+		args.add(rfc);
+		args.add(Integer.parseInt(version));
+		
+		sql2 = "UPDATE det_dato_enrolamiento SET estatus_validacion_actualizacion = ? WHERE rfc_enrolamiento = ? AND version = ?;";
+		args2.add(estatus_validacion_actualizacion);
+		args2.add(rfc);
+		args2.add(Integer.parseInt(version));
+		
+		DBManagerSaie.insertUpdate(sql, DBSaie.VISOR, args);
+		DBManagerSaie.insertUpdate(sql2, DBSaie.VISOR, args2);
+
+		return resultado;
+	}
+	
+	public void reporteBiometristaDuplicidad(ReporteBiometristaDTO request)throws SQLException{
+		String sql = "INSERT INTO resolucion (caso_numero_caso, fecha_hora_carga, reporte_url, operador, firma_reporte, tipo_resolucion, id_tipo_observacion,id_reporte, cadena_original, caso_sat)"
+				+ "values (?,?,?,?,?,?,?,?,?,?);";
+		List<Object> args = new ArrayList<Object>();
+		args.add(request.getCaso());
+		args.add(new Timestamp(new Date().getTime()));
+		args.add(request.getUrl());
+		args.add(request.getOperador());
+		args.add(request.getFirma());
+		args.add(Integer.parseInt(request.getDictaminacion()));
+		args.add(Integer.parseInt(request.getObservaciones()));
+		args.add(request.getIdReporte());
+		args.add(request.getCadenaOriginal());
+		args.add(new Integer(request.getCasoSat()));
+		DBManagerSaie.insertUpdate(sql, DBSaie.DUPLICIDAD, args);
+	}
+	
+	public List<DatosDuplicidadDTO> consultarCatalogoDuplicidad() throws SQLException{
+		List<DatosDuplicidadDTO> resultado = new ArrayList<DatosDuplicidadDTO>();
+		String sql = "SELECT * FROM view_casos_duplicidad where CAST(caso_numero_caso AS INTEGER) > ?;";
+		List<Object> args = new ArrayList<Object>();
+		args.add(new Integer(ServiceDuplicidad.DUPLICADO_CASO));
+		
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.DUPLICIDAD,args);
+		for(int i = 0 ; i < rs.size(); i++){
+			DatosDuplicidadDTO datosdto = new DatosDuplicidadDTO(rs.getString(i,"caso_numero_caso"), rs.getString(i,"nombre_completo"), rs.getString(i,"rfc"), 
+					rs.getTimestamp(i,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento")) : "", rs.getString(i,"localidad_enrolamiento"), rs.getString(i,"nombre_completo2"), rs.getString(i,"rfc2"),
+					rs.getTimestamp(i,"fecha_enrolamiento2") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento2")) : "", rs.getString(i,"localidad_enrolamiento2"), rs.getString(i,"reporte_url"), 
+					rs.getString(i,"observaciones_resolucion"),	rs.getString(i, "tipo_resolucion"), rs.getString(i, "score"),rs.getString(i, "id_reporte"), rs.getString(i, "epid"), rs.getInt(i, "caso_sat"));
+			resultado.add(datosdto);
+			if(Integer.parseInt(datosdto.getCaso_numero_caso()) > ServiceDuplicidad.DUPLICADO_CASO){
+				ServiceDuplicidad.DUPLICADO_CASO = Integer.parseInt(datosdto.getCaso_numero_caso());
+			}
+		}
+		return resultado;
+	}
+	
+	public String insertarBitacoraFolio(String documentos_descargados, String operador) throws SQLException{
+		
+		String sql = "INSERT INTO bitacora_descarga (documentos_descargados, operador) values (?,?);";
+		
+		List<Object> args = new ArrayList<Object>();
+		args.add(documentos_descargados);
+		args.add(operador);
+		
+		DBManagerSaie.insertUpdate(sql, DBSaie.DUPLICIDAD, args);
+		
+		return "OK";
+	}
+	
+	public List<DatosEnrolamientoDTO> buscarRFC(String rfc) throws SQLException{
+		List<DatosEnrolamientoDTO> resultado = new ArrayList<DatosEnrolamientoDTO>();
+		String sql = "SELECT * FROM view_busqueda_principal WHERE rfc LIKE ? LIMIT 20;";
+		List<Object> args = new ArrayList<Object>();
+		args.add(rfc+"%");
+		
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+		
+		for(int i = 0 ; i < rs.size(); i++){
+			DatosEnrolamientoDTO datosdto = new DatosEnrolamientoDTO(rs.getString(i,"rfc"), rs.getString(i,"curp"), rs.getString(i,"nombre_razonsocial"), 
+					rs.getTimestamp(i,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento")) : "", rs.getString(i,"localidad_enrolamiento"), rs.getString(i,"unidad_enrolamiento"), null);
+			resultado.add(datosdto);
+		}
+
+		return resultado;
+	}
+	
+	public List<DatosEnrolamientoDTO> buscarCURP(String curp) throws SQLException{
+		List<DatosEnrolamientoDTO> resultado = new ArrayList<DatosEnrolamientoDTO>();
+		String sql = "SELECT * FROM view_busqueda_principal WHERE curp LIKE ? LIMIT 20;";
+		List<Object> args = new ArrayList<Object>();
+		args.add(curp+"%");
+
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+		
+		for(int i = 0 ; i < rs.size(); i++){
+			DatosEnrolamientoDTO datosdto = new DatosEnrolamientoDTO(rs.getString(i,"rfc"), rs.getString(i,"curp"), rs.getString(i,"nombre_razonsocial"), 
+					rs.getTimestamp(i,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento")) : "", rs.getString(i,"localidad_enrolamiento"), rs.getString(i,"unidad_enrolamiento"), null);
+			resultado.add(datosdto);
+		}
+
+		return resultado;
+	}
+	
+	public List<DatosEnrolamientoDTO> buscarNombre(String nombre) throws SQLException{
+		List<DatosEnrolamientoDTO> resultado = new ArrayList<DatosEnrolamientoDTO>();
+		String sql = "SELECT * FROM view_busqueda_principal WHERE nombre_razonsocial LIKE ? LIMIT 20;";
+		List<Object> args = new ArrayList<Object>();
+		args.add("%"+nombre+"%");
+
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+		
+		for(int i = 0 ; i < rs.size(); i++){
+			DatosEnrolamientoDTO datosdto = new DatosEnrolamientoDTO(rs.getString(i,"rfc"), rs.getString(i,"curp"), rs.getString(i,"nombre_razonsocial"), 
+					rs.getTimestamp(i,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento")) : "", rs.getString(i,"localidad_enrolamiento"), rs.getString(i,"unidad_enrolamiento"), null);
+			resultado.add(datosdto);
+		}
+
+		return resultado;
+	}
+	
+	public List<VersionEnrolamientoGeneralDTO> listarVersiones(String rfc)throws SQLException{
+		List<VersionEnrolamientoGeneralDTO> resultado = new ArrayList<VersionEnrolamientoGeneralDTO>();
+		String sql = "SELECT * FROM view_busqueda_version WHERE rfc = ?;";
+		List<Object> args = new ArrayList<Object>();
+		args.add(rfc);
+		
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR,args);
+		for(int i = 0; i < rs.size(); i++){
+			VersionEnrolamientoGeneralDTO versiondto = new VersionEnrolamientoGeneralDTO(rs.getTimestamp(i,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(i,"fecha_enrolamiento")) : "", rs.getString(i,"localidad_enrolamiento"), 
+					rs.getString(i,"unidad_enrolamiento"), rs.getString(i,"tipo_enrolamiento"), rs.getString(i,"tipo_movimiento"), rs.getString(i,"detalle_tipo_enrolamiento"), 
+					rs.getString(i,"nombre_razonsocial"), rs.getString(i,"representante_legal"),rs.getString(i,"archivo"),rs.getInt(i,"historico"),
+					rs.getInt(i, "estatus_validacion_actualizacion"),rs.getInt(i, "version"), rs.getString(i, "estacion_enrolamiento_estatus"), rs.getString(i, "estacion_proceso_estatus"));
+			if(versiondto.getHistorico() == 1){
+				sql = "select filename from view_documento_rfc where rfc_enrolamiento = ? and version = ? AND historico = ?;";
+				args = new ArrayList<Object>();
+				args.add(rfc);
+				args.add(versiondto.getVersion());
+				args.add(versiondto.getHistorico());
+				DBSaieResult rs2 = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+				List<String> archivos = new ArrayList<String>();
+				for(int j = 0; j < rs2.size(); j++){
+					String filename = rs2.getString(j,"filename");
+					if(filename.contains("\\")){
+						filename = filename.replace("\\", "/");
+					}
+					archivos.add(filename);
+				}
+				versiondto.setArchivos(archivos);
+				resultado.add(versiondto);
+			}else{
+				String directorio = versiondto.getArchivo().replace("/datospersonales.xml", "");
+				File fdirectorio = new File(directorio);
+				List<String> archivos = new ArrayList<String>();
+				if(fdirectorio.exists() && fdirectorio.isDirectory()){
+					String[] nomArchivos = fdirectorio.list();
+					for(int k = 0; k < nomArchivos.length; k++){
+						archivos.add(directorio+"/"+nomArchivos[k]);
+					}
+				}
+				versiondto.setArchivos(archivos);
+				resultado.add(versiondto);
+			}
+		}
+		return resultado;
+	}
+	
+	public VersionEnrolamientoGeneralDTO getVersionUno(String rfc)throws SQLException{
+		String sql = "SELECT * FROM view_busqueda_version where rfc = ? AND version = 1 LIMIT 1;";
+		List<Object> args = new ArrayList<Object>();
+		args.add(rfc);
+		
+		DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.VISOR,args);
+		VersionEnrolamientoGeneralDTO versiondto = null;
+		if(rs.size() > 0){
+			versiondto = new VersionEnrolamientoGeneralDTO(rs.getTimestamp(0,"fecha_enrolamiento") != null ? dateFormat.format(rs.getTimestamp(0,"fecha_enrolamiento")) : "", rs.getString(0,"localidad_enrolamiento"), 
+					rs.getString(0,"unidad_enrolamiento"), rs.getString(0,"tipo_enrolamiento"), rs.getString(0,"tipo_movimiento"), rs.getString(0,"detalle_tipo_enrolamiento"), 
+					rs.getString(0,"nombre_razonsocial"), rs.getString(0,"representante_legal"),rs.getString(0,"archivo"),rs.getInt(0,"historico"),
+					rs.getInt(0, "estatus_validacion_actualizacion"),rs.getInt(0, "version"), rs.getString(0, "estacion_enrolamiento_estatus"), rs.getString(0, "estacion_proceso_estatus"));
+			if(versiondto.getHistorico() == 1){
+				sql = "select filename from view_documento_rfc where rfc_enrolamiento = ? and version = ? AND historico = ?;";
+				args = new ArrayList<Object>();
+				args.add(rfc);
+				args.add(versiondto.getVersion());
+				args.add(versiondto.getHistorico());
+				DBSaieResult rs2 = DBManagerSaie.select(sql, DBSaie.VISOR, args);
+				List<String> archivos = new ArrayList<String>();
+				for(int j = 0; j < rs2.size(); j++){
+					String filename = rs2.getString(j,"filename");
+					if(filename.contains("\\")){
+						filename = filename.replace("\\", "/");
+					}
+					archivos.add(filename);
+				}
+				versiondto.setArchivos(archivos);
+			}else{
+				String directorio = versiondto.getArchivo().replace("/datospersonales.xml", "");
+				File fdirectorio = new File(directorio);
+				List<String> archivos = new ArrayList<String>();
+				if(fdirectorio.exists() && fdirectorio.isDirectory()){
+					String[] nomArchivos = fdirectorio.list();
+					for(int k = 0; k < nomArchivos.length; k++){
+						archivos.add(directorio+"/"+nomArchivos[k]);
+					}
+				}
+				versiondto.setArchivos(archivos);
+			}
+		}
+		return versiondto;
+	}
+	
+	public List<String> obtenerRoles(List<String> roles)throws SQLException{
+		List<String> rolesResult = new ArrayList<String>();
+		if(roles != null && roles.size() > 0){
+			String sql = "select * from cat_grupo where ";
+			List<Object> args = new ArrayList<Object>();
+			for(int i = 0 ; i < roles.size(); i++){
+				System.out.println("rolLDAP: "+roles.get(i));
+				if(i != 0){
+					sql += " or ";
+				}
+				sql += "id_ldap = ?";
+				args.add(roles.get(i));
+			}
+			sql += ";";
+			DBSaieResult rs = DBManagerSaie.select(sql, DBSaie.DUPLICIDAD, args);
+			for(int i = 0; i < rs.size(); i++){
+				String rol = rs.getString(i, "nombre_grupo");
+				System.out.println("rolBD: " +rol);
+				rolesResult.add(rol);
+			}
+		}
+		
+		return rolesResult;
+	}
+}

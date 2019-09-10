@@ -1,0 +1,164 @@
+package com.saie.servlets;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.ControlVersionesDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.DatosEnrolamientoDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.EstatusValidacionAutorizacionDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.Permisos;
+import com.iecisa.sat.saie.vf.integration.service.dto.UsuarioDTO;
+import com.iecisa.sat.saie.vf.integration.service.dto.VersionEnrolamientoGeneralDTO;
+import com.iecisa.sat.saie.vf.integration.service.impl.ServiceEnrolamiento;
+
+public class FirmaFielServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)	throws ServletException, IOException {
+		EstatusValidacionAutorizacionDTO estatusDto = new EstatusValidacionAutorizacionDTO();
+		VersionEnrolamientoGeneralDTO versiondto = (VersionEnrolamientoGeneralDTO)req.getSession().getAttribute("versionEnrolamiento");
+		DatosEnrolamientoDTO datosdto = (DatosEnrolamientoDTO)req.getSession().getAttribute("enrolamientoDto");
+		UsuarioDTO usuario = (UsuarioDTO)req.getSession().getAttribute("usuario");
+		Integer estatus = null;
+		
+		if(ServletFileUpload.isMultipartContent(req)){
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+			ServletFileUpload upload = new ServletFileUpload(factory);
+	        
+	        InputStream certificado = null;
+	        InputStream llave = null;
+	        String pass = "";
+	        String comentarios = "";
+	        boolean bvalidar = true;
+	        try {
+	            List<FileItem> formItems = upload.parseRequest(req);
+	            if (formItems != null && formItems.size() > 0) {
+	                for (FileItem item : formItems) {
+	                    if (!item.isFormField()) {
+	                    	if(item.getName().contains(".cer")){
+	                    		certificado = item.getInputStream();
+	                    	}else if(item.getName().contains(".key")){
+	                    		llave = item.getInputStream();
+	                    	}
+	                    }else{
+	                    	if(item.getFieldName().equals("claveFiel")){
+	                    		pass = item.getString();
+	                    	}else if(item.getFieldName().equals("fcomentarios")){
+	                    		comentarios = item.getString();
+	                    	}else if(item.getFieldName().equals("bvalidar")){
+	                    		bvalidar = item.getString().equals("true");
+	                    	}
+	                    }
+	                }
+	            }
+	            
+				if(usuario.getPermisos().contains(Permisos.VALIDAR) && versiondto.getEstatus() == 3){
+					estatus = bvalidar ? new Integer(5) : new Integer(4);
+				}else if(usuario.getPermisos().contains(Permisos.AUTORIZAR) && versiondto.getEstatus() == 5){
+					estatus = bvalidar ? new Integer(6) : new Integer(7);
+				}
+				estatusDto.setComentarios(comentarios);
+				estatusDto.setMotivoCancelacion("");
+				
+				String textoEstatus = estatus == 4 || estatus == 7 ? "|CancelacionDeActualizacion" : estatus == 5 ? "|ValidacionDeActualizacion" : "|AutorizacionDeActualizacion";
+	        	String textoPorFirmar = "||"+usuario.getRfc() + "|" + datosdto.getRfc() + "|" + versiondto.getFechaEnrolamiento().replace(" ", "T") + "|" 
+	        	+ versiondto.getLocalidadEnrolamiento() + "|" + versiondto.getTipoMovimiento();
+	        	textoPorFirmar += textoEstatus+"||";
+	            if(certificado != null && llave != null){
+	            	ServiceResponse<String> responseFiel = new ServiceEnrolamiento().validarFirmarFiel(certificado, llave, pass, textoPorFirmar, usuario.getRfc());
+	            	if(responseFiel.getCode() == -1){
+	            		req.setAttribute("mensaje", responseFiel.getMessage());
+	            	}else{
+	            		estatusDto.setFirma(responseFiel.getResult());
+	            		estatusDto.setCadenaOriginal(textoPorFirmar);
+	            	}
+	            }
+	        }catch(Exception e){
+	        	e.printStackTrace();
+	        }
+		}
+		
+		if(req.getAttribute("mensaje") == null){
+			estatusDto.setEstatus_validacion_actualizacion(estatus);
+			estatusDto.setVersion(""+versiondto.getVersion());
+			estatusDto.setRfc(datosdto.getRfc());
+			
+			if(estatus != null && (usuario.getPermisos().contains(Permisos.VALIDAR) || usuario.getPermisos().contains(Permisos.AUTORIZAR))){
+				ServiceResponse<Integer> response = new ServiceEnrolamiento().setEstatusValidacionAutorizacion(estatusDto, usuario);
+				List<ControlVersionesDTO> validaciones = (List<ControlVersionesDTO>)getServletContext().getAttribute("validacionesDTO");
+				List<ControlVersionesDTO> autorizaciones = (List<ControlVersionesDTO>)getServletContext().getAttribute("autorizacionesDTO");
+				if(response.getCode() == 0){
+					ControlVersionesDTO valAutAux = null;
+					if(estatus == 5){
+						req.setAttribute("mensaje", "Validación/Autorización de actualización realizada correctamente");
+						for(ControlVersionesDTO validacion : validaciones){
+							if(validacion.getRfc().equals(estatusDto.getRfc()) && validacion.getVersion() == Integer.parseInt(estatusDto.getVersion())){
+								valAutAux = validacion;
+								valAutAux.setEstatus(new Integer(5));
+								break;
+							}
+						}
+						validaciones.remove(valAutAux);
+						autorizaciones.add(valAutAux);
+					}else if(estatus == 6){
+						req.setAttribute("mensaje", "Validación/Autorización de actualización realizada correctamente");
+						for(ControlVersionesDTO autorizacion : autorizaciones){
+							if(autorizacion.getRfc().equals(estatusDto.getRfc()) && autorizacion.getVersion() == Integer.parseInt(estatusDto.getVersion())){
+								valAutAux = autorizacion;
+								valAutAux.setEstatus(new Integer(6));
+								break;
+							}
+						}
+						autorizaciones.remove(valAutAux);
+					}else if(estatus == 4){
+						req.setAttribute("mensaje", "Actualización cancelada");
+						for(ControlVersionesDTO validacion : validaciones){
+							if(validacion.getRfc().equals(estatusDto.getRfc()) && validacion.getVersion() == Integer.parseInt(estatusDto.getVersion())){
+								valAutAux = validacion;
+								valAutAux.setEstatus(new Integer(4));
+								break;
+							}
+						}
+						validaciones.remove(valAutAux);
+					}else if(estatus == 7){
+						req.setAttribute("mensaje", "Actualización cancelada");
+						for(ControlVersionesDTO autorizacion : autorizaciones){
+							if(autorizacion.getRfc().equals(estatusDto.getRfc()) && autorizacion.getVersion() == Integer.parseInt(estatusDto.getVersion())){
+								valAutAux = autorizacion;
+								valAutAux.setEstatus(new Integer(7));
+								break;
+							}
+						}
+						autorizaciones.remove(valAutAux);
+					}else{
+						req.setAttribute("mensaje", "Actualización cancelada");
+					}
+					versiondto.setEstatus(estatus);
+				}else{
+					req.setAttribute("mensaje", "Ocurrió un error en el proceso de validación/autorización, por favor inténtalo nuevamente");
+				}
+			}
+			
+			if(req.getAttribute("mensaje") != null){
+	        	System.out.println(req.getAttribute("mensaje"));
+	        }
+		}
+        getServletContext().getRequestDispatcher("/visor_documentos.jsp").forward(req, resp);
+	}
+}

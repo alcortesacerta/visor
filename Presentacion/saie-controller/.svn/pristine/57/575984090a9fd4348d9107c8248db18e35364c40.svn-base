@@ -1,0 +1,31 @@
+package com.iecisa.sat.saie.vf.integration.service.rest;
+
+import java.util.List;
+
+import com.iecisa.sat.saie.response.ServiceResponse;
+import com.iecisa.sat.saie.vf.integration.service.dto.ConsultaLdapRequestDTO;
+
+import feign.Feign;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
+import feign.jaxrs.JAXRSModule.JAXRSContract;
+
+public class ConsultarLdapRestClient {
+	
+	private IServiceLdap proxy;
+	
+	public ConsultarLdapRestClient(){
+		super();
+		proxy = Feign
+				.builder()
+				.decoder(new GsonDecoder())
+				.encoder(new GsonEncoder())
+				.contract(new JAXRSContract())
+				.target(IServiceLdap.class, System.getProperty("LDAP_URL"));
+	}
+	
+	public ServiceResponse<List<String>> getRolesLdap(ConsultaLdapRequestDTO request){
+		return proxy.getRolesLdap(request);
+	}
+
+}
