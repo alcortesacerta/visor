@@ -1,5 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<jboss-web>
-    <context-root>fiel/visor</context-root>
-    <!--  <security-domain>java:/jaas/saie-ad</security-domain>-->
-</jboss-web>

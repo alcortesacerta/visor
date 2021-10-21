@@ -1,8 +1,0 @@
-package com.iecisa.sat.saie.audit.dto;
-
-public enum DBSaie {
-	VISOR,
-	DUPLICIDAD,
-	COLA_AFIS,
-	EXTERNA
-}

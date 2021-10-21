@@ -1,6 +1,0 @@
-package com.iecisa.sat.saie.vf.integration.service.dto;
-
-public enum TipoPersona {
-	FISICA,
-	MORAL
-}

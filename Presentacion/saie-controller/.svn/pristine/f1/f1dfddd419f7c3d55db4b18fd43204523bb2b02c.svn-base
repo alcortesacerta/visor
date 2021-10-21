@@ -1,7 +1,0 @@
-package com.iecisa.sat.saie.vf.integration.service.dto;
-
-public enum CatalogoDuplicidad {
-	PD, //Casos de Posibles Duplicados
-	CD //Casos de Duplicidad
-
-}
